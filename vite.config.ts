@@ -1,44 +1,43 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import dts from "vite-plugin-dts";
-import { resolve } from "path";
-import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { defineConfig, type Plugin } from "vite"
+import react from "@vitejs/plugin-react"
+import dts from "vite-plugin-dts"
+import { resolve } from "path"
+import { readdirSync, readFileSync, writeFileSync } from "fs"
 
-/**
- * Injects 'use client' directive at the top of all JS output files.
- * Required for Next.js App Router compatibility — marks components as Client Components.
- */
-function injectUseClientPlugin() {
+function injectUseClientPlugin(): Plugin {
   return {
     name: "inject-use-client",
     closeBundle() {
-      const distDir = resolve(__dirname, "dist");
+      const distDir = resolve(__dirname, "dist")
       const files = readdirSync(distDir).filter(
         (f) => f.endsWith(".js") || f.endsWith(".mjs"),
-      );
+      )
       for (const file of files) {
-        const filePath = resolve(distDir, file);
-        const content = readFileSync(filePath, "utf-8");
+        const filePath = resolve(distDir, file)
+        const content = readFileSync(filePath, "utf-8")
         if (!content.startsWith("'use client'")) {
-          writeFileSync(filePath, `'use client';\n${content}`);
+          writeFileSync(filePath, `'use client';\n${content}`)
         }
       }
     },
-  };
+  }
 }
 
+const plugins: Plugin[] = [
+  react() as unknown as Plugin,
+  injectUseClientPlugin(),
+  dts({
+    include: ["src"],
+    exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
+    rollupTypes: true,
+  }) as unknown as Plugin,
+]
+
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    injectUseClientPlugin(),
-    dts({
-      include: ["src"],
-      exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
-      rollupTypes: true,
-    }),
-  ],
+  plugins,
+  css: {
+    postcss: "./postcss.config.cjs",
+  },
   resolve: {
     alias: { "@": resolve(__dirname, "src") },
   },
@@ -61,4 +60,4 @@ export default defineConfig({
     },
     cssCodeSplit: false,
   },
-});
+})

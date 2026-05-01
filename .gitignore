@@ -4,3 +4,5 @@ dist
 .env
 .env.local
 storybook-static
+build-storybook.log
+styled-system/
