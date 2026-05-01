@@ -44,7 +44,7 @@ moyeorakui/
 │   ├── env.d.ts           # CSS 파일 타입 선언
 │   ├── styles.css.d.ts    # styles.css companion 타입
 │   └── index.ts           # 라이브러리 진입점
-├── styled-system/         # Panda CSS codegen 결과물 (커밋 포함)
+├── styled-system/         # Panda CSS codegen 결과물 (gitignore, bun install 시 자동 생성)
 ├── panda.config.ts        # 디자인 토큰 및 테마 설정
 ├── vite.config.ts         # 라이브러리 빌드 설정
 └── .storybook/            # Storybook 설정
@@ -57,33 +57,56 @@ moyeorakui/
 ### Atomic 토큰 (원시값)
 
 ```
-colors.neutral.{0-900}   중립 색상 팔레트
-colors.blue.{100-700}    브랜드 블루 팔레트
-colors.red               #f0405c
-colors.green             #00cf95
+colors.neutral.{0,50,100-900}      중립 색상 팔레트
+colors.neutralOpacity.{100-900}    투명도 기반 중립 색상 (rgba)
+colors.blue.{100-900}              브랜드 블루 팔레트
+colors.red                         #f0405c
+colors.green                       #00cf95
 
 fontSizes.{xs|sm|md|lg|xl|2xl}
 fontWeights.{regular|medium|semibold|bold}
 letterSpacings.{tight|tighter}
-radii.{sm|md|lg|xl|full}
+radii.{2xs|xs|sm|md|lg|xl|full}
+shadows.{subtle|default|strong|stronger}
 ```
 
-### Semantic 토큰 (의미 기반, 다크 모드 지원)
+### Semantic 토큰 (의미 기반)
+
+토큰 경로는 `요소.의도.강조단계` 구조를 따르며, 상태가 있는 경우 `강조단계-상태` 형식으로 표기해요.
 
 ```
-fg.{default|strong|subtle|subtler|subtlest|disabled}
-stroke.{default|strong|subtle|brand|negative}
-fill.{neutral-default|neutral-strong|neutral-stronger|inverted-default|brand-default|brand-subtle}
-bg.{default|strong|dim}
+fg.neutral.{faintest|subtlest|subtler|subtle|default|strong|default-disabled}
+fg.inverted.{default}
+fg.brand.{subtlest|default}
+fg.positive.{default}
+fg.negative.{default}
+
+stroke.neutral.{subtler|subtle|default|strong}
+stroke.brand.{subtle|default}
+stroke.negative.{default}
+
+fill.neutral.{default|strong|stronger|strongest}
+fill.inverted.{default|default-pressed|default-disabled}
+fill.brand.{subtlest|subtler|subtle|subtle-pressed|default|default-pressed}
+
+bg.neutral.{default|strong}
+bg.dim.{default}
+
+shadow.{subtle|default|strong|stronger}
 ```
 
 ### 텍스트 스타일
 
 ```
-head{1-3}    28px / 24px  bold / semibold
-title{1-2}   20px / 16px  semibold
-body{1-5}    16px / 14px  regular ~ semibold
-caption{1-3} 12px         regular ~ semibold
+head1         28px  semibold
+head2         24px  bold
+head3         24px  semibold
+title1        20px  semibold
+title2        20px  regular
+title3        16px  semibold
+body{1-2}     16px  medium / regular
+body{3-5}     14px  semibold / medium / regular
+caption{1-3}  12px  semibold / medium / regular
 ```
 
 ## 컴포넌트 작성 가이드
@@ -107,8 +130,8 @@ const buttonStyles = cva({
   },
   variants: {
     variant: {
-      primary: { bg: "fill.brand-default", color: "white" },
-      secondary: { bg: "fill.neutral-default", color: "fg.default" },
+      primary: { bg: "fill.brand.default", color: "white" },
+      secondary: { bg: "fill.neutral.default", color: "fg.neutral.default" },
     },
     size: {
       sm: { h: "32px", px: "12px", textStyle: "body3" },
@@ -142,13 +165,15 @@ src/components/ComponentName/
 
 ## 다크 모드
 
-Panda CSS의 `_dark` 조건은 `.dark` 클래스 기반으로 작동해요.
+현재 semantic 토큰에 `_dark` 값이 정의되지 않아 다크 모드를 지원하지 않아요. 추후 각 semantic 토큰에 `_dark` 값을 추가하면 `.dark` 클래스 기반으로 동작해요.
 
-```tsx
-// 다크 모드 적용 예시
-<div className="dark">
-  {/* 이 안의 모든 컴포넌트에 dark semanticToken 적용 */}
-</div>
+```ts
+// 다크 모드 추가 시 panda.config.ts 토큰 형태
+fg: {
+  neutral: {
+    default: { value: { base: "{colors.neutral.800}", _dark: "{colors.neutral.100}" } },
+  }
+}
 ```
 
 ## 라이브러리 사용 (소비자)
@@ -172,4 +197,4 @@ import { Button } from "moyeorak-ui"
 bun run prepare
 ```
 
-`styled-system/` 디렉토리는 gitignore 처리돼 있어요. `bun install` 시 `prepare` 스크립트가 자동으로 생성해요.
+`styled-system/` 디렉토리는 gitignore 처리돼 있어요. `bun install` 시 `prepare` 스크립트로 자동 생성돼요.
