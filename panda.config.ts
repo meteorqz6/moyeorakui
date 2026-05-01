@@ -76,10 +76,10 @@ export default defineConfig({
         full: { value: "9999px" },
       },
       shadows: {
-        subtle:   { value: "0 0 8px 4px {colors.neutralOpacity.100}" },
-        default:  { value: "0 0 8px 0px {colors.neutralOpacity.200}" },
-        strong:   { value: "0 0 12px 0px {colors.neutralOpacity.300}" },
-        stronger: { value: "0 0 6px 2px {colors.neutralOpacity.500}" },
+        subtle:   { value: "0 0 8px 4px var(--colors-shadow-subtle)" },
+        default:  { value: "0 0 8px 0px var(--colors-shadow-default)" },
+        strong:   { value: "0 0 12px 0px var(--colors-shadow-strong)" },
+        stronger: { value: "0 0 6px 2px var(--colors-shadow-stronger)" },
       },
     },
 
@@ -129,6 +129,12 @@ export default defineConfig({
           negative: {
             default: { value: { base: "{colors.red}" } },
           },
+        },
+        shadow: {
+          subtle:   { value: { base: "{colors.neutralOpacity.100}" } },
+          default:  { value: { base: "{colors.neutralOpacity.200}" } },
+          strong:   { value: { base: "{colors.neutralOpacity.300}" } },
+          stronger: { value: { base: "{colors.neutralOpacity.500}" } },
         },
         fg: {
           neutral: {
