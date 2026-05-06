@@ -1,4 +1,4 @@
-# moyeorak-ui
+# @moyeorak/design-system
 
 moyeorak 프로젝트를 위한 React 컴포넌트 디자인 시스템.
 
@@ -179,14 +179,14 @@ fg: {
 ## 라이브러리 사용 (소비자)
 
 ```bash
-npm install moyeorak-ui
+npm install @moyeorak/design-system
 ```
 
 ```tsx
 // CSS import 필수
-import "moyeorak-ui/dist/style.css"
+import "@moyeorak/design-system/dist/style.css"
 
-import { Button } from "moyeorak-ui"
+import { Button } from "@moyeorak/design-system"
 ```
 
 ## Panda CSS 코드 생성
