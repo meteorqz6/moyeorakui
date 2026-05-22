@@ -2,13 +2,14 @@ import { defineConfig, type Plugin } from "vite"
 import react from "@vitejs/plugin-react"
 import dts from "vite-plugin-dts"
 import { resolve } from "path"
-import { readdirSync, readFileSync, writeFileSync } from "fs"
+import { readdirSync, readFileSync, writeFileSync, existsSync } from "fs"
 
 function injectUseClientPlugin(): Plugin {
   return {
     name: "inject-use-client",
     closeBundle() {
       const distDir = resolve(__dirname, "dist")
+      if (!existsSync(distDir)) return
       const files = readdirSync(distDir).filter(
         (f) => f.endsWith(".js") || f.endsWith(".mjs"),
       )
