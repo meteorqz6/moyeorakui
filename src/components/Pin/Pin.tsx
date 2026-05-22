@@ -208,7 +208,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
           }}
           className={css({ bg: "fill.brand.default" })}
         >
-          <Icon type={type as IconType} size="32px" style="inverted" />
+          <Icon type={type as IconType} size="lg" variant="inverted" />
         </div>
       </div>
     );
@@ -251,7 +251,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
           justifyContent: "center",
         }}
       >
-        <Icon type={type as IconType} size="16px" style="inverted" />
+        <Icon type={type as IconType} size="xs" variant="inverted" />
       </div>
     </div>
   );

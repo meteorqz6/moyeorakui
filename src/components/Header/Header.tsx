@@ -2,6 +2,7 @@ import { css } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
 import { IconButton } from "../IconButton/IconButton";
 import { ActionButton } from "../ActionButton/ActionButton";
+import { Icon } from "../Icon/Icon";
 
 export type HeaderProps = {
   title: string;
@@ -34,12 +35,9 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
             transform: "translateY(-50%)",
           })}
         >
-          <IconButton
-            icon="chevron_left"
-            size="md"
-            aria-label="뒤로가기"
-            onClick={onBack}
-          />
+          <IconButton size="md" aria-label="뒤로가기" onClick={onBack}>
+            <Icon type="chevron_left" size="md" />
+          </IconButton>
         </div>
       )}
 

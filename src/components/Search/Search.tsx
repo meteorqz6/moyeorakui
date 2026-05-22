@@ -69,7 +69,7 @@ export function Search({
         className,
       )}
     >
-      <Icon type="search" size="24px" style="default" className={css({ flexShrink: 0 })} />
+      <Icon type="search" size="md" variant="default" className={css({ flexShrink: 0 })} />
       <div
         className={css({
           flex: 1,
@@ -102,18 +102,17 @@ export function Search({
       </div>
       {isFocused && hasValue && (
         <IconButton
-          icon="delete"
-          iconSize="24px"
           size="md"
           type="button"
           onMouseDown={(e) => {
-            // blur 전에 clear가 실행되도록 기본 동작 방지
             e.preventDefault();
             handleClear();
           }}
           className={css({ mr: "-11px" })}
           aria-label="검색어 지우기"
-        />
+        >
+          <Icon type="delete" size="md" />
+        </IconButton>
       )}
     </div>
   );

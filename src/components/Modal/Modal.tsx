@@ -88,7 +88,7 @@ export function Modal({
           {hasTwoButtons ? (
             <div className={css({ display: "flex", gap: "11px" })}>
               <ActionButton
-                variant="stroke"
+                variant="outline"
                 size="lg"
                 className={css({ flex: 1 })}
                 onClick={onCancel}

@@ -22,7 +22,7 @@ export function Toast({ type, message }: ToastProps) {
         whiteSpace: "nowrap",
       })}
     >
-      <Icon type={type} size="20px" />
+      <Icon type={type} size="sm" />
       <span
         className={css({
           textStyle: "body4",
