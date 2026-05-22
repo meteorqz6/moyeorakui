@@ -24,14 +24,20 @@ function injectUseClientPlugin(): Plugin {
   }
 }
 
+const isLibBuild = !process.env.npm_lifecycle_event?.includes("storybook")
+
 const plugins: Plugin[] = [
   react() as unknown as Plugin,
-  injectUseClientPlugin(),
-  dts({
-    include: ["src"],
-    exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
-    rollupTypes: true,
-  }) as unknown as Plugin,
+  ...(isLibBuild
+    ? [
+        injectUseClientPlugin(),
+        dts({
+          include: ["src"],
+          exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
+          rollupTypes: true,
+        }) as unknown as Plugin,
+      ]
+    : []),
 ]
 
 export default defineConfig({
