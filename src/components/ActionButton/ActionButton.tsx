@@ -135,9 +135,7 @@ export function ActionButton({
   const Comp = asChild ? Slot : "button";
   return (
     <Comp className={cx(buttonStyles({ variant, size, display }), className)} {...props}>
-      {leftIcon}
-      {children}
-      {rightIcon}
+      {asChild ? children : <>{leftIcon}{children}{rightIcon}</>}
     </Comp>
   );
 }
