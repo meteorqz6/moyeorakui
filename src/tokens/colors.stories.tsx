@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta = {
   title: "Foundations/Colors",
+  tags: ["!dev"],
 };
 export default meta;
 

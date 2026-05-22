@@ -8,8 +8,8 @@ export type { SystemStyleObject } from "../styled-system/types"
 export { Badge } from "./components/Badge"
 export type { BadgeProps } from "./components/Badge"
 
-export { Button } from "./components/Button"
-export type { ButtonProps } from "./components/Button"
+export { ActionButton } from "./components/ActionButton"
+export type { ActionButtonProps } from "./components/ActionButton"
 
 export { ButtonCta } from "./components/ButtonCta"
 export type { ButtonCtaProps } from "./components/ButtonCta"
@@ -38,8 +38,9 @@ export type { TabBarProps } from "./components/TabBar"
 export { Header } from "./components/Header"
 export type { HeaderProps } from "./components/Header"
 
-export { FloatingButton } from "./components/FloatingButton"
-export type { FloatingButtonProps, FloatingButtonVariant } from "./components/FloatingButton"
+export { FloatingActionButton } from "./components/FloatingActionButton"
+export type { FloatingActionButtonProps, FloatingActionButtonVariant } from "./components/FloatingActionButton"
+
 
 export { ShareButton } from "./components/ShareButton"
 export type { ShareButtonProps, ShareButtonVariant } from "./components/ShareButton"

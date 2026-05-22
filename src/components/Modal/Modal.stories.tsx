@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Modal } from "./Modal";
-import { Button } from "../Button/Button";
+import { ActionButton } from "../ActionButton/ActionButton";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
@@ -16,9 +16,9 @@ function ModalDemo(props: Omit<React.ComponentProps<typeof Modal>, "open" | "onO
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button variant="brand" size="md" onClick={() => setOpen(true)}>
+      <ActionButton variant="brand" size="md" onClick={() => setOpen(true)}>
         모달 열기
-      </Button>
+      </ActionButton>
       <Modal open={open} onOpenChange={setOpen} {...props} />
     </>
   );

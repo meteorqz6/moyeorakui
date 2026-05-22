@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { css } from "../../../styled-system/css";
-import { Button } from "../Button/Button";
+import { ActionButton } from "../ActionButton/ActionButton";
 
 export type ModalProps = {
   open: boolean;
@@ -87,32 +87,32 @@ export function Modal({
 
           {hasTwoButtons ? (
             <div className={css({ display: "flex", gap: "11px" })}>
-              <Button
+              <ActionButton
                 variant="stroke"
                 size="lg"
                 className={css({ flex: 1 })}
                 onClick={onCancel}
               >
                 {cancelLabel}
-              </Button>
-              <Button
+              </ActionButton>
+              <ActionButton
                 variant="brand"
                 size="lg"
                 className={css({ flex: 1 })}
                 onClick={onConfirm}
               >
                 {confirmLabel}
-              </Button>
+              </ActionButton>
             </div>
           ) : (
-            <Button
+            <ActionButton
               variant="brand"
               size="lg"
               className={css({ w: "full" })}
               onClick={onConfirm}
             >
               {confirmLabel}
-            </Button>
+            </ActionButton>
           )}
         </Dialog.Content>
       </Dialog.Portal>

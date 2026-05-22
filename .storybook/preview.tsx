@@ -3,6 +3,11 @@ import "../src/styles.css"
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ["Foundations", "Components"],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -33,11 +38,12 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals["theme"] ?? "light"
+      const isDocs = context.viewMode === "docs"
       return (
         <div className={theme === "dark" ? "dark" : ""}>
           <div
             style={{
-              minHeight: "100vh",
+              ...(isDocs ? {} : { minHeight: "100vh" }),
               padding: "2rem",
               backgroundColor: "var(--colors-bg-default)",
             }}
