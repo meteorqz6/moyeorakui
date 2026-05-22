@@ -2,7 +2,7 @@ import { cva, css } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
 import { PIN_LOGO_LARGE_SRC, PIN_LOGO_SMALL_SRC } from "./assets";
 import { Icon } from "../Icon/Icon";
-import type { IconType } from "../Icon/registry";
+import type { DecorativeIconType } from "../Icon";
 
 // ─── PinText ────────────────────────────────────────────────────────────────
 
@@ -208,7 +208,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
           }}
           className={css({ bg: "fill.brand.default" })}
         >
-          <Icon type={type as IconType} size="lg" variant="inverted" />
+          <Icon type={type as DecorativeIconType} size="lg" variant="inverted" />
         </div>
       </div>
     );
@@ -251,7 +251,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
           justifyContent: "center",
         }}
       >
-        <Icon type={type as IconType} size="xs" variant="inverted" />
+        <Icon type={type as DecorativeIconType} size="xs" variant="inverted" />
       </div>
     </div>
   );
