@@ -1,0 +1,45 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as IconButtonStories from "./IconButton.stories";
+
+<Meta of={IconButtonStories} />
+
+# Icon Button
+
+Icon Button은 아이콘만으로 구성된 버튼이에요. 텍스트 없이 아이콘만으로 액션을 전달할 때 사용해요.
+
+`Icon` 컴포넌트를 자식으로 직접 전달해요. Icon에 `variant`를 지정하지 않아야 해요.
+
+버튼의 색상을 자동으로 상속하기 때문에 pressed, disabled 상태에서도 아이콘 색상이 버튼과 함께 변경돼요.
+
+{/* <Story of={IconButtonStories.Default} /> */}
+
+---
+
+## 사용 예제
+
+### 크기
+
+`size` 속성으로 버튼의 크기를 설정해요. `sm`, `md`, `lg` 3가지가 있어요.
+
+<Story of={IconButtonStories.Sizes} />
+
+<Source of={IconButtonStories.Sizes} />
+
+### 스타일
+
+`variant` 속성으로 버튼의 스타일을 설정해요.
+
+- **clear** — 배경 없이 아이콘만 표시해요. 일반적인 아이콘 버튼에 사용해요.
+- **fill** — 어두운 배경 위에 흰색 아이콘을 표시해요. 강조가 필요한 경우에 사용해요.
+
+<Story of={IconButtonStories.Variants} />
+
+<Source of={IconButtonStories.Variants} />
+
+### 비활성화
+
+`disabled` 속성으로 버튼을 비활성화할 수 있어요.
+
+<Story of={IconButtonStories.Disabled} />
+
+<Source of={IconButtonStories.Disabled} />

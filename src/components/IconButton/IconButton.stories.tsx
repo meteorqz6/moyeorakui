@@ -1,14 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { IconButton } from "./IconButton";
-import type { IconSize, IconStyle } from "../Icon/registry";
+import { Icon } from "../Icon/Icon";
 
 const meta: Meta<typeof IconButton> = {
-  title: "Components/IconButton",
+  title: "Components/Buttons/Icon Button",
   component: IconButton,
+  tags: ["!dev"],
   argTypes: {
-    size: { control: "select", options: ["sm", "md"] },
-    iconSize: { control: "select", options: ["16px", "20px", "24px", "32px"] },
-    iconStyle: { control: "select", options: ["default", "weak", "brand", "inverted"] },
+    variant: {
+      control: "select",
+      options: ["clear", "fill"],
+      description: "버튼의 시각적 스타일을 설정해요.",
+      table: { defaultValue: { summary: "clear" } },
+    },
+    size: {
+      control: "select",
+      options: ["sm", "md"],
+      description: "버튼의 크기를 설정해요.",
+      table: { defaultValue: { summary: "md" } },
+    },
+    disabled: {
+      control: "boolean",
+      description: "버튼을 비활성화해요. 비활성화된 버튼은 클릭할 수 없어요.",
+      table: { defaultValue: { summary: "false" } },
+    },
   },
 };
 
@@ -16,87 +31,99 @@ export default meta;
 type Story = StoryObj<typeof IconButton>;
 
 export const Default: Story = {
-  args: { icon: "search", size: "md", iconSize: "24px", iconStyle: "default" },
+  name: "기본",
+  args: { variant: "clear", size: "md" },
+  render: ({ variant, size, ...args }) => (
+    <IconButton variant={variant} size={size} {...args}>
+      <Icon type="search" size="md" />
+    </IconButton>
+  ),
 };
-
-const iconSizes: IconSize[] = ["16px", "20px", "24px", "32px"];
-const iconStyles: IconStyle[] = ["default", "weak", "brand", "inverted"];
 
 export const Sizes: Story = {
+  name: "크기",
+  parameters: {
+    docs: {
+      source: {
+        code: `<IconButton variant="fill" size="sm">
+  <Icon type="search" size="sm" />
+</IconButton>
+
+<IconButton variant="fill" size="md">
+  <Icon type="search" size="md" />
+</IconButton>
+
+<IconButton variant="fill" size="lg">
+  <Icon type="search" size="lg" />
+</IconButton>`,
+      },
+    },
+  },
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px", padding: "16px" }}>
-      {(["sm", "md"] as const).map((size) => (
-        <div key={size} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <span style={{ width: "36px", fontSize: "12px", color: "#737a89" }}>{size}</span>
-          <IconButton icon="search" size={size} />
-          <IconButton icon="chevron_right" size={size} />
-          <IconButton icon="chevron_left" size={size} />
-          <IconButton icon="share" size={size} />
-          <IconButton icon="delete" size={size} />
-        </div>
-      ))}
+    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+      <IconButton variant="fill" size="sm">
+        <Icon type="search" size="sm" />
+      </IconButton>
+      <IconButton variant="fill" size="md">
+        <Icon type="search" size="md" />
+      </IconButton>
+      <IconButton variant="fill" size="lg">
+        <Icon type="search" size="lg" />
+      </IconButton>
     </div>
   ),
 };
 
-export const IconSizes: Story = {
+export const Variants: Story = {
+  name: "스타일",
+  parameters: {
+    docs: {
+      source: {
+        code: `<IconButton variant="clear">
+  <Icon type="search" size="md" />
+</IconButton>
+
+<IconButton variant="fill">
+  <Icon type="search" size="md" />
+</IconButton>`,
+      },
+    },
+  },
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px", padding: "16px" }}>
-      {iconSizes.map((iconSize) => (
-        <div key={iconSize} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <span style={{ width: "36px", fontSize: "12px", color: "#737a89" }}>{iconSize}</span>
-          <IconButton icon="search" size="sm" iconSize={iconSize} />
-          <IconButton icon="search" size="md" iconSize={iconSize} />
-          <IconButton icon="chevron_right" size="sm" iconSize={iconSize} />
-          <IconButton icon="chevron_right" size="md" iconSize={iconSize} />
-        </div>
-      ))}
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <IconButton variant="clear">
+        <Icon type="search" size="md" />
+      </IconButton>
+      <IconButton variant="fill">
+        <Icon type="search" size="md" />
+      </IconButton>
     </div>
   ),
 };
 
-export const IconStyles: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "16px" }}>
-      {iconStyles.map((iconStyle) => (
-        <div
-          key={iconStyle}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "16px",
-            padding: "12px 16px",
-            background: iconStyle === "inverted" ? "#2c3038" : "#f9fafd",
-            borderRadius: "8px",
-          }}
-        >
-          <span
-            style={{
-              width: "60px",
-              fontSize: "12px",
-              color: iconStyle === "inverted" ? "#9fa5b3" : "#737a89",
-            }}
-          >
-            {iconStyle}
-          </span>
-          <IconButton icon="search" size="md" iconStyle={iconStyle} />
-          <IconButton icon="chevron_right" size="md" iconStyle={iconStyle} />
-          <IconButton icon="chevron_left" size="md" iconStyle={iconStyle} />
-          <IconButton icon="share" size="md" iconStyle={iconStyle} />
-          <IconButton icon="arrow_up" size="md" iconStyle={iconStyle} />
-        </div>
-      ))}
-    </div>
-  ),
-};
+export const Disabled: Story = {
+  name: "비활성화",
+  parameters: {
+    docs: {
+      source: {
+        code: `<IconButton variant="clear" disabled>
+  <Icon type="search" size="md" />
+</IconButton>
 
-export const DisabledState: Story = {
+<IconButton variant="fill" disabled>
+  <Icon type="search" size="md" />
+</IconButton>`,
+      },
+    },
+  },
   render: () => (
-    <div style={{ display: "flex", gap: "16px", padding: "16px", alignItems: "center" }}>
-      <IconButton icon="search" size="sm" disabled />
-      <IconButton icon="search" size="md" disabled />
-      <IconButton icon="chevron_right" size="sm" disabled />
-      <IconButton icon="chevron_right" size="md" disabled />
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <IconButton variant="clear" disabled>
+        <Icon type="search" size="md" />
+      </IconButton>
+      <IconButton variant="fill" disabled>
+        <Icon type="search" size="md" />
+      </IconButton>
     </div>
   ),
 };

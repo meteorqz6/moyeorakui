@@ -1,0 +1,59 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as IconStories from "./Icon.stories";
+
+<Meta of={IconStories} />
+
+# Icon
+
+Icon 컴포넌트는 SVG 아이콘을 렌더링해요. 아이콘 이름(`type`), 크기(`size`), 색상 스타일(`variant`)을 지정할 수 있어요.
+
+---
+
+## 사용 예제
+
+### 종류
+
+아이콘은 **Semantic**과 **Decorative** 두 종류로 구분돼요.
+
+- **Semantic** — 상태나 의미를 전달하는 아이콘이에요. `variant` prop과 관계없이 고정된 색상으로 표시돼요.
+- **Decorative** — UI 구성에 사용하는 아이콘이에요. `variant` prop으로 색상을 변경할 수 있어요.
+
+<Story of={IconStories.AllIcons} />
+
+### 크기
+
+`size` 속성으로 아이콘 크기를 설정해요. `xs`(16px), `sm`(20px), `md`(24px), `lg`(32px) 중 하나를 선택할 수 있어요.
+
+<Story of={IconStories.Sizes} />
+
+<Source of={IconStories.Sizes} />
+
+### 스타일
+
+`variant` 속성으로 Decorative 아이콘의 색상을 설정해요. `default`, `weak`, `weakest`, `brand`, `inverted` 5가지가 있어요.
+
+<Story of={IconStories.Styles} />
+
+<Source of={IconStories.Styles} />
+
+### 버튼 안에서 사용할 때
+
+`ActionButton`, `IconButton` 같은 버튼 컴포넌트 안에 Icon을 사용할 때는 **`variant`를 지정하지 않아요.**
+
+버튼은 자체적으로 `color` CSS 속성을 설정하고, Icon의 SVG는 `fill="currentColor"`를 사용하기 때문에 버튼 색상을 자동으로 상속해요. pressed, disabled 같은 버튼 상태에 따른 색상 변화도 자동으로 적용돼요.
+
+```tsx
+// 버튼 안에서는 variant 지정 안 함 — 버튼 색상 자동 상속
+<ActionButton leftIcon={<Icon type="chevron_left" size="xs" />}>
+  버튼
+</ActionButton>
+
+<IconButton>
+  <Icon type="search" size="md" />
+</IconButton>
+
+// variant를 지정하면 버튼 상태 색상이 아이콘에 반영되지 않음
+<IconButton>
+  <Icon type="search" size="md" variant="default" />
+</IconButton>  // ❌
+```

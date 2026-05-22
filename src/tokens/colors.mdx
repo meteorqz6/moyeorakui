@@ -1,0 +1,27 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as ColorsStories from "./colors.stories";
+
+<Meta of={ColorsStories} />
+
+# Colors
+
+색상 시스템은 **Atomic**과 **Semantic** 두 계층으로 구성돼요.
+
+- **Atomic** — 팔레트의 원시 색상값이에요. 직접 사용하지 않고 Semantic 토큰의 참조 대상으로만 사용해요.
+- **Semantic** — 역할과 의미를 기반으로 정의된 토큰이에요. UI 구현 시 항상 이 토큰을 사용해요.
+
+---
+
+## Atomic
+
+디자인 시스템의 기반이 되는 원시 색상 팔레트예요. Neutral, Blue, Red, Green 4가지 계열로 구성돼요.
+
+<Story of={ColorsStories.Atomic} />
+
+---
+
+## Semantic
+
+컴포넌트와 UI 요소에 직접 적용하는 토큰이에요. 역할에 따라 FG, Fill, Stroke, BG, Shadow로 분류돼요.
+
+<Story of={ColorsStories.Semantic} />

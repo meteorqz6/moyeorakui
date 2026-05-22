@@ -1,0 +1,28 @@
+import { Meta, Story } from "@storybook/blocks";
+import * as TypographyStories from "./typography.stories";
+
+<Meta of={TypographyStories} />
+
+# Typography
+
+텍스트 스타일은 **Head**, **Title**, **Body**, **Caption** 4개 그룹으로 구성돼요. Panda CSS의 `textStyle` 속성으로 사용해요.
+
+```tsx
+<p className={css({ textStyle: "body1" })}>텍스트</p>
+```
+
+---
+
+## Text Styles
+
+각 토큰의 크기, 굵기, 행간, 자간을 확인할 수 있어요.
+
+<Story of={TypographyStories.AllStyles} />
+
+---
+
+## Type Scale
+
+폰트 크기와 굵기의 단계별 스케일이에요.
+
+<Story of={TypographyStories.Scale} />

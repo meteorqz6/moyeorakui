@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Icon } from "./Icon";
+import { Icon, type SemanticIconType, type DecorativeIconType } from "./Icon";
 import { iconRegistry, type IconType, type IconStyle } from "./registry";
 import { css } from "../../../styled-system/css";
 
 const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
   component: Icon,
+  tags: ["!dev"],
   argTypes: {
     type: { control: "select", options: Object.keys(iconRegistry) },
-    size: { control: "select", options: ["16px", "20px", "24px", "32px"] },
-    style: { control: "select", options: ["default", "weak", "brand", "inverted"] },
+    size: { control: "select", options: ["xs", "sm", "md", "lg"] },
+    variant: { control: "select", options: ["default", "weak", "weakest", "brand", "inverted"] },
   },
 };
 
@@ -17,22 +18,23 @@ export default meta;
 type Story = StoryObj<typeof Icon>;
 
 export const Default: Story = {
-  args: { type: "search", size: "24px", style: "default" },
+  name: "기본",
+  args: { type: "search", size: "md", variant: "default" },
 };
 
-const SEMANTIC_ICONS: IconType[] = ["check", "valid", "success", "error", "delete", "invalid"];
+const SEMANTIC_ICONS: SemanticIconType[] = ["check", "valid", "invalid", "success", "error"];
+const SEMANTIC_SET = new Set<string>(SEMANTIC_ICONS);
 const DECORATIVE_ICONS = (Object.keys(iconRegistry) as IconType[]).filter(
-  (type) => !SEMANTIC_ICONS.includes(type),
+  (type): type is DecorativeIconType => !SEMANTIC_SET.has(type),
 );
-const allStyles: IconStyle[] = ["default", "weak", "brand", "inverted"];
 
 function IconGrid({
   types,
-  style,
+  variant = "default",
   dark = false,
 }: {
   types: IconType[];
-  style: IconStyle;
+  variant?: IconStyle;
   dark?: boolean;
 }) {
   return (
@@ -66,7 +68,11 @@ function IconGrid({
               height: "40px",
             }}
           >
-            <Icon type={type} size="24px" style={style} />
+            {SEMANTIC_SET.has(type) ? (
+              <Icon type={type as SemanticIconType} size="md" />
+            ) : (
+              <Icon type={type as DecorativeIconType} size="md" variant={variant} />
+            )}
           </div>
           <span
             className={css({ textStyle: "body5" })}
@@ -74,7 +80,7 @@ function IconGrid({
               color: dark ? "#9fa5b3" : "#737a89",
               textAlign: "center",
               wordBreak: "break-all",
-              fontSize: "10px",
+              fontSize: "9px",
             }}
           >
             {type}
@@ -85,61 +91,70 @@ function IconGrid({
   );
 }
 
-function SectionLabel({ children }: { children: string }) {
-  return (
-    <p style={{ fontSize: "12px", color: "#737a89", marginBottom: "12px", fontWeight: 600 }}>
-      {children}
-    </p>
-  );
-}
-
 export const AllIcons: Story = {
+  name: "아이콘 목록",
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "32px", padding: "16px" }}>
-      {/* Semantic */}
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <div>
-        <p style={{ fontSize: "14px", fontWeight: 700, marginBottom: "16px" }}>
-          Semantic — 고정 색상 (style prop 무시)
+        <p style={{ fontSize: "13px", fontWeight: 600, marginBottom: "8px", color: "#737a89" }}>
+          Semantic
         </p>
-        <IconGrid types={SEMANTIC_ICONS} style="default" />
+        <IconGrid types={SEMANTIC_ICONS} />
       </div>
-
-      {/* Decorative */}
       <div>
-        <p style={{ fontSize: "14px", fontWeight: 700, marginBottom: "16px" }}>
-          Decorative — currentColor
+        <p style={{ fontSize: "13px", fontWeight: 600, marginBottom: "8px", color: "#737a89" }}>
+          Decorative
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          {allStyles.map((style) => (
-            <div key={style}>
-              <SectionLabel>{`style: ${style}`}</SectionLabel>
-              <IconGrid
-                types={DECORATIVE_ICONS}
-                style={style}
-                dark={style === "inverted"}
-              />
-            </div>
-          ))}
-        </div>
+        <IconGrid types={DECORATIVE_ICONS} />
       </div>
     </div>
   ),
 };
 
 export const Sizes: Story = {
+  name: "크기",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Icon type="search" size="xs" />
+<Icon type="search" size="sm" />
+<Icon type="search" size="md" />
+<Icon type="search" size="lg" />`,
+      },
+    },
+  },
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "16px" }}>
-      {(["16px", "20px", "24px", "32px"] as const).map((size) => (
-        <div key={size} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <span style={{ width: "36px", fontSize: "12px", color: "#737a89" }}>{size}</span>
-          <Icon type="search" size={size} style="default" />
-          <Icon type="chevron_right" size={size} style="default" />
-          <Icon type="share" size={size} style="default" />
-          <Icon type="check" size={size} />
-          <Icon type="error" size={size} />
-          <Icon type="success" size={size} />
-        </div>
-      ))}
+    <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <Icon type="search" size="xs" />
+      <Icon type="search" size="sm" />
+      <Icon type="search" size="md" />
+      <Icon type="search" size="lg" />
+    </div>
+  ),
+};
+
+export const Styles: Story = {
+  name: "스타일",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Icon type="search" variant="default" />
+<Icon type="search" variant="weak" />
+<Icon type="search" variant="weakest" />
+<Icon type="search" variant="brand" />
+<Icon type="search" variant="inverted" />`,
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+      <Icon type="search" variant="default" />
+      <Icon type="search" variant="weak" />
+      <Icon type="search" variant="weakest" />
+      <Icon type="search" variant="brand" />
+      <div style={{ background: "#2c3038", padding: "4px", borderRadius: "4px" }}>
+        <Icon type="search" variant="inverted" />
+      </div>
     </div>
   ),
 };

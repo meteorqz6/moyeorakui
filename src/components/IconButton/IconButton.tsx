@@ -1,7 +1,5 @@
 import { cva, type RecipeVariantProps } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
-import { Icon } from "../Icon/Icon";
-import type { IconType, IconStyle, IconSize } from "../Icon/registry";
 
 const iconButtonStyles = cva({
   base: {
@@ -10,41 +8,59 @@ const iconButtonStyles = cva({
     justifyContent: "center",
     flexShrink: 0,
     cursor: "pointer",
-    bg: "transparent",
     _disabled: {
       cursor: "not-allowed",
-      opacity: 0.4,
     },
   },
   variants: {
+    variant: {
+      clear: {
+        bg: "transparent",
+        color: "fg.neutral.subtler",
+        _active: {
+          color: "fg.neutral.subtlest",
+        },
+        _disabled: {
+          color: "fg.neutral.faintest",
+          bg: "transparent",
+          _active: { color: "fg.neutral.faintest" },
+        },
+      },
+      fill: {
+        bg: "fill.inverted.default",
+        color: "fg.inverted.default",
+        _active: {
+          bg: "fill.inverted.default-pressed",
+        },
+        _disabled: {
+          bg: "fill.inverted.default-disabled",
+          color: "fg.neutral.subtlest",
+          _active: {
+            bg: "fill.inverted.default-disabled",
+            color: "fg.neutral.subtlest",
+          },
+        },
+      },
+    },
     size: {
-      sm: { width: "36px", height: "36px" },
-      md: { width: "48px", height: "48px" },
+      sm: { width: "36px", height: "36px", borderRadius: "xs" },
+      md: { width: "48px", height: "48px", borderRadius: "sm" },
+      lg: { width: "54px", height: "54px", borderRadius: "sm" },
     },
   },
   defaultVariants: {
+    variant: "clear",
     size: "md",
   },
 });
 
 export type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  RecipeVariantProps<typeof iconButtonStyles> & {
-    icon: IconType;
-    iconStyle?: IconStyle;
-    iconSize?: IconSize;
-  };
+  RecipeVariantProps<typeof iconButtonStyles>;
 
-export function IconButton({
-  icon,
-  iconStyle = "default",
-  iconSize = "24px",
-  size,
-  className,
-  ...props
-}: IconButtonProps) {
+export function IconButton({ size, variant, className, children, ...props }: IconButtonProps) {
   return (
-    <button className={cx(iconButtonStyles({ size }), className)} {...props}>
-      <Icon type={icon} size={iconSize} style={iconStyle} />
+    <button className={cx(iconButtonStyles({ size, variant }), className)} {...props}>
+      {children}
     </button>
   );
 }

@@ -27,13 +27,12 @@ export type IconType =
   | "traffic"
   | "valid";
 
-export type IconStyle = "default" | "weak" | "brand" | "inverted";
-export type IconSize = "16px" | "20px" | "24px" | "32px";
+export type IconStyle = "default" | "weak" | "weakest" | "brand" | "inverted";
+export type IconSize = "xs" | "sm" | "md" | "lg";
 
 const COLOR_BRAND = "var(--colors-fill-brand-default)";
 const COLOR_ERROR = "var(--colors-fg-negative-default)";
 const COLOR_SUCCESS = "var(--colors-fg-positive-default)";
-const COLOR_NEUTRAL_SUBTLEST = "var(--colors-fg-neutral-subtlest)";
 const COLOR_NEUTRAL_SUBTLER = "var(--colors-fg-neutral-subtler)";
 
 type IconEntry = {
@@ -90,13 +89,12 @@ export const iconRegistry: Record<IconType, IconEntry> = {
   delete: {
     viewBox: "0 0 24 24",
     paths: (
-      <>
-        <rect x="3" y="3" width="18" height="18" rx="9" fill={COLOR_NEUTRAL_SUBTLEST} />
-        <path
-          d="M14.4697 8.46967C14.7626 8.17678 15.2373 8.17678 15.5302 8.46967C15.8231 8.76256 15.8231 9.23732 15.5302 9.53022L13.0605 11.9999L15.5302 14.4697C15.8231 14.7626 15.8231 15.2373 15.5302 15.5302C15.2373 15.8231 14.7626 15.8231 14.4697 15.5302L11.9999 13.0605L9.53022 15.5302C9.23732 15.8231 8.76256 15.8231 8.46967 15.5302C8.17678 15.2373 8.17678 14.7626 8.46967 14.4697L10.9394 11.9999L8.46967 9.53022C8.17678 9.23732 8.17678 8.76256 8.46967 8.46967C8.76256 8.17678 9.23732 8.17678 9.53022 8.46967L11.9999 10.9394L14.4697 8.46967Z"
-          fill="white"
-        />
-      </>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 12A9 9 0 0 1 21 12A9 9 0 0 1 3 12ZM14.4697 8.46967C14.7626 8.17678 15.2373 8.17678 15.5302 8.46967C15.8231 8.76256 15.8231 9.23732 15.5302 9.53022L13.0605 11.9999L15.5302 14.4697C15.8231 14.7626 15.8231 15.2373 15.5302 15.5302C15.2373 15.8231 14.7626 15.8231 14.4697 15.5302L11.9999 13.0605L9.53022 15.5302C9.23732 15.8231 8.76256 15.8231 8.46967 15.5302C8.17678 15.2373 8.17678 14.7626 8.46967 14.4697L10.9394 11.9999L8.46967 9.53022C8.17678 9.23732 8.17678 8.76256 8.46967 8.46967C8.76256 8.17678 9.23732 8.17678 9.53022 8.46967L11.9999 10.9394L14.4697 8.46967Z"
+        fill="currentColor"
+      />
     ),
   },
 
