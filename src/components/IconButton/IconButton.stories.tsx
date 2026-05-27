@@ -15,7 +15,7 @@ const meta: Meta<typeof IconButton> = {
     },
     size: {
       control: "select",
-      options: ["sm", "md"],
+      options: ["sm", "md", "lg"],
       description: "버튼의 크기를 설정해요.",
       table: { defaultValue: { summary: "md" } },
     },
@@ -46,15 +46,15 @@ export const Sizes: Story = {
     docs: {
       source: {
         code: `<IconButton variant="fill" size="sm">
-  <Icon type="search" size="sm" />
+  <Icon type="search" />
 </IconButton>
 
 <IconButton variant="fill" size="md">
-  <Icon type="search" size="md" />
+  <Icon type="search" />
 </IconButton>
 
 <IconButton variant="fill" size="lg">
-  <Icon type="search" size="lg" />
+  <Icon type="search" />
 </IconButton>`,
       },
     },
@@ -62,13 +62,13 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
       <IconButton variant="fill" size="sm">
-        <Icon type="search" size="sm" />
+        <Icon type="search" />
       </IconButton>
       <IconButton variant="fill" size="md">
-        <Icon type="search" size="md" />
+        <Icon type="search" />
       </IconButton>
       <IconButton variant="fill" size="lg">
-        <Icon type="search" size="lg" />
+        <Icon type="search" />
       </IconButton>
     </div>
   ),
@@ -80,11 +80,11 @@ export const Variants: Story = {
     docs: {
       source: {
         code: `<IconButton variant="clear">
-  <Icon type="search" size="md" />
+  <Icon type="search" />
 </IconButton>
 
 <IconButton variant="fill">
-  <Icon type="search" size="md" />
+  <Icon type="search" />
 </IconButton>`,
       },
     },
@@ -92,11 +92,46 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
       <IconButton variant="clear">
-        <Icon type="search" size="md" />
+        <Icon type="search" />
       </IconButton>
       <IconButton variant="fill">
-        <Icon type="search" size="md" />
+        <Icon type="search" />
       </IconButton>
+    </div>
+  ),
+};
+
+export const States: Story = {
+  name: "상태",
+  parameters: {
+    docs: {
+      source: {
+        code: `// Default
+<IconButton variant="clear"><Icon type="search" /></IconButton>
+<IconButton variant="fill"><Icon type="search" /></IconButton>
+
+// Disabled
+<IconButton variant="clear" disabled><Icon type="search" /></IconButton>
+<IconButton variant="fill" disabled><Icon type="search" /></IconButton>`,
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ fontSize: 12, color: "#888", fontWeight: 600 }}>Default</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <IconButton variant="clear"><Icon type="search" /></IconButton>
+          <IconButton variant="fill"><Icon type="search" /></IconButton>
+        </div>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ fontSize: 12, color: "#888", fontWeight: 600 }}>Disabled</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <IconButton variant="clear" disabled><Icon type="search" /></IconButton>
+          <IconButton variant="fill" disabled><Icon type="search" /></IconButton>
+        </div>
+      </div>
     </div>
   ),
 };
@@ -107,11 +142,11 @@ export const Disabled: Story = {
     docs: {
       source: {
         code: `<IconButton variant="clear" disabled>
-  <Icon type="search" size="md" />
+  <Icon type="search" />
 </IconButton>
 
 <IconButton variant="fill" disabled>
-  <Icon type="search" size="md" />
+  <Icon type="search" />
 </IconButton>`,
       },
     },
@@ -119,10 +154,10 @@ export const Disabled: Story = {
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
       <IconButton variant="clear" disabled>
-        <Icon type="search" size="md" />
+        <Icon type="search" />
       </IconButton>
       <IconButton variant="fill" disabled>
-        <Icon type="search" size="md" />
+        <Icon type="search" />
       </IconButton>
     </div>
   ),

@@ -3,7 +3,7 @@ import { cx } from "../../lib/utils";
 import { Icon } from "../Icon/Icon";
 import type { IconType } from "../Icon/registry";
 
-const floatingActionButtonStyles = cva({
+const floatingButtonStyles = cva({
   base: {
     display: "inline-flex",
     alignItems: "center",
@@ -20,20 +20,20 @@ const floatingActionButtonStyles = cva({
   },
 });
 
-const ICON_MAP: Record<FloatingActionButtonVariant, IconType> = {
+const ICON_MAP: Record<FloatingButtonVariant, IconType> = {
   up: "arrow_up",
   back: "chevron_left",
 };
 
-export type FloatingActionButtonVariant = "up" | "back";
+export type FloatingButtonVariant = "up" | "back";
 
-export type FloatingActionButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: FloatingActionButtonVariant;
+export type FloatingButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant: FloatingButtonVariant;
 };
 
-export function FloatingActionButton({ variant, className, ...props }: FloatingActionButtonProps) {
+export function FloatingButton({ variant, className, ...props }: FloatingButtonProps) {
   return (
-    <button type="button" className={cx(floatingActionButtonStyles(), className)} {...props}>
+    <button type="button" className={cx(floatingButtonStyles(), className)} {...props}>
       <Icon type={ICON_MAP[variant]} size="md" />
     </button>
   );

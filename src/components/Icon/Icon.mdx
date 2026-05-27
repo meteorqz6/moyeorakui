@@ -38,15 +38,15 @@ Icon 컴포넌트는 SVG 아이콘을 렌더링해요. 아이콘 이름(`type`),
 
 ### 버튼 안에서 사용할 때
 
-`ActionButton`, `IconButton` 같은 버튼 컴포넌트 안에 Icon을 사용할 때는 **`variant`를 지정하지 않아요.**
+`Button`, `IconButton` 같은 버튼 컴포넌트 안에 Icon을 사용할 때는 **`variant`를 지정하지 않아요.**
 
 버튼은 자체적으로 `color` CSS 속성을 설정하고, Icon의 SVG는 `fill="currentColor"`를 사용하기 때문에 버튼 색상을 자동으로 상속해요. pressed, disabled 같은 버튼 상태에 따른 색상 변화도 자동으로 적용돼요.
 
 ```tsx
 // 버튼 안에서는 variant 지정 안 함 — 버튼 색상 자동 상속
-<ActionButton leftIcon={<Icon type="chevron_left" size="xs" />}>
+<Button leftIcon={<Icon type="chevron_left" size="xs" />}>
   버튼
-</ActionButton>
+</Button>
 
 <IconButton>
   <Icon type="search" size="md" />

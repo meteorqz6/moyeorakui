@@ -59,7 +59,7 @@ export type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 export function IconButton({ size, variant, className, children, ...props }: IconButtonProps) {
   return (
-    <button className={cx(iconButtonStyles({ size, variant }), className)} {...props}>
+    <button type="button" className={cx(iconButtonStyles({ size, variant }), className)} {...props}>
       {children}
     </button>
   );

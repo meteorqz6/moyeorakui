@@ -1,7 +1,7 @@
 import { css } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
 import { IconButton } from "../IconButton/IconButton";
-import { ActionButton } from "../ActionButton/ActionButton";
+import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 
 export type HeaderProps = {
@@ -57,7 +57,7 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
       </div>
 
       {actionLabel && (
-        <ActionButton
+        <Button
           variant="ghost-brand"
           size="lg"
           onClick={onAction}
@@ -68,7 +68,7 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
           })}
         >
           {actionLabel}
-        </ActionButton>
+        </Button>
       )}
     </div>
   );

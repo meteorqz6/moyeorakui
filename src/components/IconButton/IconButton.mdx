@@ -1,25 +1,30 @@
 import { Meta, Story, Source } from "@storybook/blocks";
 import * as IconButtonStories from "./IconButton.stories";
+import anatomyImg from "./icon-button-anatomy.png";
 
 <Meta of={IconButtonStories} />
 
 # Icon Button
 
-Icon Button은 아이콘만으로 구성된 버튼이에요. 텍스트 없이 아이콘만으로 액션을 전달할 때 사용해요.
+텍스트 라벨 없이 아이콘만으로 특정 액션을 수행하는 버튼 요소에요. 공간이 제한적이거나 사용자가 즉시 이해할 수 있는 표준적인 기능을 간결하고 직관적으로 제공할 때 사용해요.
 
-`Icon` 컴포넌트를 자식으로 직접 전달해요. Icon에 `variant`를 지정하지 않아야 해요.
+<br></br>
 
-버튼의 색상을 자동으로 상속하기 때문에 pressed, disabled 상태에서도 아이콘 색상이 버튼과 함께 변경돼요.
+## Anatomy
 
-{/* <Story of={IconButtonStories.Default} /> */}
+<img src={anatomyImg} alt="Icon Button anatomy" style={{ width: "100%", maxWidth: 800 }} />
 
----
+Icon Button은 Icon을 감싸는 Container로 구성되며, Container는 선택적으로 배경을 가질 수 있어요.
+
+<br></br>
 
 ## 사용 예제
 
 ### 크기
 
-`size` 속성으로 버튼의 크기를 설정해요. `sm`, `md`, `lg` 3가지가 있어요.
+`IconButton` 컴포넌트의 크기를 변경하려면 `size` 속성을 사용하세요.
+접근성과 터치 정확도를 고려하여 24px Icon을 기준으로 터치 영역만 달리한 `sm`, `md`, `lg` 3가지 사이즈를 제공해요.
+`sm`은 밀도 높은 UI에서, `md`는 일반적인 터치 환경의 기본 사이즈에요. `lg`는 Action Area 내에서 동일한 높이에 맞출 때 사용해요.
 
 <Story of={IconButtonStories.Sizes} />
 
@@ -29,17 +34,23 @@ Icon Button은 아이콘만으로 구성된 버튼이에요. 텍스트 없이 �
 
 `variant` 속성으로 버튼의 스타일을 설정해요.
 
-- **clear** — 배경 없이 아이콘만 표시해요. 일반적인 아이콘 버튼에 사용해요.
-- **fill** — 어두운 배경 위에 흰색 아이콘을 표시해요. 강조가 필요한 경우에 사용해요.
+- **clear** — 배경 없이 아이콘만 표시해요.
+- **fill** — 배경이 채워진 스타일로 아이콘이 강조가 필요한 경우에 사용해요.
 
 <Story of={IconButtonStories.Variants} />
 
 <Source of={IconButtonStories.Variants} />
 
-### 비활성화
+### 상태
 
-`disabled` 속성으로 버튼을 비활성화할 수 있어요.
+Icon Button은 **Default**, **Pressed**, **Disabled** 3가지 상태로 구분돼요.
 
-<Story of={IconButtonStories.Disabled} />
+- **Default** — 기본 상태의 버튼으로, 클릭 가능한 요소임을 명확하게 전달해요.
+- **Pressed** — 버튼을 누르고 있는 상태로, 정상적으로 인식되었음을 시각적으로 피드백해요. 버튼을 직접 눌러서 확인할 수 있어요.
+- **Disabled** — 비활성화된 상태의 버튼으로, 현재 수행할 수 없는 액션을 의미해요. 사용자의 상호작용을 제한하고 비활성 상태를 시각적으로 전달해요.
+
+<Story of={IconButtonStories.States} />
+
+`disabled` 속성을 사용하면 버튼을 비활성화할 수 있어요.
 
 <Source of={IconButtonStories.Disabled} />

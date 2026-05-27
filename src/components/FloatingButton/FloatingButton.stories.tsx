@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FloatingActionButton } from "./FloatingActionButton";
+import { FloatingButton } from "./FloatingButton";
 
-const meta: Meta<typeof FloatingActionButton> = {
-  title: "Components/Buttons/Floating Action Button",
-  component: FloatingActionButton,
+const meta: Meta<typeof FloatingButton> = {
+  title: "Components/Buttons/Floating Button",
+  component: FloatingButton,
   tags: ["!dev"],
   argTypes: {
     variant: {
@@ -22,7 +22,7 @@ const meta: Meta<typeof FloatingActionButton> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof FloatingActionButton>;
+type Story = StoryObj<typeof FloatingButton>;
 
 export const Default: Story = {
   name: "기본",
@@ -34,15 +34,15 @@ export const Variants: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<FloatingActionButton variant="up" />
-<FloatingActionButton variant="back" />`,
+        code: `<FloatingButton variant="up" />
+<FloatingButton variant="back" />`,
       },
     },
   },
   render: () => (
     <div style={{ display: "flex", gap: 16 }}>
-      <FloatingActionButton variant="up" />
-      <FloatingActionButton variant="back" />
+      <FloatingButton variant="up" />
+      <FloatingButton variant="back" />
     </div>
   ),
 };
@@ -52,15 +52,15 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<FloatingActionButton variant="up" disabled />
-<FloatingActionButton variant="back" disabled />`,
+        code: `<FloatingButton variant="up" disabled />
+<FloatingButton variant="back" disabled />`,
       },
     },
   },
   render: () => (
     <div style={{ display: "flex", gap: 16 }}>
-      <FloatingActionButton variant="up" disabled />
-      <FloatingActionButton variant="back" disabled />
+      <FloatingButton variant="up" disabled />
+      <FloatingButton variant="back" disabled />
     </div>
   ),
 };

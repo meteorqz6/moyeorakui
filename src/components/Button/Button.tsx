@@ -114,28 +114,28 @@ const buttonStyles = cva({
   },
 });
 
-export type ActionButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   RecipeVariantProps<typeof buttonStyles> & {
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leadingIcon?: React.ReactNode;
+    trailingIcon?: React.ReactNode;
     asChild?: boolean;
   };
 
-export function ActionButton({
+export function Button({
   variant,
   size,
   display,
-  leftIcon,
-  rightIcon,
+  leadingIcon,
+  trailingIcon,
   asChild = false,
   className,
   children,
   ...props
-}: ActionButtonProps) {
+}: ButtonProps) {
   const Comp = asChild ? Slot : "button";
   return (
-    <Comp className={cx(buttonStyles({ variant, size, display }), className)} {...props}>
-      {asChild ? children : <>{leftIcon}{children}{rightIcon}</>}
+    <Comp type="button" className={cx(buttonStyles({ variant, size, display }), className)} {...props}>
+      {asChild ? children : <>{leadingIcon}{children}{trailingIcon}</>}
     </Comp>
   );
 }
