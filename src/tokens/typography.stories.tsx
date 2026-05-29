@@ -7,174 +7,433 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
 type TextStyleEntry = {
   name: string;
+  // actual CSS values — used only for rendering the preview
   fontSize: string;
   fontWeight: string;
   lineHeight: string;
   letterSpacing: string;
+  // token names — shown in the table
+  sizeToken: string;
+  weightToken: string;
+  spacingToken: string;
+  // designer px value for line height
+  lineHeightPx: string;
 };
 
-function TypeRow({ name, fontSize, fontWeight, lineHeight, letterSpacing }: TextStyleEntry) {
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const headEntries: TextStyleEntry[] = [
+  { name: "head1",  fontSize: "28px", fontWeight: "600", lineHeight: "1.36", letterSpacing: "-0.005em", sizeToken: "2xl", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "38px" },
+  { name: "head2",  fontSize: "24px", fontWeight: "700", lineHeight: "1.17", letterSpacing: "-0.005em", sizeToken: "xl",  weightToken: "bold",     spacingToken: "tighter", lineHeightPx: "28px" },
+  { name: "head3",  fontSize: "24px", fontWeight: "600", lineHeight: "1.33", letterSpacing: "-0.005em", sizeToken: "xl",  weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "32px" },
+  { name: "head4",  fontSize: "20px", fontWeight: "500", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg",  weightToken: "medium",   spacingToken: "tighter", lineHeightPx: "28px" },
+];
+
+const titleEntries: TextStyleEntry[] = [
+  { name: "title1", fontSize: "20px", fontWeight: "600", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "28px" },
+  { name: "title2", fontSize: "20px", fontWeight: "400", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg", weightToken: "regular",  spacingToken: "tighter", lineHeightPx: "28px" },
+  { name: "title3", fontSize: "16px", fontWeight: "600", lineHeight: "1.38", letterSpacing: "-0.005em", sizeToken: "md", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "22px" },
+];
+
+const bodyEntries: TextStyleEntry[] = [
+  { name: "body1",  fontSize: "16px", fontWeight: "500", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "md", weightToken: "medium",   spacingToken: "tight", lineHeightPx: "24px" },
+  { name: "body2",  fontSize: "16px", fontWeight: "400", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "md", weightToken: "regular",  spacingToken: "tight", lineHeightPx: "24px" },
+  { name: "body3",  fontSize: "14px", fontWeight: "600", lineHeight: "1.57", letterSpacing: "-0.01em", sizeToken: "sm", weightToken: "semibold", spacingToken: "tight", lineHeightPx: "22px" },
+  { name: "body4",  fontSize: "14px", fontWeight: "500", lineHeight: "1.57", letterSpacing: "-0.01em", sizeToken: "sm", weightToken: "medium",   spacingToken: "tight", lineHeightPx: "22px" },
+  { name: "body5",  fontSize: "14px", fontWeight: "400", lineHeight: "1.57", letterSpacing: "-0.01em", sizeToken: "sm", weightToken: "regular",  spacingToken: "tight", lineHeightPx: "22px" },
+];
+
+const captionEntries: TextStyleEntry[] = [
+  { name: "caption1", fontSize: "12px", fontWeight: "600", lineHeight: "1.67", letterSpacing: "-0.01em", sizeToken: "xs", weightToken: "semibold", spacingToken: "tight", lineHeightPx: "20px" },
+  { name: "caption2", fontSize: "12px", fontWeight: "500", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "xs", weightToken: "medium",   spacingToken: "tight", lineHeightPx: "18px" },
+  { name: "caption3", fontSize: "12px", fontWeight: "400", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "xs", weightToken: "regular",  spacingToken: "tight", lineHeightPx: "18px" },
+];
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+const TABLE_COLS = "140px 64px 72px 104px 136px";
+const TABLE_HEADERS = ["Text Style", "Size", "Weight", "Line Height", "Letter Spacing"];
+
+function StylePreview({ entries }: { entries: TextStyleEntry[] }) {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "120px 1fr 80px 80px 80px 100px",
-        alignItems: "center",
-        padding: "16px",
-        borderBottom: "1px solid #f2f4f9",
-        gap: 16,
-      }}
-    >
-      <code style={{ fontSize: 12, color: "#5f6572", fontFamily: "monospace" }}>{name}</code>
-      <span
-        style={{
-          fontSize,
-          fontWeight,
-          lineHeight,
-          letterSpacing,
-          color: "#171a1f",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }}
-      >
-        가나다라 AaBbCc 123
-      </span>
-      <span style={{ fontSize: 11, color: "#9fa5b3", textAlign: "right" }}>{fontSize}</span>
-      <span style={{ fontSize: 11, color: "#9fa5b3", textAlign: "right" }}>{fontWeight}</span>
-      <span style={{ fontSize: 11, color: "#9fa5b3", textAlign: "right" }}>{lineHeight}</span>
-      <span style={{ fontSize: 11, color: "#9fa5b3", textAlign: "right" }}>{letterSpacing}</span>
+    <div style={{ padding: "28px 28px 24px", borderBottom: "1px solid #e1e4ec" }}>
+      {entries.map(({ name, fontSize, fontWeight, lineHeight, letterSpacing }, i) => (
+        <div key={name} style={{ marginBottom: i < entries.length - 1 ? 28 : 0 }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              color: "#9fa5b3",
+              fontFamily: "monospace",
+              marginBottom: 6,
+              letterSpacing: "0.02em",
+            }}
+          >
+            {name}
+          </div>
+          <div
+            style={{
+              fontSize,
+              fontWeight,
+              lineHeight,
+              letterSpacing,
+              color: "#171a1f",
+            }}
+          >
+            가나다라 AaBbCc 123
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
-function TypeSection({ title, entries }: { title: string; entries: TextStyleEntry[] }) {
+function TokenCell({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ marginBottom: 40 }}>
-      <h3
+    <code
+      style={{
+        fontSize: 11,
+        fontFamily: "monospace",
+        background: "#f2f4f9",
+        color: "#2c3038",
+        padding: "2px 6px",
+        borderRadius: 4,
+        display: "inline-block",
+      }}
+    >
+      {children}
+    </code>
+  );
+}
+
+function StyleTable({ entries }: { entries: TextStyleEntry[] }) {
+  return (
+    <div>
+      <div
         style={{
-          fontSize: 15,
+          display: "grid",
+          gridTemplateColumns: TABLE_COLS,
+          padding: "9px 28px",
+          background: "#f9fafd",
+          borderBottom: "1px solid #e1e4ec",
+          gap: 12,
+        }}
+      >
+        {TABLE_HEADERS.map((h) => (
+          <span key={h} style={{ fontSize: 11, fontWeight: 600, color: "#9fa5b3" }}>
+            {h}
+          </span>
+        ))}
+      </div>
+      {entries.map(({ name, sizeToken, weightToken, lineHeight, lineHeightPx, spacingToken }, i) => (
+        <div
+          key={name}
+          style={{
+            display: "grid",
+            gridTemplateColumns: TABLE_COLS,
+            padding: "12px 28px",
+            borderBottom: i < entries.length - 1 ? "1px solid #f2f4f9" : undefined,
+            gap: 12,
+            alignItems: "center",
+          }}
+        >
+          <code
+            style={{ fontSize: 12, color: "#2c3038", fontFamily: "monospace", fontWeight: 600 }}
+          >
+            {name}
+          </code>
+          <TokenCell>{sizeToken}</TokenCell>
+          <TokenCell>{weightToken}</TokenCell>
+          <span style={{ fontSize: 12, color: "#464b53" }}>
+            {lineHeight}{" "}
+            <span style={{ color: "#9fa5b3" }}>({lineHeightPx})</span>
+          </span>
+          <TokenCell>{spacingToken}</TokenCell>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TypeSection({
+  title,
+  description,
+  entries,
+}: {
+  title: string;
+  description: string;
+  entries: TextStyleEntry[];
+}) {
+  return (
+    <div style={{ marginBottom: 48 }}>
+      <h2
+        style={{
+          fontSize: 16,
           fontWeight: 700,
-          marginBottom: 12,
+          marginBottom: 6,
           color: "#171a1f",
-          borderLeft: "4px solid #4181ff",
-          paddingLeft: 12,
         }}
       >
         {title}
-      </h3>
-      <div style={{ border: "1px solid #e1e4ec", borderRadius: 8, overflow: "hidden" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "120px 1fr 80px 80px 80px 100px",
-            padding: "8px 16px",
-            background: "#f9fafd",
-            borderBottom: "1px solid #e1e4ec",
-            gap: 16,
-          }}
-        >
-          {["Token", "Preview", "Size", "Weight", "Line Height", "Letter Spacing"].map((h) => (
-            <span key={h} style={{ fontSize: 11, fontWeight: 600, color: "#9fa5b3" }}>{h}</span>
-          ))}
-        </div>
-        {entries.map((entry) => (
-          <TypeRow key={entry.name} {...entry} />
-        ))}
+      </h2>
+      <p style={{ fontSize: 13, color: "#737a89", marginBottom: 16, lineHeight: 1.6 }}>
+        {description}
+      </p>
+      <div style={{ border: "1px solid #e1e4ec", borderRadius: 12, overflow: "hidden" }}>
+        <StylePreview entries={entries} />
+        <StyleTable entries={entries} />
       </div>
     </div>
   );
 }
 
-const headEntries: TextStyleEntry[] = [
-  { name: "head1", fontSize: "28px", fontWeight: "600", lineHeight: "1.36", letterSpacing: "-0.005em" },
-  { name: "head2", fontSize: "24px", fontWeight: "700", lineHeight: "1.17", letterSpacing: "-0.005em" },
-  { name: "head3", fontSize: "24px", fontWeight: "600", lineHeight: "1.33", letterSpacing: "-0.005em" },
-];
+// ─── Token sub-components ─────────────────────────────────────────────────────
 
-const titleEntries: TextStyleEntry[] = [
-  { name: "title1", fontSize: "20px", fontWeight: "600", lineHeight: "1.4", letterSpacing: "-0.005em" },
-  { name: "title2", fontSize: "20px", fontWeight: "400", lineHeight: "1.4", letterSpacing: "-0.005em" },
-  { name: "title3", fontSize: "16px", fontWeight: "600", lineHeight: "1.38", letterSpacing: "-0.005em" },
-];
+function TokenSectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontSize: 14,
+        fontWeight: 700,
+        color: "#171a1f",
+        marginBottom: 16,
+        marginTop: 40,
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
 
-const bodyEntries: TextStyleEntry[] = [
-  { name: "body1", fontSize: "16px", fontWeight: "500", lineHeight: "1.5", letterSpacing: "-0.01em" },
-  { name: "body2", fontSize: "16px", fontWeight: "400", lineHeight: "1.5", letterSpacing: "-0.01em" },
-  { name: "body3", fontSize: "14px", fontWeight: "600", lineHeight: "1.57", letterSpacing: "-0.01em" },
-  { name: "body4", fontSize: "14px", fontWeight: "500", lineHeight: "1.57", letterSpacing: "-0.01em" },
-  { name: "body5", fontSize: "14px", fontWeight: "400", lineHeight: "1.57", letterSpacing: "-0.01em" },
-];
+// ─── Stories ─────────────────────────────────────────────────────────────────
 
-const captionEntries: TextStyleEntry[] = [
-  { name: "caption1", fontSize: "12px", fontWeight: "600", lineHeight: "1.67", letterSpacing: "-0.01em" },
-  { name: "caption2", fontSize: "12px", fontWeight: "500", lineHeight: "1.5", letterSpacing: "-0.01em" },
-  { name: "caption3", fontSize: "12px", fontWeight: "400", lineHeight: "1.5", letterSpacing: "-0.01em" },
-];
-
-export const AllStyles: Story = {
-  name: "Text Styles",
+export const Tokens: Story = {
   render: () => (
-    <div style={{ padding: 32, fontFamily: "sans-serif", maxWidth: 900 }}>
-      <TypeSection title="Head" entries={headEntries} />
-      <TypeSection title="Title" entries={titleEntries} />
-      <TypeSection title="Body" entries={bodyEntries} />
-      <TypeSection title="Caption" entries={captionEntries} />
+    <div style={{ padding: 16, fontFamily: "inherit", maxWidth: 720 }}>
+      {/* Font Size */}
+      <TokenSectionTitle>Font Size</TokenSectionTitle>
+      <div
+        style={{
+          border: "1px solid #e1e4ec",
+          borderRadius: 10,
+          overflow: "hidden",
+          marginBottom: 0,
+        }}
+      >
+        {[
+          { token: "2xl", size: "28px" },
+          { token: "xl", size: "24px" },
+          { token: "lg", size: "20px" },
+          { token: "md", size: "16px" },
+          { token: "sm", size: "14px" },
+          { token: "xs", size: "12px" },
+        ].map(({ token, size }, i, arr) => (
+          <div
+            key={token}
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              gap: 16,
+              padding: "14px 20px",
+              borderBottom: i < arr.length - 1 ? "1px solid #f2f4f9" : undefined,
+              background: i % 2 === 1 ? "#fafbff" : "#ffffff",
+            }}
+          >
+            <code
+              style={{
+                width: 32,
+                fontSize: 11,
+                fontWeight: 700,
+                color: "#9fa5b3",
+                fontFamily: "monospace",
+                flexShrink: 0,
+              }}
+            >
+              {token}
+            </code>
+            <span
+              style={{
+                fontSize: size,
+                fontWeight: 500,
+                color: "#171a1f",
+                lineHeight: 1,
+                flex: 1,
+              }}
+            >
+              가나다라 AaBbCc 123
+            </span>
+            <span
+              style={{
+                fontSize: 11,
+                color: "#ccd0d9",
+                fontFamily: "monospace",
+                flexShrink: 0,
+              }}
+            >
+              {size}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Font Weight */}
+      <TokenSectionTitle>Font Weight</TokenSectionTitle>
+      <div
+        style={{
+          border: "1px solid #e1e4ec",
+          borderRadius: 10,
+          overflow: "hidden",
+        }}
+      >
+        {[
+          { token: "bold", weight: "700" },
+          { token: "semibold", weight: "600" },
+          { token: "medium", weight: "500" },
+          { token: "regular", weight: "400" },
+        ].map(({ token, weight }, i, arr) => (
+          <div
+            key={token}
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              gap: 16,
+              padding: "14px 20px",
+              borderBottom: i < arr.length - 1 ? "1px solid #f2f4f9" : undefined,
+              background: i % 2 === 1 ? "#fafbff" : "#ffffff",
+            }}
+          >
+            <code
+              style={{
+                width: 72,
+                fontSize: 11,
+                fontWeight: 700,
+                color: "#9fa5b3",
+                fontFamily: "monospace",
+                flexShrink: 0,
+              }}
+            >
+              {token}
+            </code>
+            <span
+              style={{
+                fontSize: "20px",
+                fontWeight: weight,
+                color: "#171a1f",
+                lineHeight: 1,
+                flex: 1,
+              }}
+            >
+              가나다라 AaBbCc 123
+            </span>
+            <span
+              style={{
+                fontSize: 11,
+                color: "#ccd0d9",
+                fontFamily: "monospace",
+                flexShrink: 0,
+              }}
+            >
+              {weight}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Letter Spacing */}
+      <TokenSectionTitle>Letter Spacing</TokenSectionTitle>
+      <div
+        style={{
+          border: "1px solid #e1e4ec",
+          borderRadius: 10,
+          overflow: "hidden",
+        }}
+      >
+        {[
+          { token: "tighter", value: "-0.005em", usage: "Head, Title" },
+          { token: "tight", value: "-0.01em", usage: "Body, Caption" },
+        ].map(({ token, value, usage }, i, arr) => (
+          <div
+            key={token}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              padding: "14px 20px",
+              borderBottom: i < arr.length - 1 ? "1px solid #f2f4f9" : undefined,
+            }}
+          >
+            <code
+              style={{
+                width: 64,
+                fontSize: 11,
+                fontWeight: 700,
+                color: "#9fa5b3",
+                fontFamily: "monospace",
+                flexShrink: 0,
+              }}
+            >
+              {token}
+            </code>
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: 500,
+                color: "#171a1f",
+                letterSpacing: value,
+                flex: 1,
+              }}
+            >
+              가나다라 AaBbCc 123
+            </span>
+            <span style={{ fontSize: 11, color: "#9fa5b3", flexShrink: 0 }}>{usage}</span>
+            <span
+              style={{
+                fontSize: 11,
+                color: "#ccd0d9",
+                fontFamily: "monospace",
+                flexShrink: 0,
+              }}
+            >
+              {value}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   ),
 };
 
-export const Scale: Story = {
-  name: "Type Scale",
+export const AllStyles: Story = {
+  name: "Styles",
   render: () => (
-    <div style={{ padding: 32, fontFamily: "sans-serif", maxWidth: 720 }}>
-      <h2 style={{ fontSize: 15, fontWeight: 700, marginBottom: 24, color: "#171a1f" }}>
-        Font Size Scale
-      </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 48 }}>
-        {[
-          { token: "2xl", size: "28px", label: "28" },
-          { token: "xl",  size: "24px", label: "24" },
-          { token: "lg",  size: "20px", label: "20" },
-          { token: "md",  size: "16px", label: "16" },
-          { token: "sm",  size: "14px", label: "14" },
-          { token: "xs",  size: "12px", label: "12" },
-        ].map(({ token, size, label }) => (
-          <div key={token} style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
-            <code style={{ width: 40, fontSize: 11, color: "#9fa5b3", fontFamily: "monospace", flexShrink: 0 }}>
-              {token}
-            </code>
-            <span style={{ fontSize: size, fontWeight: 500, color: "#171a1f", lineHeight: 1 }}>
-              가나다라 AaBbCc
-            </span>
-            <span style={{ fontSize: 11, color: "#ccd0d9" }}>{label}px</span>
-          </div>
-        ))}
-      </div>
+    <div style={{ padding: 32, fontFamily: "inherit", maxWidth: 900 }}>
+      <TypeSection
+        title="Head"
+        description="가장 높은 시각적 위계를 가지는 텍스트 스타일로, 사용자의 주목이 필요한 대표 콘텐츠를 강조할 때 사용해요."
+        entries={headEntries}
+      />
 
-      <h2 style={{ fontSize: 15, fontWeight: 700, marginBottom: 24, color: "#171a1f" }}>
-        Font Weight
-      </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {[
-          { token: "bold",     weight: "700" },
-          { token: "semibold", weight: "600" },
-          { token: "medium",   weight: "500" },
-          { token: "regular",  weight: "400" },
-        ].map(({ token, weight }) => (
-          <div key={token} style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
-            <code style={{ width: 70, fontSize: 11, color: "#9fa5b3", fontFamily: "monospace", flexShrink: 0 }}>
-              {token}
-            </code>
-            <span style={{ fontSize: "20px", fontWeight: weight, color: "#171a1f", lineHeight: 1 }}>
-              가나다라 AaBbCc 123
-            </span>
-            <span style={{ fontSize: 11, color: "#ccd0d9" }}>{weight}</span>
-          </div>
-        ))}
-      </div>
+      <TypeSection
+        title="Title"
+        description="상위 정보 위계를 표현하는 텍스트 스타일이에요. 화면, 섹션 또는 콘텐츠를 구분하고 강조하며 핵심 제목이나 주제를 표현하는 데 사용해요."
+        entries={titleEntries}
+      />
+
+      <TypeSection
+        title="Body"
+        description="기본 정보 위계를 표현하며 서비스 전반에서 기본적으로 사용되는 텍스트 스타일이에요. 레이블, 일반 정보, 설명 등 다양한 UI 텍스트를 전달하는 데 사용하며, 상대적으로 중요도가 낮은 제목이나 소제목에도 활용돼요."
+        entries={bodyEntries}
+      />
+
+      <TypeSection
+        title="Caption"
+        description="보조 정보 위계를 표현하는 텍스트 스타일로, 본문을 보완하거나 추가적인 맥락을 전달할 때 사용해요."
+        entries={captionEntries}
+      />
     </div>
   ),
 };
