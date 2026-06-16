@@ -18,7 +18,7 @@ const chipStyles = cva({
     variant: {
       brand: {
         bg: "fill.brand.default",
-        color: "fg.inverted.default",
+        color: "fg.neutral.faintest",
       },
       "brand-weak": {
         bg: "fill.brand.subtle",
@@ -28,10 +28,10 @@ const chipStyles = cva({
         borderColor: "stroke.brand.default",
       },
       neutral: {
-        bg: "fill.inverted.default",
-        color: "fg.inverted.default",
+        bg: "fill.neutral.default",
+        color: "fg.neutral.faintest",
         _disabled: {
-          bg: "fill.neutral.stronger",
+          bg: "fill.neutral.subtler",
           color: "fg.neutral.subtler",
         },
       },

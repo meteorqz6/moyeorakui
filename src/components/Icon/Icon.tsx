@@ -13,7 +13,7 @@ const iconStyles = cva({
       weak: { color: "fg.neutral.subtlest" },
       weakest: { color: "fg.neutral.faintest" },
       brand: { color: "fg.brand.default" },
-      inverted: { color: "fg.inverted.default" },
+      inverted: { color: "fg.neutral.faintest" },
     },
     iconSize: {
       xs: { width: "16px", height: "16px" },

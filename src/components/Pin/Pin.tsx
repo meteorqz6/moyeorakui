@@ -18,7 +18,7 @@ const pillStyles = cva({
   variants: {
     style: {
       brand: { bg: "fill.brand.default" },
-      neutral: { bg: "fill.inverted.default" },
+      neutral: { bg: "fill.neutral.default" },
     },
   },
   defaultVariants: { style: "brand" },
@@ -28,7 +28,7 @@ const tailColorStyles = cva({
   variants: {
     style: {
       brand: { color: "fill.brand.default" },
-      neutral: { color: "fill.inverted.default" },
+      neutral: { color: "fill.neutral.default" },
     },
   },
 });
@@ -78,7 +78,7 @@ export function PinText({ style = "brand", text, className }: PinTextProps) {
           <span
             className={css({
               textStyle: "caption1",
-              color: "fg.inverted.default",
+              color: "fg.neutral.faintest",
               whiteSpace: "nowrap",
             })}
           >

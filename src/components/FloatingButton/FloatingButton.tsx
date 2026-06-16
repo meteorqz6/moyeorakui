@@ -15,7 +15,7 @@ const floatingButtonStyles = cva({
     bg: "fill.neutral.default",
     shadow: "strong",
     cursor: "pointer",
-    _active: { bg: "fill.neutral.stronger" },
+    _active: { bg: "fill.neutral.subtler" },
     _disabled: { cursor: "not-allowed", opacity: 0.4 },
   },
 });

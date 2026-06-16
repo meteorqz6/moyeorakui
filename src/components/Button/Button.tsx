@@ -11,24 +11,24 @@ const buttonStyles = cva({
     gap: "2px",
     _disabled: {
       cursor: "not-allowed",
-      bg: "fill.inverted.default-disabled",
+      bg: "fill.neutral.default-disabled",
       color: "fg.neutral.subtlest",
       borderColor: "transparent",
       _active: {
-        bg: "fill.inverted.default-disabled",
+        bg: "fill.neutral.default-disabled",
       },
     },
   },
   variants: {
     variant: {
       default: {
-        bg: "fill.inverted.default",
-        color: "fg.inverted.default",
-        _active: { bg: "fill.inverted.default-pressed" },
+        bg: "fill.neutral.default",
+        color: "fg.neutral.faintest",
+        _active: { bg: "fill.neutral.default-pressed" },
       },
       brand: {
         bg: "fill.brand.default",
-        color: "fg.inverted.default",
+        color: "fg.neutral.faintest",
         _active: { bg: "fill.brand.default-pressed" },
       },
       "brand-weak": {
@@ -37,22 +37,22 @@ const buttonStyles = cva({
         _active: { bg: "fill.brand.subtle-pressed" },
       },
       outline: {
-        bg: "fill.neutral.default",
+        bg: "fill.neutral.faintest",
         color: "fg.neutral.subtle",
         borderWidth: "1px",
         borderStyle: "solid",
         borderColor: "stroke.neutral.subtle",
-        _active: { bg: "fill.neutral.stronger" },
+        _active: { bg: "fill.neutral.subtler" },
       },
       ghost: {
         bg: "transparent",
         color: "fg.neutral.subtle",
-        _active: { bg: "fill.neutral.stronger" },
+        _active: { bg: "fill.neutral.subtler" },
       },
       "ghost-brand": {
         bg: "transparent",
         color: "fg.brand.default",
-        _active: { bg: "fill.neutral.stronger" },
+        _active: { bg: "fill.neutral.subtler" },
       },
     },
     display: {
@@ -134,8 +134,20 @@ export function Button({
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
   return (
-    <Comp type="button" className={cx(buttonStyles({ variant, size, display }), className)} {...props}>
-      {asChild ? children : <>{leadingIcon}{children}{trailingIcon}</>}
+    <Comp
+      type="button"
+      className={cx(buttonStyles({ variant, size, display }), className)}
+      {...props}
+    >
+      {asChild ? (
+        children
+      ) : (
+        <>
+          {leadingIcon}
+          {children}
+          {trailingIcon}
+        </>
+      )}
     </Comp>
   );
 }

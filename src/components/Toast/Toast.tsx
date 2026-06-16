@@ -26,7 +26,7 @@ export function Toast({ type, message }: ToastProps) {
       <span
         className={css({
           textStyle: "body4",
-          color: "fg.inverted.default",
+          color: "fg.neutral.faintest",
         })}
       >
         {message}

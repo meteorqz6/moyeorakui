@@ -15,23 +15,23 @@ const buttonCtaStyles = cva({
     p: "16px",
     _disabled: {
       cursor: "not-allowed",
-      bg: "fill.inverted.default-disabled",
+      bg: "fill.neutral.default-disabled",
       color: "fg.neutral.subtlest",
       _active: {
-        bg: "fill.inverted.default-disabled",
+        bg: "fill.neutral.default-disabled",
       },
     },
   },
   variants: {
     variant: {
       default: {
-        bg: "fill.inverted.default",
-        color: "fg.inverted.default",
-        _active: { bg: "fill.inverted.default-pressed" },
+        bg: "fill.neutral.default",
+        color: "fg.neutral.faintest",
+        _active: { bg: "fill.neutral.default-pressed" },
       },
       brand: {
         bg: "fill.brand.default",
-        color: "fg.inverted.default",
+        color: "fg.neutral.faintest",
         _active: { bg: "fill.brand.default-pressed" },
       },
     },

@@ -18,7 +18,7 @@ const wrapperStyles = cva({
   },
   variants: {
     selected: {
-      true: { bg: "fill.neutral.stronger" },
+      true: { bg: "fill.neutral.subtler" },
       false: {},
     },
   },

@@ -32,7 +32,7 @@ export function Modal({
           className={css({
             position: "fixed",
             inset: 0,
-            bg: "bg.dim.default",
+            bg: "overlay.neutral.default",
             zIndex: 50,
           })}
         />

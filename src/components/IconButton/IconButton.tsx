@@ -16,27 +16,27 @@ const iconButtonStyles = cva({
     variant: {
       clear: {
         bg: "transparent",
-        color: "fg.neutral.subtler",
+        color: "fg.neutral.subtle",
         _active: {
-          color: "fg.neutral.subtlest",
+          color: "fg.neutral.subtler",
         },
         _disabled: {
-          color: "fg.neutral.faintest",
+          color: "fg.neutral.subtlest",
           bg: "transparent",
-          _active: { color: "fg.neutral.faintest" },
+          _active: { color: "fg.neutral.subtlest" },
         },
       },
       fill: {
-        bg: "fill.inverted.default",
-        color: "fg.inverted.default",
+        bg: "fill.neutral.default",
+        color: "fg.neutral.faintest",
         _active: {
-          bg: "fill.inverted.default-pressed",
+          bg: "fill.neutral.default-pressed",
         },
         _disabled: {
-          bg: "fill.inverted.default-disabled",
+          bg: "fill.neutral.default-disabled",
           color: "fg.neutral.subtlest",
           _active: {
-            bg: "fill.inverted.default-disabled",
+            bg: "fill.neutral.default-disabled",
             color: "fg.neutral.subtlest",
           },
         },
