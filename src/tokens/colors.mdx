@@ -1,27 +1,57 @@
-import { Meta, Story, Source } from "@storybook/blocks";
+import { Meta, Story } from "@storybook/blocks";
 import * as ColorsStories from "./colors.stories";
 
 <Meta of={ColorsStories} />
 
 # Colors
 
-색상 시스템은 **Atomic**과 **Semantic** 두 계층으로 구성돼요.
-
-- **Atomic** — 팔레트의 원시 색상값이에요. 직접 사용하지 않고 Semantic 토큰의 참조 대상으로만 사용해요.
-- **Semantic** — 역할과 의미를 기반으로 정의된 토큰이에요. UI 구현 시 항상 이 토큰을 사용해요.
+색상 시스템은 **Palette → Semantic** 두 계층으로 구성돼요.
 
 ---
 
-## Atomic
+## Palette
 
-디자인 시스템의 기반이 되는 원시 색상 팔레트예요. Neutral, Blue, Red, Green 4가지 계열로 구성돼요.
+디자인 시스템의 기반이 되는 원시 색상 팔레트예요. 직접 참조하지 않고 Semantic 토큰이 이 값을 참조합니다.
 
-<Story of={ColorsStories.Atomic} />
+<Story of={ColorsStories.Palette} />
 
 ---
 
-## Semantic
+## Semantic Tokens
 
-컴포넌트와 UI 요소에 직접 적용하는 토큰이에요. 역할에 따라 FG, Fill, Stroke, BG, Shadow로 분류돼요.
+요소(fg, bg, stroke, fill, shadow, overlay) 기준으로 정렬된 전체 토큰 목록이에요.
+
+### Anatomy
+
+시맨틱 토큰은 **[요소]-[의도]-[강조 단계]-[상태]** 구조로 구성돼요. 각 토큰은 적용 대상, 의미, 시각적 우선순위, 상호작용 상태를 조합해 일관된 색상 사용 기준을 제공해요.
+
+#### 요소 (Element)
+
+- **fg** — 텍스트, 아이콘 요소에 사용돼요.
+- **bg** — 페이지, 섹션, 모달 등 넓은 영역의 배경을 구성하는 데 사용돼요.
+- **stroke** — 테두리, 구분선 등 요소의 경계를 표현하는 데 사용돼요.
+- **fill** — 배지, 버튼 등 내부가 채워진 독립적 시각 요소의 면 영역에 사용돼요.
+- **shadow** — 요소의 깊이감과 계층 구조를 표현하기 위한 그림자에 사용돼요.
+- **overlay** — 모달, 바텀시트 등이 활성화될 때 배경을 덮고 레이어를 시각적으로 구분하는 오버레이에 사용돼요.
+
+#### 의도 (Role)
+
+색상이 전달하는 의미와 사용 목적을 정의해요.
+
+- **neutral** — UI 전반에 사용되는 기본 색상 계열로, 중립적인 무채색이에요.
+- **brand** — 브랜드 정체성을 표현하기 위해 사용돼요.
+- **positive** — 성공, 완료, 긍정 상태를 표현하기 위해 사용돼요.
+- **negative** — 오류, 경고, 위험 상태를 표현하기 위해 사용돼요.
+
+#### 강조 단계 (Emphasis)
+
+색상의 시각적 강조 수준을 정의하는 8단계예요. `strongest`에 가까울수록 강하게 강조되고, `faintest`에 가까울수록 옅어져 보조적인 정보 표현에 사용돼요.
+
+`strongest` → `stronger` → `strong` → `default` → `subtle` → `subtler` → `subtlest` → `faintest`
+
+#### 상태 (State)
+
+- **pressed** — 사용자가 컴포넌트를 누르고 있는 상태예요.
+- **disabled** — 사용이 불가능한 비활성 상태예요.
 
 <Story of={ColorsStories.Semantic} />
