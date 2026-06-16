@@ -1,11 +1,28 @@
 import { Meta, Story } from "@storybook/blocks";
 import * as ColorsStories from "./colors.stories";
+import anatomyImg from "./color-anatomy.png";
 
 <Meta of={ColorsStories} />
 
 # Colors
 
 색상 시스템은 **Palette → Semantic** 두 계층으로 구성돼요.
+`tailwind.config.ts`에 플러그인을 추가하면 시맨틱 컬러 토큰을 className으로 사용할 수 있어요.
+
+```ts
+// tailwind.config.ts
+import moyeorakPlugin from "@moyeorak/design-system/tailwind-plugin"
+
+export default {
+  plugins: [moyeorakPlugin],
+}
+```
+
+```tsx
+<p className="text-fg-neutral-default">텍스트</p>
+<div className="bg-fill-brand-default">버튼</div>
+<div className="border-stroke-neutral-subtle">...</div>
+```
 
 ---
 
@@ -17,13 +34,17 @@ import * as ColorsStories from "./colors.stories";
 
 ---
 
-## Semantic Tokens
-
-요소(fg, bg, stroke, fill, shadow, overlay) 기준으로 정렬된 전체 토큰 목록이에요.
+## Semantic
 
 ### Anatomy
 
-시맨틱 토큰은 **[요소]-[의도]-[강조 단계]-[상태]** 구조로 구성돼요. 각 토큰은 적용 대상, 의미, 시각적 우선순위, 상호작용 상태를 조합해 일관된 색상 사용 기준을 제공해요.
+시맨틱 토큰은 **[요소]-[의도]-[강조단계]-[상태]** 구조로 구성돼요. 각 토큰은 적용 대상, 의미, 시각적 우선순위, 상호작용 상태를 조합해 일관된 색상 사용 기준을 제공해요.
+
+<img
+  src={anatomyImg}
+  alt="Color token anatomy"
+  style={{ width: "100%", maxWidth: 800, marginBottom: 32 }}
+/>
 
 #### 요소 (Element)
 
@@ -40,10 +61,10 @@ import * as ColorsStories from "./colors.stories";
 
 - **neutral** — UI 전반에 사용되는 기본 색상 계열로, 중립적인 무채색이에요.
 - **brand** — 브랜드 정체성을 표현하기 위해 사용돼요.
-- **positive** — 성공, 완료, 긍정 상태를 표현하기 위해 사용돼요.
 - **negative** — 오류, 경고, 위험 상태를 표현하기 위해 사용돼요.
+- **positive** — 성공, 완료, 긍정 상태를 표현하기 위해 사용돼요.
 
-#### 강조 단계 (Emphasis)
+#### 강조단계 (Emphasis)
 
 색상의 시각적 강조 수준을 정의하는 8단계예요. `strongest`에 가까울수록 강하게 강조되고, `faintest`에 가까울수록 옅어져 보조적인 정보 표현에 사용돼요.
 

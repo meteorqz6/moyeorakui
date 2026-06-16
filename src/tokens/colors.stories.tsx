@@ -154,7 +154,6 @@ function ColorScale({
 }
 
 function SingleColor({ name, value, cssVar }: { name: string; value: string; cssVar: string }) {
-  const lum = hexLuminance(value);
   return (
     <div style={{ flex: 1 }}>
       <p
@@ -179,16 +178,6 @@ function SingleColor({ name, value, cssVar }: { name: string; value: string; css
             padding: "6px 10px",
           }}
         >
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 700,
-              color: lum > 0.45 ? "#171a1f" : "#ffffff",
-              opacity: 0.65,
-            }}
-          >
-            ●
-          </span>
         </div>
         <div style={{ padding: "8px 10px", background: "#f9fafd" }}>
           <div style={{ fontSize: 9, fontFamily: "monospace", color: "#737a89", marginBottom: 2 }}>
