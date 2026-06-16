@@ -11,7 +11,9 @@ function injectUseClientPlugin(): Plugin {
       const distDir = resolve(__dirname, "dist")
       if (!existsSync(distDir)) return
       const files = readdirSync(distDir).filter(
-        (f) => f.endsWith(".js") || f.endsWith(".mjs"),
+        (f) =>
+          (f.endsWith(".js") || f.endsWith(".mjs")) &&
+          !f.startsWith("tailwind-plugin"),
       )
       for (const file of files) {
         const filePath = resolve(distDir, file)
@@ -50,13 +52,16 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "@moyeorak/design-system",
+      entry: {
+        index: resolve(__dirname, "src/index.ts"),
+        "tailwind-plugin": resolve(__dirname, "src/tailwind-plugin.ts"),
+      },
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "mjs" : "js"}`,
+      fileName: (format, entryAlias) =>
+        `${entryAlias}.${format === "es" ? "mjs" : "js"}`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: ["react", "react-dom", "react/jsx-runtime", "tailwindcss/plugin"],
       output: {
         globals: {
           react: "React",
