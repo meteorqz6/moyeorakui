@@ -3,6 +3,9 @@ import { defineConfig } from "@pandacss/dev";
 export default defineConfig({
   preflight: true,
   include: ["./src/**/*.{ts,tsx}", "./.storybook/**/*.{ts,tsx}"],
+  globalCss: {
+    body: { fontFamily: "{fonts.sans}" },
+  },
   exclude: [],
   outdir: "styled-system",
   jsxFramework: "react",
@@ -10,7 +13,7 @@ export default defineConfig({
   theme: {
     tokens: {
       colors: {
-        neutral: {
+        gray: {
           0: { value: "#ffffff" },
           50: { value: "#f9fafd" },
           100: { value: "#f2f4f9" },
@@ -34,19 +37,22 @@ export default defineConfig({
           800: { value: "#3c76e9" },
           900: { value: "#3265cb" },
         },
-        neutralOpacity: {
-          100: { value: "rgba(15, 17, 24, 0.02)" },
-          200: { value: "rgba(15, 17, 24, 0.04)" },
-          300: { value: "rgba(15, 17, 24, 0.08)" },
-          400: { value: "rgba(15, 17, 24, 0.20)" },
-          500: { value: "rgba(15, 17, 24, 0.28)" },
-          600: { value: "rgba(15, 17, 24, 0.56)" },
-          700: { value: "rgba(15, 17, 24, 0.70)" },
-          800: { value: "rgba(15, 17, 24, 0.80)" },
-          900: { value: "rgba(15, 17, 24, 0.90)" },
+        grayOpacity: {
+          100: { value: "rgb(15 17 24 / 2%)" },
+          200: { value: "rgb(15 17 24 / 4%)" },
+          300: { value: "rgb(15 17 24 / 8%)" },
+          400: { value: "rgb(15 17 24 / 20%)" },
+          500: { value: "rgb(15 17 24 / 28%)" },
+          600: { value: "rgb(15 17 24 / 56%)" },
+          700: { value: "rgb(15 17 24 / 70%)" },
+          800: { value: "rgb(15 17 24 / 80%)" },
+          900: { value: "rgb(15 17 24 / 90%)" },
         },
         red: { value: "#f0405c" },
         green: { value: "#00cf95" },
+      },
+      fonts: {
+        sans: { value: "'Pretendard Variable', Pretendard, sans-serif" },
       },
       fontSizes: {
         xs: { value: "12px" },
@@ -73,13 +79,7 @@ export default defineConfig({
         md: { value: "12px" },
         lg: { value: "16px" },
         xl: { value: "20px" },
-        full: { value: "9999px" },
-      },
-      shadows: {
-        subtle:   { value: "0 0 8px 4px var(--colors-shadow-subtle)" },
-        default:  { value: "0 0 8px 0px var(--colors-shadow-default)" },
-        strong:   { value: "0 0 12px 0px var(--colors-shadow-strong)" },
-        stronger: { value: "0 0 6px 2px var(--colors-shadow-stronger)" },
+        full: { value: "999px" },
       },
     },
 
@@ -87,71 +87,76 @@ export default defineConfig({
       colors: {
         fill: {
           neutral: {
-            default: { value: { base: "{colors.neutral.0}" } },
-            strong: { value: { base: "{colors.neutral.50}" } },
-            stronger: { value: { base: "{colors.neutral.100}" } },
-            strongest: { value: { base: "{colors.neutral.300}" } },
-          },
-          inverted: {
-            default: { value: { base: "{colors.neutral.800}" } },
-            "default-pressed": { value: { base: "{colors.neutral.600}" } },
-            "default-disabled": { value: { base: "{colors.neutral.200}" } },
+            default: { value: { base: "{colors.gray.800}" } },
+            "default-pressed": { value: { base: "{colors.gray.600}" } },
+            "default-disabled": { value: { base: "{colors.gray.200}" } },
+            subtle: { value: { base: "{colors.gray.300}" } },
+            subtler: { value: { base: "{colors.gray.100}" } },
+            subtlest: { value: { base: "{colors.gray.50}" } },
+            faintest: { value: { base: "{colors.gray.0}" } },
           },
           brand: {
-            subtlest: { value: { base: "{colors.blue.100}" } },
-            subtler: { value: { base: "{colors.blue.200}" } },
-            subtle: { value: { base: "{colors.blue.300}" } },
-            "subtle-pressed": { value: { base: "{colors.blue.500}" } },
             default: { value: { base: "{colors.blue.700}" } },
             "default-pressed": { value: { base: "{colors.blue.900}" } },
+            subtle: { value: { base: "{colors.blue.300}" } },
+            "subtle-pressed": { value: { base: "{colors.blue.500}" } },
+            subtler: { value: { base: "{colors.blue.200}" } },
+            subtlest: { value: { base: "{colors.blue.100}" } },
           },
         },
         bg: {
           neutral: {
-            default: { value: { base: "{colors.neutral.0}" } },
-            strong: { value: { base: "{colors.neutral.100}" } },
+            strongest: { value: { base: "{colors.gray.800}" } },
+            strong: { value: { base: "{colors.gray.100}" } },
+            default: { value: { base: "{colors.gray.0}" } },
           },
-          dim: {
-            default: { value: { base: "{colors.neutralOpacity.700}" } },
+        },
+        overlay: {
+          neutral: {
+            stronger: { value: { base: "{colors.grayOpacity.900}" } },
+            strong: { value: { base: "{colors.grayOpacity.800}" } },
+            default: { value: { base: "{colors.grayOpacity.700}" } },
+            subtle: { value: { base: "{colors.grayOpacity.600}" } },
+            subtler: { value: { base: "{colors.grayOpacity.500}" } },
           },
         },
         stroke: {
           neutral: {
-            subtler: { value: { base: "{colors.neutral.100}" } },
-            subtle: { value: { base: "{colors.neutral.200}" } },
-            default: { value: { base: "{colors.neutral.300}" } },
-            strong: { value: { base: "{colors.neutral.400}" } },
+            strong: { value: { base: "{colors.gray.400}" } },
+            default: { value: { base: "{colors.gray.300}" } },
+            subtle: { value: { base: "{colors.gray.200}" } },
+            subtler: { value: { base: "{colors.gray.100}" } },
           },
           brand: {
-            subtle: { value: { base: "{colors.blue.600}" } },
             default: { value: { base: "{colors.blue.700}" } },
+            subtle: { value: { base: "{colors.blue.600}" } },
           },
           negative: {
             default: { value: { base: "{colors.red}" } },
           },
         },
         shadow: {
-          subtle:   { value: { base: "{colors.neutralOpacity.100}" } },
-          default:  { value: { base: "{colors.neutralOpacity.200}" } },
-          strong:   { value: { base: "{colors.neutralOpacity.300}" } },
-          stronger: { value: { base: "{colors.neutralOpacity.500}" } },
+          neutral: {
+            stronger: { value: { base: "{colors.grayOpacity.500}" } },
+            strong: { value: { base: "{colors.grayOpacity.300}" } },
+            default: { value: { base: "{colors.grayOpacity.200}" } },
+            subtle: { value: { base: "{colors.grayOpacity.100}" } },
+          },
         },
         fg: {
           neutral: {
-            faintest: { value: { base: "{colors.neutral.300}" } },
-            subtlest: { value: { base: "{colors.neutral.400}" } },
-            subtler: { value: { base: "{colors.neutral.500}" } },
-            subtle: { value: { base: "{colors.neutral.700}" } },
-            default: { value: { base: "{colors.neutral.800}" } },
-            strong: { value: { base: "{colors.neutral.900}" } },
-            "default-disabled": { value: { base: "{colors.neutral.200}" } },
-          },
-          inverted: {
-            default: { value: { base: "{colors.neutral.0}" } },
+            stronger: { value: { base: "{colors.gray.900}" } },
+            strong: { value: { base: "{colors.gray.800}" } },
+            default: { value: { base: "{colors.gray.700}" } },
+            subtle: { value: { base: "{colors.gray.500}" } },
+            subtler: { value: { base: "{colors.gray.400}" } },
+            subtlest: { value: { base: "{colors.gray.300}" } },
+            faintest: { value: { base: "{colors.gray.0}" } },
           },
           brand: {
-            subtlest: { value: { base: "{colors.blue.200}" } },
             default: { value: { base: "{colors.blue.700}" } },
+            subtle: { value: { base: "{colors.blue.400}" } },
+            subtlest: { value: { base: "{colors.blue.200}" } },
           },
           positive: {
             default: { value: { base: "{colors.green}" } },
@@ -189,6 +194,14 @@ export default defineConfig({
           lineHeight: "1.33",
         },
       }, // 32÷24
+      head4: {
+        value: {
+          fontSize: "{fontSizes.lg}",
+          fontWeight: "{fontWeights.medium}",
+          letterSpacing: "{letterSpacings.tighter}",
+          lineHeight: "1.4",
+        },
+      }, // 28÷20
       title1: {
         value: {
           fontSize: "{fontSizes.lg}",
