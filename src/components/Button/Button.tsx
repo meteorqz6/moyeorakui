@@ -13,7 +13,6 @@ const buttonStyles = cva({
       cursor: "not-allowed",
       bg: "fill.neutral.default-disabled",
       color: "fg.neutral.subtler",
-      borderColor: "transparent",
       _active: {
         bg: "fill.neutral.default-disabled",
       },
@@ -39,9 +38,7 @@ const buttonStyles = cva({
       outline: {
         bg: "fill.neutral.faintest",
         color: "fg.neutral.default",
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "stroke.neutral.subtle",
+        boxShadow: "inset 0 0 0 1px {colors.stroke.neutral.subtle}",
         _active: { bg: "fill.neutral.subtler" },
       },
       ghost: {
@@ -86,6 +83,14 @@ const buttonStyles = cva({
     },
   },
   compoundVariants: [
+    {
+      variant: "outline",
+      css: {
+        _disabled: {
+          boxShadow: "none",
+        },
+      },
+    },
     {
       variant: "ghost",
       css: {

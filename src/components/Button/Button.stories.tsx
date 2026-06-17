@@ -87,7 +87,6 @@ export const Sizes: Story = {
   ),
 };
 
-
 export const VariantsSolid: Story = {
   name: "스타일 — Solid",
   parameters: {
@@ -168,21 +167,21 @@ export const Layout: Story = {
     docs: {
       source: {
         code: `// Label Only
-<Button>버튼</Button>
+<Button>Button</Button>
 
 // Leading Icon + Label
-<Button leadingIcon={<Icon type="chevron_left" size="xs" />}>버튼</Button>
+<Button leadingIcon={<Icon type="chevron_left" size="xs" />}>Button</Button>
 
 // Label + Trailing Icon
-<Button trailingIcon={<Icon type="chevron_right" size="xs" />}>버튼</Button>`,
+<Button trailingIcon={<Icon type="chevron_right" size="xs" />}>Button</Button>`,
       },
     },
   },
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
-      <Button>버튼</Button>
-      <Button leadingIcon={<Icon type="chevron_left" size="xs" />}>버튼</Button>
-      <Button trailingIcon={<Icon type="chevron_right" size="xs" />}>버튼</Button>
+      <Button>Button</Button>
+      <Button leadingIcon={<Icon type="chevron_left" size="xs" />}>Button</Button>
+      <Button trailingIcon={<Icon type="chevron_right" size="xs" />}>Button</Button>
     </div>
   ),
 };
