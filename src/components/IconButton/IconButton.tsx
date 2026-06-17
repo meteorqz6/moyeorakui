@@ -54,8 +54,14 @@ const iconButtonStyles = cva({
   },
 });
 
-export type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  RecipeVariantProps<typeof iconButtonStyles>;
+export type IconButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "aria-label"
+> &
+  RecipeVariantProps<typeof iconButtonStyles> & {
+    /** 텍스트 라벨이 없는 아이콘 전용 버튼이므로, 스크린 리더를 위한 접근 가능한 이름을 필수로 전달해야 해요. */
+    "aria-label": string;
+  };
 
 export function IconButton({ size, variant, className, children, ...props }: IconButtonProps) {
   return (

@@ -54,3 +54,13 @@ Icon Button은 **Default**, **Pressed**, **Disabled** 3가지 상태로 구분�
 `disabled` 속성을 사용하면 버튼을 비활성화할 수 있어요.
 
 <Source of={IconButtonStories.Disabled} />
+
+### 접근성
+
+텍스트 라벨이 없기 때문에 `aria-label`이 **필수** 속성이에요. 스크린 리더 사용자가 버튼의 역할을 인지할 수 있도록 액션을 설명하는 문자열을 전달하세요.
+
+```tsx
+<IconButton aria-label="검색">
+  <Icon type="search" />
+</IconButton>
+```

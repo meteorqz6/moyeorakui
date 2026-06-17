@@ -32,7 +32,7 @@ type Story = StoryObj<typeof IconButton>;
 
 export const Default: Story = {
   name: "기본",
-  args: { variant: "clear", size: "md" },
+  args: { variant: "clear", size: "md", "aria-label": "검색" },
   render: ({ variant, size, ...args }) => (
     <IconButton variant={variant} size={size} {...args}>
       <Icon type="search" size="md" />
@@ -45,15 +45,15 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<IconButton variant="fill" size="sm">
+        code: `<IconButton variant="fill" size="sm" aria-label="검색">
   <Icon type="search" />
 </IconButton>
 
-<IconButton variant="fill" size="md">
+<IconButton variant="fill" size="md" aria-label="검색">
   <Icon type="search" />
 </IconButton>
 
-<IconButton variant="fill" size="lg">
+<IconButton variant="fill" size="lg" aria-label="검색">
   <Icon type="search" />
 </IconButton>`,
       },
@@ -61,13 +61,13 @@ export const Sizes: Story = {
   },
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-      <IconButton variant="fill" size="sm">
+      <IconButton variant="fill" size="sm" aria-label="검색">
         <Icon type="search" />
       </IconButton>
-      <IconButton variant="fill" size="md">
+      <IconButton variant="fill" size="md" aria-label="검색">
         <Icon type="search" />
       </IconButton>
-      <IconButton variant="fill" size="lg">
+      <IconButton variant="fill" size="lg" aria-label="검색">
         <Icon type="search" />
       </IconButton>
     </div>
@@ -79,11 +79,11 @@ export const Variants: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<IconButton variant="clear">
+        code: `<IconButton variant="clear" aria-label="검색">
   <Icon type="search" />
 </IconButton>
 
-<IconButton variant="fill">
+<IconButton variant="fill" aria-label="검색">
   <Icon type="search" />
 </IconButton>`,
       },
@@ -91,10 +91,10 @@ export const Variants: Story = {
   },
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <IconButton variant="clear">
+      <IconButton variant="clear" aria-label="검색">
         <Icon type="search" />
       </IconButton>
-      <IconButton variant="fill">
+      <IconButton variant="fill" aria-label="검색">
         <Icon type="search" />
       </IconButton>
     </div>
@@ -107,12 +107,12 @@ export const States: Story = {
     docs: {
       source: {
         code: `// Default
-<IconButton variant="clear"><Icon type="search" /></IconButton>
-<IconButton variant="fill"><Icon type="search" /></IconButton>
+<IconButton variant="clear" aria-label="검색"><Icon type="search" /></IconButton>
+<IconButton variant="fill" aria-label="검색"><Icon type="search" /></IconButton>
 
 // Disabled
-<IconButton variant="clear" disabled><Icon type="search" /></IconButton>
-<IconButton variant="fill" disabled><Icon type="search" /></IconButton>`,
+<IconButton variant="clear" disabled aria-label="검색"><Icon type="search" /></IconButton>
+<IconButton variant="fill" disabled aria-label="검색"><Icon type="search" /></IconButton>`,
       },
     },
   },
@@ -121,10 +121,10 @@ export const States: Story = {
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <div style={{ fontSize: 12, color: "#888", fontWeight: 600 }}>Default</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <IconButton variant="clear">
+          <IconButton variant="clear" aria-label="검색">
             <Icon type="search" />
           </IconButton>
-          <IconButton variant="fill">
+          <IconButton variant="fill" aria-label="검색">
             <Icon type="search" />
           </IconButton>
         </div>
@@ -132,10 +132,10 @@ export const States: Story = {
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <div style={{ fontSize: 12, color: "#888", fontWeight: 600 }}>Disabled</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <IconButton variant="clear" disabled>
+          <IconButton variant="clear" disabled aria-label="검색">
             <Icon type="search" />
           </IconButton>
-          <IconButton variant="fill" disabled>
+          <IconButton variant="fill" disabled aria-label="검색">
             <Icon type="search" />
           </IconButton>
         </div>
@@ -149,11 +149,11 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<IconButton variant="clear" disabled>
+        code: `<IconButton variant="clear" disabled aria-label="검색">
   <Icon type="search" />
 </IconButton>
 
-<IconButton variant="fill" disabled>
+<IconButton variant="fill" disabled aria-label="검색">
   <Icon type="search" />
 </IconButton>`,
       },
@@ -161,10 +161,10 @@ export const Disabled: Story = {
   },
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <IconButton variant="clear" disabled>
+      <IconButton variant="clear" disabled aria-label="검색">
         <Icon type="search" />
       </IconButton>
-      <IconButton variant="fill" disabled>
+      <IconButton variant="fill" disabled aria-label="검색">
         <Icon type="search" />
       </IconButton>
     </div>
