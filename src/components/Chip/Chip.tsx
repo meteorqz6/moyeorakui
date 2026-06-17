@@ -56,7 +56,7 @@ export type ChipProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 export function Chip({ variant, shape, className, children, ...props }: ChipProps) {
   return (
-    <button className={cx(chipStyles({ variant, shape }), className)} {...props}>
+    <button type="button" className={cx(chipStyles({ variant, shape }), className)} {...props}>
       {children}
     </button>
   );
