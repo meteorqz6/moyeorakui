@@ -3,7 +3,7 @@ import { IconButton } from "./IconButton";
 import { Icon } from "../Icon/Icon";
 
 const meta: Meta<typeof IconButton> = {
-  title: "Components/Buttons/Icon Button",
+  title: "Components/Icon Button",
   component: IconButton,
   tags: ["!dev"],
   argTypes: {
@@ -121,15 +121,23 @@ export const States: Story = {
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <div style={{ fontSize: 12, color: "#888", fontWeight: 600 }}>Default</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <IconButton variant="clear"><Icon type="search" /></IconButton>
-          <IconButton variant="fill"><Icon type="search" /></IconButton>
+          <IconButton variant="clear">
+            <Icon type="search" />
+          </IconButton>
+          <IconButton variant="fill">
+            <Icon type="search" />
+          </IconButton>
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <div style={{ fontSize: 12, color: "#888", fontWeight: 600 }}>Disabled</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <IconButton variant="clear" disabled><Icon type="search" /></IconButton>
-          <IconButton variant="fill" disabled><Icon type="search" /></IconButton>
+          <IconButton variant="clear" disabled>
+            <Icon type="search" />
+          </IconButton>
+          <IconButton variant="fill" disabled>
+            <Icon type="search" />
+          </IconButton>
         </div>
       </div>
     </div>

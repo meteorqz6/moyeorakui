@@ -2,14 +2,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FloatingButton } from "./FloatingButton";
 
 const meta: Meta<typeof FloatingButton> = {
-  title: "Components/Buttons/Floating Button",
+  title: "Components/Floating Button",
   component: FloatingButton,
   tags: ["!dev"],
   argTypes: {
     variant: {
       control: "select",
       options: ["up", "back"],
-      description: "버튼의 동작 유형을 설정해요. `up`은 위로 스크롤, `back`은 이전 화면으로 이동해요.",
+      description:
+        "버튼의 동작 유형을 설정해요. `up`은 위로 스크롤, `back`은 이전 화면으로 이동해요.",
       table: { defaultValue: { summary: "up" } },
     },
     disabled: {
