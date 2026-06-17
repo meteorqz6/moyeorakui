@@ -43,15 +43,15 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<Badge size="sm">뱃지</Badge>
-<Badge size="md">뱃지</Badge>`,
+        code: `<Badge size="sm">Small</Badge>
+<Badge size="md">Medium</Badge>`,
       },
     },
   },
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <Badge size="sm">뱃지</Badge>
-      <Badge size="md">뱃지</Badge>
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
     </div>
   ),
 };
@@ -61,17 +61,17 @@ export const Styles: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<Badge variant="neutral-weak">뱃지</Badge>
-<Badge variant="brand-weak">뱃지</Badge>
-<Badge variant="outline">뱃지</Badge>`,
+        code: `<Badge variant="neutral-weak">Neutral Weak</Badge>
+<Badge variant="brand-weak">Brand Weak</Badge>
+<Badge variant="outline">Outline</Badge>`,
       },
     },
   },
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <Badge variant="neutral-weak">뱃지</Badge>
-      <Badge variant="brand-weak">뱃지</Badge>
-      <Badge variant="outline">뱃지</Badge>
+      <Badge variant="neutral-weak">Neutral Weak</Badge>
+      <Badge variant="brand-weak">Brand Weak</Badge>
+      <Badge variant="outline">Outline</Badge>
     </div>
   ),
 };
