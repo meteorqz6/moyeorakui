@@ -9,9 +9,9 @@ const meta: Meta<typeof Chip> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["neutral", "brand", "outlined-brand"],
+      options: ["neutral", "neutral-weak", "brand", "outlined-brand"],
       description: "칩의 시각적 스타일을 설정해요.",
-      table: { defaultValue: { summary: "outlined-brand" } },
+      table: { defaultValue: { summary: "neutral-weak" } },
     },
     shape: {
       control: "select",
@@ -40,7 +40,7 @@ type Story = StoryObj<typeof Chip>;
 
 export const Default: Story = {
   name: "기본",
-  args: { variant: "outlined-brand", shape: "square" },
+  args: { variant: "neutral-weak", shape: "square" },
 };
 
 export const Shapes: Story = {
@@ -66,7 +66,8 @@ export const Styles: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<Chip variant="neutral">Neutral</Chip>
+        code: `<Chip variant="neutral-weak">Neutral Weak</Chip>
+<Chip variant="neutral">Neutral</Chip>
 <Chip variant="brand">Brand</Chip>
 <Chip variant="outlined-brand">Outlined Brand</Chip>`,
       },
@@ -74,35 +75,10 @@ export const Styles: Story = {
   },
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Chip variant="neutral-weak">Neutral Weak</Chip>
       <Chip variant="neutral">Neutral</Chip>
       <Chip variant="brand">Brand</Chip>
       <Chip variant="outlined-brand">Outlined Brand</Chip>
-    </div>
-  ),
-};
-
-export const Disabled: Story = {
-  name: "비활성화",
-  parameters: {
-    docs: {
-      source: {
-        code: `<Chip variant="neutral" disabled>Neutral</Chip>
-<Chip variant="brand" disabled>Brand</Chip>
-<Chip variant="outlined-brand" disabled>Outlined Brand</Chip>`,
-      },
-    },
-  },
-  render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <Chip variant="neutral" disabled>
-        Neutral
-      </Chip>
-      <Chip variant="brand" disabled>
-        Brand
-      </Chip>
-      <Chip variant="outlined-brand" disabled>
-        Outlined Brand
-      </Chip>
     </div>
   ),
 };

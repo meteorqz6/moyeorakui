@@ -28,10 +28,10 @@ const chipStyles = cva({
       neutral: {
         bg: "fill.neutral.default",
         color: "fg.neutral.faintest",
-        _disabled: {
-          bg: "fill.neutral.subtler",
-          color: "fg.neutral.subtler",
-        },
+      },
+      "neutral-weak": {
+        bg: "fill.neutral.subtler",
+        color: "fg.neutral.subtler",
       },
     },
     shape: {
@@ -46,7 +46,7 @@ const chipStyles = cva({
     },
   },
   defaultVariants: {
-    variant: "outlined-brand",
+    variant: "neutral-weak",
     shape: "square",
   },
 });
