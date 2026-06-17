@@ -1,0 +1,45 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as BadgeStories from "./Badge.stories";
+import anatomyImg from "./badge-anatomy.png";
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+숫자, 상태, 분류, 속성 등의 정보를 강조하여 전달하는 데 사용해요. 일반적으로 클릭과 같은 상호작용 기능은 제공하지 않아요.
+
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Badge anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Badge는 Label을 감싸는 Container로 구성돼요.
+
+<br></br>
+
+## 사용 가이드
+
+- 핵심 정보를 강조하기 위해 사용하며, 하나의 Badge에는 하나의 요소만 담아요.
+- Label은 사용자가 빠르고 직관적으로 인지할 수 있도록 간결하게 작성하고, 줄바꿈이 발생하지 않도록 해요.
+
+<br></br>
+
+## 사용 예제
+
+### 크기
+
+`Badge` 컴포넌트의 크기를 변경하려면 `size` 속성을 사용하세요. 사용 환경에 따라 `sm`, `md` 중 하나를 선택할 수 있어요.
+
+<Story of={BadgeStories.Sizes} />
+
+<Source of={BadgeStories.Sizes} />
+
+### 스타일
+
+`variant` 속성으로 뱃지의 스타일을 설정해요. `neutral-weak`, `brand-weak`, `outline` 3가지가 있어요.
+사용 환경 및 시각적 강조 수준에 따라 선택하여 사용할 수 있어요.
+
+<Story of={BadgeStories.Styles} />
+
+<Source of={BadgeStories.Styles} />

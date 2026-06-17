@@ -4,17 +4,28 @@ import { Badge } from "./Badge";
 const meta: Meta<typeof Badge> = {
   title: "Components/Badge",
   component: Badge,
-  args: {
-    children: "뱃지",
-  },
+  tags: ["!dev"],
+  args: { children: "뱃지" },
   argTypes: {
     variant: {
       control: "select",
-      options: ["brand", "neutral", "stroke"],
+      options: ["brand-weak", "neutral-weak", "outline"],
+      description: "뱃지의 시각적 스타일을 설정해요.",
+      table: { defaultValue: { summary: "neutral-weak" } },
     },
     size: {
       control: "select",
       options: ["sm", "md"],
+      description: "뱃지의 크기를 설정해요.",
+      table: { defaultValue: { summary: "md" } },
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Badge 컴포넌트는 항목의 상태나 속성을 짧은 텍스트로 표시할 때 사용해요. 새 항목 표시, 카테고리 분류, 상태 라벨 등에 활용할 수 있어요.",
+      },
     },
   },
 };
@@ -22,31 +33,45 @@ const meta: Meta<typeof Badge> = {
 export default meta;
 type Story = StoryObj<typeof Badge>;
 
-export const Brand: Story = {
-  args: { variant: "brand", size: "md" },
+export const Default: Story = {
+  name: "기본",
+  args: { variant: "neutral-weak", size: "md" },
 };
 
-export const Neutral: Story = {
-  args: { variant: "neutral", size: "md" },
-};
-
-export const Stroke: Story = {
-  args: { variant: "stroke", size: "md" },
-};
-
-export const AllVariants: Story = {
+export const Sizes: Story = {
+  name: "크기",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Badge size="sm">뱃지</Badge>
+<Badge size="md">뱃지</Badge>`,
+      },
+    },
+  },
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <Badge variant="brand" size="md">brand md</Badge>
-        <Badge variant="neutral" size="md">neutral md</Badge>
-        <Badge variant="stroke" size="md">stroke md</Badge>
-      </div>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <Badge variant="brand" size="sm">brand sm</Badge>
-        <Badge variant="neutral" size="sm">neutral sm</Badge>
-        <Badge variant="stroke" size="sm">stroke sm</Badge>
-      </div>
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Badge size="sm">뱃지</Badge>
+      <Badge size="md">뱃지</Badge>
+    </div>
+  ),
+};
+
+export const Styles: Story = {
+  name: "스타일",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Badge variant="neutral-weak">뱃지</Badge>
+<Badge variant="brand-weak">뱃지</Badge>
+<Badge variant="outline">뱃지</Badge>`,
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Badge variant="neutral-weak">뱃지</Badge>
+      <Badge variant="brand-weak">뱃지</Badge>
+      <Badge variant="outline">뱃지</Badge>
     </div>
   ),
 };

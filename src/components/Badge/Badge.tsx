@@ -12,20 +12,18 @@ const badgeStyles = cva({
   },
   variants: {
     variant: {
-      brand: {
+      "brand-weak": {
         bg: "fill.brand.subtler",
         color: "fg.brand.default",
       },
-      neutral: {
+      "neutral-weak": {
         bg: "stroke.neutral.subtler",
-        color: "fg.neutral.subtler",
+        color: "fg.neutral.subtle",
       },
-      stroke: {
-        bg: "fill.neutral.default",
-        color: "fg.neutral.subtler",
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "stroke.neutral.subtle",
+      outline: {
+        bg: "fill.neutral.faintest",
+        color: "fg.neutral.subtle",
+        boxShadow: "inset 0 0 0 1px {colors.stroke.neutral.subtle}",
       },
     },
     size: {
@@ -34,7 +32,7 @@ const badgeStyles = cva({
     },
   },
   defaultVariants: {
-    variant: "neutral",
+    variant: "neutral-weak",
     size: "md",
   },
 });
@@ -42,13 +40,7 @@ const badgeStyles = cva({
 export type BadgeProps = React.HTMLAttributes<HTMLSpanElement> &
   RecipeVariantProps<typeof badgeStyles>;
 
-export function Badge({
-  variant,
-  size,
-  className,
-  children,
-  ...props
-}: BadgeProps) {
+export function Badge({ variant, size, className, children, ...props }: BadgeProps) {
   return (
     <span className={cx(badgeStyles({ variant, size }), className)} {...props}>
       {children}
