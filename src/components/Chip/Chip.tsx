@@ -20,12 +20,10 @@ const chipStyles = cva({
         bg: "fill.brand.default",
         color: "fg.neutral.faintest",
       },
-      "brand-weak": {
+      "outlined-brand": {
         bg: "fill.brand.subtle",
         color: "fg.brand.default",
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "stroke.brand.default",
+        boxShadow: "inset 0 0 0 1px {colors.stroke.brand.default}",
       },
       neutral: {
         bg: "fill.neutral.default",
@@ -34,17 +32,6 @@ const chipStyles = cva({
           bg: "fill.neutral.subtler",
           color: "fg.neutral.subtler",
         },
-      },
-      inverted: {
-        bg: "fill.neutral.default",
-        color: "fg.neutral.subtler",
-      },
-      "inverted-stroke": {
-        bg: "fill.neutral.default",
-        color: "fg.neutral.subtler",
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "stroke.neutral.subtle",
       },
     },
     shape: {
@@ -59,7 +46,7 @@ const chipStyles = cva({
     },
   },
   defaultVariants: {
-    variant: "neutral",
+    variant: "outlined-brand",
     shape: "square",
   },
 });
@@ -67,18 +54,9 @@ const chipStyles = cva({
 export type ChipProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   RecipeVariantProps<typeof chipStyles>;
 
-export function Chip({
-  variant,
-  shape,
-  className,
-  children,
-  ...props
-}: ChipProps) {
+export function Chip({ variant, shape, className, children, ...props }: ChipProps) {
   return (
-    <button
-      className={cx(chipStyles({ variant, shape }), className)}
-      {...props}
-    >
+    <button className={cx(chipStyles({ variant, shape }), className)} {...props}>
       {children}
     </button>
   );

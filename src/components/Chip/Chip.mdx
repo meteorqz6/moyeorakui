@@ -1,0 +1,42 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as ChipStories from "./Chip.stories";
+
+<Meta of={ChipStories} />
+
+# Chip
+
+정보를 선택하거나 콘텐츠를 필터링하는 데 사용하는 컴포넌트에요. 사용자의 선택 상태를 시각적으로 표현하며, 원하는 조건을 설정하거나 해제하는 등의 상호작용을 통해 정보 탐색과 선택 과정을 더 직관적으로 만들어줘요.
+
+Square, Pill 두 가지 Shape와 Neutral, Brand, Outlined Brand 세 가지 Style을 제공하며, 사용 환경과 시각적 강조 수준에 따라 선택해서 사용할 수 있어요.
+
+<br></br>
+
+## 사용 예제
+
+### 모양
+
+`shape` 속성으로 칩의 모양을 설정해요. `square`, `pill` 중 하나를 선택할 수 있어요.
+
+<Story of={ChipStories.Shapes} />
+
+<Source of={ChipStories.Shapes} />
+
+### 스타일
+
+`variant` 속성으로 칩의 스타일을 설정해요.
+
+- **Neutral** — 중립적인 색상으로 채워진 기본 스타일이에요.
+- **Brand** — 브랜드 컬러로 채워진 스타일로, 주목도가 높아야 하는 항목에 사용해요.
+- **Outlined Brand** — 브랜드 컬러의 테두리를 사용한 스타일로, 상대적으로 강조가 덜 필요한 항목에 사용해요.
+
+<Story of={ChipStories.Styles} />
+
+<Source of={ChipStories.Styles} />
+
+### 상태
+
+`disabled` 속성을 사용하면 칩을 비활성화할 수 있어요. 비활성화된 칩은 클릭할 수 없어요.
+
+<Story of={ChipStories.Disabled} />
+
+<Source of={ChipStories.Disabled} />

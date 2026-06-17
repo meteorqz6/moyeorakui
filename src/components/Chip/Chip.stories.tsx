@@ -4,17 +4,33 @@ import { Chip } from "./Chip";
 const meta: Meta<typeof Chip> = {
   title: "Components/Chip",
   component: Chip,
-  args: {
-    children: "칩",
-  },
+  tags: ["!dev"],
+  args: { children: "칩" },
   argTypes: {
     variant: {
       control: "select",
-      options: ["brand", "brand-weak", "neutral", "inverted", "inverted-stroke"],
+      options: ["neutral", "brand", "outlined-brand"],
+      description: "칩의 시각적 스타일을 설정해요.",
+      table: { defaultValue: { summary: "outlined-brand" } },
     },
     shape: {
       control: "select",
       options: ["square", "pill"],
+      description: "칩의 모양을 설정해요.",
+      table: { defaultValue: { summary: "square" } },
+    },
+    disabled: {
+      control: "boolean",
+      description: "칩을 비활성화해요. 비활성화된 칩은 클릭할 수 없어요.",
+      table: { defaultValue: { summary: "false" } },
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Chip 컴포넌트는 정보를 선택하거나 콘텐츠를 필터링하는 데 사용해요. 사용자의 선택 상태를 시각적으로 표현하며, 원하는 조건을 설정하거나 해제하는 등의 상호작용을 통해 정보 탐색과 선택 과정을 더 직관적으로 만들어줘요.",
+      },
     },
   },
 };
@@ -22,64 +38,71 @@ const meta: Meta<typeof Chip> = {
 export default meta;
 type Story = StoryObj<typeof Chip>;
 
-export const AllVariants: Story = {
+export const Default: Story = {
+  name: "기본",
+  args: { variant: "outlined-brand", shape: "square" },
+};
+
+export const Shapes: Story = {
+  name: "모양",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Chip shape="square">Square</Chip>
+<Chip shape="pill">Pill</Chip>`,
+      },
+    },
+  },
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-      <div>
-        <p style={{ marginBottom: "8px", fontSize: "12px", color: "#737a89" }}>Square / Selected</p>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <Chip variant="brand" shape="square">brand</Chip>
-          <Chip variant="brand-weak" shape="square">brand-weak</Chip>
-          <Chip variant="neutral" shape="square">neutral</Chip>
-        </div>
-      </div>
-      <div>
-        <p style={{ marginBottom: "8px", fontSize: "12px", color: "#737a89" }}>Square / Disabled</p>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <Chip variant="neutral" shape="square" disabled>neutral</Chip>
-          <Chip variant="inverted" shape="square" disabled>inverted</Chip>
-        </div>
-      </div>
-      <div>
-        <p style={{ marginBottom: "8px", fontSize: "12px", color: "#737a89" }}>Pill / Selected</p>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <Chip variant="brand" shape="pill">brand</Chip>
-          <Chip variant="brand-weak" shape="pill">brand-weak</Chip>
-          <Chip variant="neutral" shape="pill">neutral</Chip>
-        </div>
-      </div>
-      <div>
-        <p style={{ marginBottom: "8px", fontSize: "12px", color: "#737a89" }}>Pill / Disabled</p>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <Chip variant="neutral" shape="pill" disabled>neutral</Chip>
-          <Chip variant="inverted" shape="pill" disabled>inverted</Chip>
-          <Chip variant="inverted-stroke" shape="pill" disabled>inverted-stroke</Chip>
-        </div>
-      </div>
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Chip shape="square">Square</Chip>
+      <Chip shape="pill">Pill</Chip>
     </div>
   ),
 };
 
-export const Brand: Story = {
-  args: { variant: "brand", shape: "square" },
+export const Styles: Story = {
+  name: "스타일",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Chip variant="neutral">Neutral</Chip>
+<Chip variant="brand">Brand</Chip>
+<Chip variant="outlined-brand">Outlined Brand</Chip>`,
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Chip variant="neutral">Neutral</Chip>
+      <Chip variant="brand">Brand</Chip>
+      <Chip variant="outlined-brand">Outlined Brand</Chip>
+    </div>
+  ),
 };
 
-export const BrandWeak: Story = {
-  args: { variant: "brand-weak", shape: "square" },
-};
-
-export const Neutral: Story = {
-  args: { variant: "neutral", shape: "square" },
-};
-
-export const NeutralDisabled: Story = {
-  args: { variant: "neutral", shape: "square", disabled: true },
-};
-
-export const Inverted: Story = {
-  args: { variant: "inverted", shape: "square", disabled: true },
-};
-
-export const InvertedStroke: Story = {
-  args: { variant: "inverted-stroke", shape: "pill", disabled: true },
+export const Disabled: Story = {
+  name: "비활성화",
+  parameters: {
+    docs: {
+      source: {
+        code: `<Chip variant="neutral" disabled>Neutral</Chip>
+<Chip variant="brand" disabled>Brand</Chip>
+<Chip variant="outlined-brand" disabled>Outlined Brand</Chip>`,
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Chip variant="neutral" disabled>
+        Neutral
+      </Chip>
+      <Chip variant="brand" disabled>
+        Brand
+      </Chip>
+      <Chip variant="outlined-brand" disabled>
+        Outlined Brand
+      </Chip>
+    </div>
+  ),
 };
