@@ -44,16 +44,16 @@ Icon 컴포넌트는 SVG 아이콘을 렌더링해요. 아이콘 이름(`type`),
 
 ```tsx
 // 버튼 안에서는 variant 지정 안 함 — 버튼 색상 자동 상속
-<Button leftIcon={<Icon type="chevron_left" size="xs" />}>
+<Button leadingIcon={<Icon type="chevron_left" size="xs" />}>
   버튼
 </Button>
 
-<IconButton>
+<IconButton aria-label="검색">
   <Icon type="search" size="md" />
 </IconButton>
 
 // variant를 지정하면 버튼 상태 색상이 아이콘에 반영되지 않음
-<IconButton>
+<IconButton aria-label="검색">
   <Icon type="search" size="md" variant="default" />
 </IconButton>  // ❌
 ```
