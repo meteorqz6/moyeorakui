@@ -1,5 +1,7 @@
 import { Meta, Story, Source, Controls } from "@storybook/blocks";
 import * as FloatingButtonStories from "./FloatingButton.stories";
+import anatomyImg from "./floating-button-anatomy.png";
+import placementImg from "./floating-button-placement.png";
 
 <Meta of={FloatingButtonStories} />
 
@@ -9,22 +11,40 @@ Floating Button은 화면 위에 떠 있는 형태의 버튼이에요. 스크롤
 
 {/* <Story of={FloatingButtonStories.Default} /> */}
 
----
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Floating Button anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Floating Button은 Icon을 감싸는 Container로 구성되며, Shadow Effect를 가질 수 있어요.
+
+<br></br>
+
+## 사용 가이드
+
+<img src={placementImg} alt="Floating Button Placement" style={{ width: "100%", maxWidth: 800 }} />
+
+- 화면 위에 떠 있는 동시에 오른쪽 하단에 20px 마진을 기준으로 일정한 여백을 두고 배치해요.
+- 페이지가 스크롤되어도 화면 우측 하단 동일한 위치에 고정되어 유지돼요.
+
+<br></br>
 
 ## 사용 예제
 
-### 변형
+### 유형
 
-`variant` 속성으로 버튼의 동작 유형을 설정해요. `up`과 `back` 2가지가 있어요.
+`type` 속성으로 버튼의 동작 유형을 설정해요. `up`과 `back` 2가지가 있어요.
 
 <Story of={FloatingButtonStories.Variants} />
 
 <Source of={FloatingButtonStories.Variants} />
 
-### 비활성화
+### 접근성
 
-`disabled` 속성으로 버튼을 비활성화할 수 있어요.
+텍스트 라벨이 없기 때문에 `aria-label`이 **필수** 속성이에요. 스크린 리더 사용자가 버튼의 역할을 인지할 수 있도록 액션을 설명하는 문자열을 전달하세요.
 
-<Story of={FloatingButtonStories.Disabled} />
-
-<Source of={FloatingButtonStories.Disabled} />
+```tsx
+<FloatingButton type="up" aria-label="위로 이동" />
+<FloatingButton type="back" aria-label="뒤로 가기" />
+```

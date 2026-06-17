@@ -1,2 +1,2 @@
 export { FloatingButton } from "./FloatingButton";
-export type { FloatingButtonProps, FloatingButtonVariant } from "./FloatingButton";
+export type { FloatingButtonProps, FloatingButtonType } from "./FloatingButton";

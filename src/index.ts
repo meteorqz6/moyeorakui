@@ -39,7 +39,7 @@ export { Header } from "./components/Header"
 export type { HeaderProps } from "./components/Header"
 
 export { FloatingButton } from "./components/FloatingButton"
-export type { FloatingButtonProps, FloatingButtonVariant } from "./components/FloatingButton"
+export type { FloatingButtonProps, FloatingButtonType } from "./components/FloatingButton"
 
 
 export { ShareButton } from "./components/ShareButton"

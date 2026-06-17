@@ -81,6 +81,9 @@ export default defineConfig({
         xl: { value: "20px" },
         full: { value: "999px" },
       },
+      shadows: {
+        strong: { value: "0 0 12px {colors.shadow.neutral.strong}" },
+      },
     },
 
     semanticTokens: {

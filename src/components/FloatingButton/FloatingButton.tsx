@@ -12,29 +12,33 @@ const floatingButtonStyles = cva({
     w: "40px",
     h: "40px",
     borderRadius: "full",
-    bg: "fill.neutral.default",
+    bg: "fill.neutral.faintest",
     shadow: "strong",
     cursor: "pointer",
     _active: { bg: "fill.neutral.subtler" },
-    _disabled: { cursor: "not-allowed", opacity: 0.4 },
   },
 });
 
-const ICON_MAP: Record<FloatingButtonVariant, IconType> = {
+const ICON_MAP: Record<FloatingButtonType, IconType> = {
   up: "arrow_up",
   back: "chevron_left",
 };
 
-export type FloatingButtonVariant = "up" | "back";
+export type FloatingButtonType = "up" | "back";
 
-export type FloatingButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: FloatingButtonVariant;
+export type FloatingButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "type" | "aria-label"
+> & {
+  type: FloatingButtonType;
+  /** 텍스트 라벨이 없는 아이콘 전용 버튼이므로, 스크린 리더를 위한 접근 가능한 이름을 필수로 전달해야 해요. */
+  "aria-label": string;
 };
 
-export function FloatingButton({ variant, className, ...props }: FloatingButtonProps) {
+export function FloatingButton({ type, className, ...props }: FloatingButtonProps) {
   return (
     <button type="button" className={cx(floatingButtonStyles(), className)} {...props}>
-      <Icon type={ICON_MAP[variant]} size="md" />
+      <Icon type={ICON_MAP[type]} size="md" />
     </button>
   );
 }
