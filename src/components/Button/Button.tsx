@@ -140,7 +140,7 @@ export function Button({
   const Comp = asChild ? Slot : "button";
   return (
     <Comp
-      type="button"
+      type={asChild ? undefined : "button"}
       className={cx(buttonStyles({ variant, size, display }), className)}
       {...props}
     >
