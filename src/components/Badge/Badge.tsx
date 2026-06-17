@@ -17,7 +17,7 @@ const badgeStyles = cva({
         color: "fg.brand.default",
       },
       "neutral-weak": {
-        bg: "stroke.neutral.subtler",
+        bg: "fill.neutral.subtler",
         color: "fg.neutral.subtle",
       },
       outline: {
