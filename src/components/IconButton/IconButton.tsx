@@ -34,10 +34,10 @@ const iconButtonStyles = cva({
         },
         _disabled: {
           bg: "fill.neutral.default-disabled",
-          color: "fg.neutral.subtlest",
+          color: "fg.neutral.subtler",
           _active: {
             bg: "fill.neutral.default-disabled",
-            color: "fg.neutral.subtlest",
+            color: "fg.neutral.subtler",
           },
         },
       },

@@ -9,9 +9,9 @@ const iconStyles = cva({
   },
   variants: {
     iconStyle: {
-      default: { color: "fg.neutral.subtler" },
-      weak: { color: "fg.neutral.subtlest" },
-      weakest: { color: "fg.neutral.faintest" },
+      default: { color: "fg.neutral.subtle" },
+      weak: { color: "fg.neutral.subtler" },
+      weakest: { color: "fg.neutral.subtlest" },
       brand: { color: "fg.brand.default" },
       inverted: { color: "fg.neutral.faintest" },
     },

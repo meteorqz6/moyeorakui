@@ -12,7 +12,7 @@ const buttonStyles = cva({
     _disabled: {
       cursor: "not-allowed",
       bg: "fill.neutral.default-disabled",
-      color: "fg.neutral.subtlest",
+      color: "fg.neutral.subtler",
       borderColor: "transparent",
       _active: {
         bg: "fill.neutral.default-disabled",
@@ -38,7 +38,7 @@ const buttonStyles = cva({
       },
       outline: {
         bg: "fill.neutral.faintest",
-        color: "fg.neutral.subtle",
+        color: "fg.neutral.default",
         borderWidth: "1px",
         borderStyle: "solid",
         borderColor: "stroke.neutral.subtle",
@@ -46,7 +46,7 @@ const buttonStyles = cva({
       },
       ghost: {
         bg: "transparent",
-        color: "fg.neutral.subtle",
+        color: "fg.neutral.default",
         _active: { bg: "fill.neutral.subtler" },
       },
       "ghost-brand": {
@@ -91,7 +91,7 @@ const buttonStyles = cva({
       css: {
         _disabled: {
           bg: "transparent",
-          color: "fg.neutral.faintest",
+          color: "fg.neutral.subtlest",
           _active: { bg: "transparent" },
         },
       },
@@ -101,7 +101,7 @@ const buttonStyles = cva({
       css: {
         _disabled: {
           bg: "transparent",
-          color: "fg.neutral.faintest",
+          color: "fg.neutral.subtlest",
           _active: { bg: "transparent" },
         },
       },
