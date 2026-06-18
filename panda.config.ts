@@ -9,6 +9,15 @@ export default defineConfig({
   exclude: [],
   outdir: "styled-system",
   jsxFramework: "react",
+  // Tailwind 등 다른 cascade layer 시스템과 이름이 겹치면(base, utilities 등)
+  // 레이어 등록 순서가 충돌해서 컴포넌트 스타일이 깨질 수 있어 고유한 이름으로 분리
+  layers: {
+    reset: "moyeorak-reset",
+    base: "moyeorak-base",
+    tokens: "moyeorak-tokens",
+    recipes: "moyeorak-recipes",
+    utilities: "moyeorak-utilities",
+  },
 
   theme: {
     tokens: {
