@@ -32,7 +32,7 @@ export function Toast(props: ToastProps) {
         gap: "4px",
         px: "16px",
         py: "8px",
-        bg: "fg.neutral.default",
+        bg: "overlay.neutral.stronger",
         borderRadius: "full",
         whiteSpace: "nowrap",
       })}
