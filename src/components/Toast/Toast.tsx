@@ -1,14 +1,29 @@
 import { css } from "../../../styled-system/css";
-import { Icon } from "../Icon/Icon";
+import { Icon, type DecorativeIconType } from "../Icon/Icon";
 
-export type ToastType = "success" | "error";
+export type ToastVariant = "neutral" | "negative" | "positive";
 
-export type ToastProps = {
-  type: ToastType;
+type NeutralToastProps = {
+  variant: "neutral";
+  icon?: DecorativeIconType;
   message: string;
 };
 
-export function Toast({ type, message }: ToastProps) {
+type NegativeToastProps = {
+  variant: "negative";
+  message: string;
+};
+
+type PositiveToastProps = {
+  variant: "positive";
+  message: string;
+};
+
+export type ToastProps = NeutralToastProps | NegativeToastProps | PositiveToastProps;
+
+export function Toast(props: ToastProps) {
+  const { variant, message } = props;
+
   return (
     <div
       className={css({
@@ -17,12 +32,16 @@ export function Toast({ type, message }: ToastProps) {
         gap: "4px",
         px: "16px",
         py: "8px",
-        bg: "fg.neutral.subtle",
+        bg: "fg.neutral.default",
         borderRadius: "full",
         whiteSpace: "nowrap",
       })}
     >
-      <Icon type={type} size="sm" />
+      {variant === "neutral" && props.icon && (
+        <Icon type={props.icon} variant="inverted" size="sm" />
+      )}
+      {variant === "negative" && <Icon type="error" size="sm" />}
+      {variant === "positive" && <Icon type="success" size="sm" />}
       <span
         className={css({
           textStyle: "body4",

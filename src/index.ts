@@ -27,7 +27,7 @@ export { IconButton } from "./components/IconButton"
 export type { IconButtonProps } from "./components/IconButton"
 
 export { Toast } from "./components/Toast"
-export type { ToastProps, ToastType } from "./components/Toast"
+export type { ToastProps, ToastVariant } from "./components/Toast"
 
 export { Modal } from "./components/Modal"
 export type { ModalProps } from "./components/Modal"

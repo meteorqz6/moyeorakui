@@ -1,0 +1,44 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as ToastStories from "./Toast.stories";
+import anatomyImg from "./toast-anatomy.png";
+import usageImg from "./toast-usuage.png";
+
+<Meta of={ToastStories} />
+
+# Toast
+
+Toast는 사용자의 행동 결과나 시스템 상태를 간단하게 전달하는 피드백 컴포넌트예요. 화면 하단에 일시적으로 표시되며, 현재 작업을 방해하지 않고 필요한 정보를 빠르게 전달한 뒤 자동으로 사라져요. 주로 작업 완료, 오류 발생, 상태 변경 등의 피드백을 제공할 때 사용해요.
+
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Toast anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Toast는 Leading Icon과 Message를 감싸는 Container로 구성되며, Leading Icon은 상황 및 상태에 따라 생략될 수 있어요.
+
+<br></br>
+
+## 사용 가이드
+
+<img src={usageImg} alt="Toast Usage" style={{ width: "100%", maxWidth: 800 }} />
+
+- **Default** — Safe Area 영역을 제외하고 12px 위에서 노출돼요.
+- **Action Area가 있는 경우** — Action Area 영역 12px 위에서 노출돼요.
+- **Support Item과 함께 쓰인 경우** — Support Item을 제외한 하단 Action Area 영역 기준으로 12px 위에서 노출돼요.
+
+<br></br>
+
+## 사용 예제
+
+### 스타일
+
+`variant` 속성으로 토스트의 스타일을 설정해요. `neutral`, `negative`, `positive` 3가지가 있어요.
+
+- **neutral** — 단순 정보 전달이나 상태 변경 안내 등 중립적인 피드백에 사용해요. `icon` 속성으로 Decorative 아이콘을 선택적으로 표시할 수 있고, 생략하면 메시지만 단독으로 노출돼요.
+- **negative** — 작업이 실패했거나 오류가 발생했음을 알리는 부정적인 피드백에 사용해요. Error 아이콘이 고정으로 표시돼요.
+- **positive** — 작업이 성공적으로 처리되었음을 알리는 긍정적인 피드백에 사용해요. Success 아이콘이 고정으로 표시돼요.
+
+<Story of={ToastStories.Variants} />
+
+<Source of={ToastStories.Variants} />
