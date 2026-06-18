@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react"
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
 import "../src/styles.css"
 
 const preview: Preview = {

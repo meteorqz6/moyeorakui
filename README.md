@@ -189,6 +189,22 @@ import "@moyeorak/design-system/dist/style.css"
 import { Button } from "@moyeorak/design-system"
 ```
 
+### 폰트 (Pretendard)
+
+라이브러리는 폰트 파일을 번들링하지 않고 `font-family: 'Pretendard Variable', Pretendard, sans-serif`로 이름만 참조해요. Pretendard를 직접 적용하려면 소비 앱에서 폰트를 로드해야 해요.
+
+```tsx
+// Next.js의 경우 next/font/local 사용 권장
+import localFont from "next/font/local"
+
+const pretendard = localFont({
+  src: "../fonts/PretendardVariable.woff2",
+  variable: "--font-pretendard",
+})
+```
+
+폰트를 로드하지 않으면 시스템 sans-serif 폰트로 자동 폴백돼요.
+
 ## Panda CSS 코드 생성
 
 `panda.config.ts`를 수정하면 반드시 codegen을 다시 실행해야 해요.
