@@ -9,6 +9,7 @@ const badgeStyles = cva({
     borderRadius: "xs",
     px: "8px",
     py: "4px",
+    boxSizing: "border-box",
   },
   variants: {
     variant: {

@@ -8,6 +8,9 @@ const iconButtonStyles = cva({
     justifyContent: "center",
     flexShrink: 0,
     cursor: "pointer",
+    border: "none",
+    boxSizing: "border-box",
+    fontFamily: "inherit",
     _disabled: {
       cursor: "not-allowed",
     },

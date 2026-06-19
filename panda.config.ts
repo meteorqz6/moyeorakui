@@ -1,7 +1,9 @@
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
-  preflight: true,
+  // 호스트 앱의 button/input 등 네이티브 엘리먼트까지 건드리는 전역 리셋을 막기 위해 끔.
+  // 대신 각 컴포넌트가 자기 base 스타일에서 border/box-sizing/font를 직접 명시함.
+  preflight: false,
   include: ["./src/**/*.{ts,tsx}", "./.storybook/**/*.{ts,tsx}"],
   globalCss: {
     body: { fontFamily: "{fonts.sans}" },

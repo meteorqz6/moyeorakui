@@ -9,6 +9,9 @@ const buttonStyles = cva({
     whiteSpace: "nowrap",
     cursor: "pointer",
     gap: "2px",
+    border: "none",
+    boxSizing: "border-box",
+    fontFamily: "inherit",
     _disabled: {
       cursor: "not-allowed",
       bg: "fill.neutral.default-disabled",
