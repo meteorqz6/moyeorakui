@@ -25,8 +25,12 @@ Floating Button은 Icon을 감싸는 Container로 구성되며, Shadow Effect를
 
 <img src={placementImg} alt="Floating Button Placement" style={{ width: "100%", maxWidth: 800 }} />
 
-- 화면 위에 떠 있는 동시에 오른쪽 하단에 20px 마진을 기준으로 일정한 여백을 두고 배치해요.
+이 배치 가이드는 `up` 타입 기준이에요.
+
+- 화면 위에 떠 있는 동시에 오른쪽 하단에 20px 마진을 기준으로 일정한 여백을 두고 배치해요. `type="up"`이면 `position: fixed`가 컴포넌트에 내장되어 있어 별도 작업 없이 적용돼요.
 - 페이지가 스크롤되어도 화면 우측 하단 동일한 위치에 고정되어 유지돼요.
+
+`back`은 "뒤로 가기"라는 동작 특성상 고정 배치 스펙이 따로 없어요. `type="back"`은 위치가 내장되어 있지 않으니, 실제 고정 위치는 소비 앱에서 직접 배치하세요.
 
 <br></br>
 

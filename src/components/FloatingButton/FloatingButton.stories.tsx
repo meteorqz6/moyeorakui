@@ -22,7 +22,9 @@ type Story = StoryObj<typeof FloatingButton>;
 
 export const Default: Story = {
   name: "기본",
-  args: { type: "up", "aria-label": "위로 이동" },
+  // `type="up"`은 position: fixed가 내장되어 있어요. Storybook 문서 페이지에서 실제
+  // 뷰포트 모서리에 떠서 다른 컨텐츠 위를 덮지 않도록 문서에서만 static으로 덮어써요.
+  args: { type: "up", "aria-label": "위로 이동", style: { position: "static" } },
 };
 
 export const Variants: Story = {
@@ -37,7 +39,7 @@ export const Variants: Story = {
   },
   render: () => (
     <div style={{ display: "flex", gap: 16 }}>
-      <FloatingButton type="up" aria-label="위로 이동" />
+      <FloatingButton type="up" aria-label="위로 이동" style={{ position: "static" }} />
       <FloatingButton type="back" aria-label="뒤로 가기" />
     </div>
   ),

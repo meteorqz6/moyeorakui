@@ -15,7 +15,22 @@ const floatingButtonStyles = cva({
     bg: "fill.neutral.faintest",
     shadow: "strong",
     cursor: "pointer",
+    border: "none",
+    boxSizing: "border-box",
     _active: { bg: "fill.neutral.subtler" },
+  },
+  variants: {
+    type: {
+      // 스크롤해도 화면 우측 하단 동일 위치에 고정. "뒤로 가기"는 배치 스펙이 따로 없어
+      // 소비 앱에서 직접 위치를 잡아야 해요 (FloatingButton.mdx 참고).
+      up: {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        zIndex: 40,
+      },
+      back: {},
+    },
   },
 });
 
@@ -37,7 +52,7 @@ export type FloatingButtonProps = Omit<
 
 export function FloatingButton({ type, className, ...props }: FloatingButtonProps) {
   return (
-    <button type="button" className={cx(floatingButtonStyles(), className)} {...props}>
+    <button type="button" className={cx(floatingButtonStyles({ type }), className)} {...props}>
       <Icon type={ICON_MAP[type]} size="md" />
     </button>
   );
