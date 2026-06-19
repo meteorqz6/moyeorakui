@@ -20,8 +20,8 @@ export type { IconProps, IconType, IconStyle, IconSize } from "./components/Icon
 export { IconButton } from "./components/IconButton"
 export type { IconButtonProps } from "./components/IconButton"
 
-export { Toast } from "./components/Toast"
-export type { ToastProps, ToastVariant } from "./components/Toast"
+export { Toast, ToastProvider, ToastViewport } from "./components/Toast"
+export type { ToastProps, ToastVariant, ToastViewportProps } from "./components/Toast"
 
 export { FloatingButton } from "./components/FloatingButton"
 export type { FloatingButtonProps, FloatingButtonType } from "./components/FloatingButton"

@@ -1,10 +1,43 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Toast } from "./Toast";
+import * as RadixToast from "@radix-ui/react-toast";
+import { Toast, ToastProvider } from "./Toast";
+
+// 실제 `ToastViewport`는 화면에 고정(position: fixed)돼요. Storybook 문서 페이지처럼
+// 여러 스토리가 한 페이지에 길게 나열되는 곳에서는 떠다니면 안 되니, 문서에서만 일반 흐름을 따르는
+// 뷰포트를 별도로 써요.
+function DocsViewport() {
+  return (
+    <RadixToast.Viewport
+      style={{
+        position: "static",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: "8px",
+        marginTop: "8px",
+        outline: "none",
+        listStyleType: "none",
+      }}
+    />
+  );
+}
 
 const meta: Meta<typeof Toast> = {
   title: "Components/Toast",
   component: Toast,
   tags: ["!dev"],
+  decorators: [
+    (Story) => (
+      <ToastProvider>
+        <Story />
+        <DocsViewport />
+      </ToastProvider>
+    ),
+  ],
+  args: {
+    // 문서를 보는 동안 자동으로 사라지지 않도록 storybook에서만 무한대로 설정
+    duration: Infinity,
+  },
   argTypes: {
     variant: {
       control: "select",
@@ -47,19 +80,11 @@ export const Variants: Story = {
     },
   },
   render: () => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        gap: "16px",
-        padding: "16px",
-      }}
-    >
-      <Toast variant="neutral" message="message" />
-      <Toast variant="neutral" icon="member" message="message" />
-      <Toast variant="negative" message="message" />
-      <Toast variant="positive" message="message" />
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "16px" }}>
+      <Toast variant="neutral" message="message" duration={Infinity} />
+      <Toast variant="neutral" icon="member" message="message" duration={Infinity} />
+      <Toast variant="negative" message="message" duration={Infinity} />
+      <Toast variant="positive" message="message" duration={Infinity} />
     </div>
   ),
 };

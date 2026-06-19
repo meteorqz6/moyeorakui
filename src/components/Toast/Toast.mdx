@@ -29,6 +29,27 @@ Toast는 Leading Icon과 Message를 감싸는 Container로 구성되며, Leading
 
 <br></br>
 
+## 사용 전 설정
+
+Toast는 내부적으로 Radix `Toast.Root`를 사용해요. 동작하려면 앱 루트에 `ToastProvider`와 `ToastViewport`를 한 번 배치해야 해요. 이 설정 없이 `<Toast>`만 단독으로 렌더링하면 에러가 발생해요.
+
+```tsx
+import { ToastProvider, ToastViewport } from "@moyeorak/design-system"
+
+function App() {
+  return (
+    <ToastProvider>
+      {/* ... */}
+      <ToastViewport />
+    </ToastProvider>
+  )
+}
+```
+
+`open`/`defaultOpen`/`onOpenChange`로 노출 여부를 제어하고, `duration`(ms)으로 자동으로 사라지기까지의 시간을 설정해요.
+
+<br></br>
+
 ## 사용 예제
 
 ### 스타일
