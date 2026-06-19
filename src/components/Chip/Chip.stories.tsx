@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Chip } from "./Chip";
 
@@ -81,4 +82,35 @@ export const Styles: Story = {
       <Chip variant="outlined-brand">Outlined Brand</Chip>
     </div>
   ),
+};
+
+export const Selectable: Story = {
+  name: "선택 상태",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`pressed`/`onPressedChange`로 선택 상태를 제어해요. 내부적으로 Radix `Toggle`을 사용해 `aria-pressed`가 자동으로 반영돼요.",
+      },
+      source: {
+        code: `const [pressed, setPressed] = useState(false)
+
+<Chip
+  variant={pressed ? "brand" : "neutral-weak"}
+  pressed={pressed}
+  onPressedChange={setPressed}
+>
+  필터
+</Chip>`,
+      },
+    },
+  },
+  render: () => {
+    const [pressed, setPressed] = useState(false);
+    return (
+      <Chip variant={pressed ? "brand" : "neutral-weak"} pressed={pressed} onPressedChange={setPressed}>
+        필터
+      </Chip>
+    );
+  },
 };

@@ -47,8 +47,18 @@ Chip은 Label을 감싸는 Container로 구성돼요.
 - **Neutral Weak** — 선택되지 않은 기본 상태예요.
 - **Neutral**, **Brand**, **Outlined Brand** — 선택된 상태를 표현할 때 사용해요. 강조 수준에 따라 선택해서 사용할 수 있어요.
 
-Chip은 스스로 선택 여부를 알지 못해요. 선택 상태에 따라 어떤 `variant`를 보여줄지는 Chip을 사용하는 쪽(부모 컴포넌트)에서 관리해야 해요.
+선택 상태에 따라 어떤 `variant`를 보여줄지는 Chip을 사용하는 쪽(부모 컴포넌트)에서 관리해야 해요.
 
 <Story of={ChipStories.Styles} />
 
 <Source of={ChipStories.Styles} />
+
+### 선택 상태
+
+Chip은 내부적으로 Radix `Toggle`을 사용해요. `pressed`/`onPressedChange`로 선택 상태를 전달하면 `aria-pressed`가 자동으로 반영돼요. 비제어로 쓰고 싶다면 `defaultPressed`를 사용해요.
+
+스타일(`variant`)은 여전히 선택 상태를 보고 부모가 직접 골라야 해요 — Chip이 `pressed` 값에 따라 스스로 색을 바꾸지는 않아요.
+
+<Story of={ChipStories.Selectable} />
+
+<Source of={ChipStories.Selectable} />

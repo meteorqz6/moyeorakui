@@ -1,3 +1,4 @@
+import * as Toggle from "@radix-ui/react-toggle";
 import { cva, type RecipeVariantProps } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
 
@@ -10,6 +11,9 @@ const chipStyles = cva({
     cursor: "pointer",
     textStyle: "body4",
     py: "6px",
+    border: "none",
+    boxSizing: "border-box",
+    fontFamily: "inherit",
     _disabled: {
       cursor: "not-allowed",
     },
@@ -52,12 +56,32 @@ const chipStyles = cva({
 });
 
 export type ChipProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  RecipeVariantProps<typeof chipStyles>;
+  RecipeVariantProps<typeof chipStyles> & {
+    /** 칩의 선택 상태예요. 전달하면 controlled로 동작하며, `aria-pressed`에 반영돼요. */
+    pressed?: boolean;
+    defaultPressed?: boolean;
+    onPressedChange?: (pressed: boolean) => void;
+  };
 
-export function Chip({ variant, shape, className, children, ...props }: ChipProps) {
+export function Chip({
+  variant,
+  shape,
+  className,
+  children,
+  pressed,
+  defaultPressed,
+  onPressedChange,
+  ...props
+}: ChipProps) {
   return (
-    <button type="button" className={cx(chipStyles({ variant, shape }), className)} {...props}>
+    <Toggle.Root
+      pressed={pressed}
+      defaultPressed={defaultPressed}
+      onPressedChange={onPressedChange}
+      className={cx(chipStyles({ variant, shape }), className)}
+      {...props}
+    >
       {children}
-    </button>
+    </Toggle.Root>
   );
 }
