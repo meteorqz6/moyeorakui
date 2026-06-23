@@ -1,6 +1,6 @@
 import "./styles.css";
 
-export const version = "0.2.0";
+export const version = "0.3.0";
 
 export { css, cva, cx } from "../styled-system/css";
 export type { SystemStyleObject } from "../styled-system/types";
