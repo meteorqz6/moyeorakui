@@ -7,15 +7,14 @@ import anatomyImg from "./color-anatomy.png";
 # Colors
 
 색상 시스템은 **Palette → Semantic** 두 계층으로 구성돼요.
-`tailwind.config.ts`에 플러그인을 추가하면 시맨틱 컬러 토큰을 className으로 사용할 수 있어요.
+Tailwind v4 진입 CSS에 플러그인을 추가하면 시맨틱 컬러 토큰을 className으로 사용할 수 있어요.
 
-```ts
-// tailwind.config.ts
-import moyeorakPlugin from "@moyeorak/design-system/tailwind-plugin"
-
-export default {
-  plugins: [moyeorakPlugin],
-}
+```css
+/* 앱의 전역 CSS 진입점 */
+@import "@moyeorak/design-system/layers.css";
+@import "tailwindcss";
+@plugin "@moyeorak/design-system/tailwind-plugin";
+@import "@moyeorak/design-system/styles.css";
 ```
 
 ```tsx

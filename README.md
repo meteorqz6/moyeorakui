@@ -2,12 +2,12 @@
 
 ## 프로젝트 소개
 
-실 서비스인 모여락을 먼저 개발한 뒤 시작된 프로젝트예요. 함께 작업한 디자이너와 함께 디자인 토큰과 컴포넌트를 체계적으로 문서화해 디자이너-개발자 간 커뮤니케이션 비용을 줄이고 서비스 전반의 디자인 일관성을 보장하고 싶어서 별도 프로젝트로 시작했어요. 아직 모여락 서비스 자체에는 적용하지 못했고, 새로 시작하는 프로젝트에 먼저 도입해 검증할 계획이에요.
+실 서비스인 모여락을 먼저 개발한 뒤 시작된 프로젝트로, 함께 작업한 디자이너와 함께 디자인 토큰과 컴포넌트를 체계적으로 문서화해 디자이너-개발자 간 커뮤니케이션 비용을 줄이고 서비스 전반의 디자인 일관성을 보장하고자 별도 프로젝트로 시작했습니다.
 
 ### 기술적 의사결정
 
 - **Panda CSS** — 빌드타임에 정적 CSS를 추출하는 zero-runtime CSS-in-JS로, 토큰을 타입 안전하게 참조할 수 있어요.
-- **Radix UI** — 복잡한 동작이나 합성이 필요한 곳에 선택적으로 헤드리스 프리미티브를 적용해요. 합성엔 `Slot`(Button), 선택 상태엔 `Toggle`(Chip), 일시적 알림에는 `Toast`를 써요. 단순 표시용 컴포넌트는 Panda CSS만으로 구현해요.
+- **Radix UI** — 복잡한 동작이나 합성이 필요한 곳에 선택적으로 헤드리스 프리미티브를 적용해요. 합성에는 `Slot`(Button), 선택 상태에는 `Toggle`(Chip), 일시적 알림에는 `Toast`를 써요. 단순 표시용 컴포넌트는 Panda CSS만으로 구현해요.
 - **Tailwind 동시 지원** — 소비 프로젝트가 반드시 Panda CSS를 쓰지 않아도 동일한 디자인 토큰을 쓸 수 있도록 별도의 `tailwind-plugin` 진입점을 제공해요.
 
 ### 컴포넌트 / 토큰 문서
@@ -80,20 +80,23 @@ src/components/ComponentName/
 └── ComponentName.mdx         # Storybook 문서 (anatomy/usage 이미지 포함, 선택)
 ```
 
-## Tailwind 지원
+## Tailwind 지원 (v4)
 
-Panda CSS를 쓰지 않는 소비 프로젝트를 위해 동일한 디자인 토큰을 Tailwind CSS 유틸리티로 노출하는 플러그인을 별도로 제공해요.
+Panda CSS를 쓰지 않는 소비 프로젝트를 위해 동일한 디자인 토큰을 Tailwind CSS 유틸리티로 노출하는 플러그인을 별도로 제공해요. Tailwind v4는 CSS 안에서 직접 설정하는 방식이라 `tailwind.config.ts` 없이 진입 CSS에서 바로 로드해요.
 
-```ts
-// tailwind.config.ts
-import moyeorakPlugin from "@moyeorak/design-system/tailwind-plugin"
-
-export default {
-  plugins: [moyeorakPlugin],
-}
+```css
+/* 앱의 전역 CSS 진입점 */
+@import "@moyeorak/design-system/layers.css";
+@import "tailwindcss";
+@plugin "@moyeorak/design-system/tailwind-plugin";
+@import "@moyeorak/design-system/styles.css";
 ```
 
-플러그인은 semantic 색상 토큰을 `bg-fill-brand-default`, `text-fg-neutral-default`처럼 CSS 변수 기반 Tailwind 컬러로, 텍스트 스타일을 `.textStyle_body1` 같은 유틸리티 클래스로 노출해요. CSS 변수 자체는 `@moyeorak/design-system/dist/style.css`에서 가져오므로, 이 CSS는 Tailwind 사용 여부와 관계없이 항상 import해야 해요.
+플러그인은 semantic 색상 토큰을 `bg-fill-brand-default`, `text-fg-neutral-default`처럼 CSS 변수 기반 Tailwind 컬러로, 텍스트 스타일을 `.textStyle_body1` 같은 유틸리티 클래스로 노출해요. CSS 변수 자체는 `@moyeorak/design-system/styles.css`에서 가져오므로, 이 CSS는 Tailwind 사용 여부와 관계없이 항상 import해야 해요.
+
+### Cascade layer 우선순위 고정
+
+Tailwind v4는 네이티브 CSS cascade layer(`@layer theme, base, components, utilities`)를 쓰는데, 레이어 우선순위는 import 순서가 아니라 "레이어 이름이 처음 선언된 순서"로 전역 고정돼요. 이 패키지의 컴포넌트 CSS도 자체 `moyeorak-*` 레이어를 쓰기 때문에, 위 예제처럼 `layers.css`를 다른 `@import`보다 먼저 로드해 순서를 미리 고정해야 해요. 그러지 않으면 디자인 시스템 컴포넌트 기본 스타일이 Tailwind preflight에 눌리거나, 반대로 컴포넌트에 붙인 Tailwind 유틸 클래스 오버라이드가 안 먹히는 문제가 import 순서에 따라 무작위로 발생해요.
 
 ## 다크 모드
 
@@ -105,11 +108,27 @@ export default {
 npm install @moyeorak/design-system
 ```
 
-```tsx
-// CSS import 필수
-import "@moyeorak/design-system/dist/style.css"
+CSS는 앱의 전역 CSS 진입점에서 한 번만 가져오면 돼요. Tailwind 없이 쓴다면:
 
-import { Button } from "@moyeorak/design-system"
+```css
+/* 앱의 전역 CSS 진입점 */
+@import "@moyeorak/design-system/styles.css";
+```
+
+Tailwind v4를 함께 쓴다면 위 [Tailwind 지원 (v4)](#tailwind-지원-v4) 섹션의 예제를 참고해주세요.
+
+토큰은 `styles.css`의 `:root`에 CSS 변수로 노출돼요. 어디서든 `var(--colors-fill-brand-default)`처럼 직접 참조하면 돼요.
+
+```css
+.myButton {
+  background: var(--colors-fill-brand-default);
+}
+```
+
+텍스트 스타일(Heading/Title/Body/Caption)은 CSS 변수 조합이 아니라 완성된 클래스로 제공돼요. `textStyle_{이름}` 클래스를 그대로 붙이면 돼요.
+
+```html
+<p class="textStyle_body1">본문 텍스트</p>
 ```
 
 ### 폰트 (Pretendard)
