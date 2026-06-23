@@ -1,0 +1,7 @@
+/**
+ * Tailwind v4는 네이티브 CSS cascade layer를 쓰는데, 레이어 우선순위는 import 순서가 아니라
+ * "레이어 이름이 처음 선언된 순서"로 전역 고정된다. 이 파일을 호스트 진입 CSS 최상단(다른
+ * @import보다 위)에서 가장 먼저 import하면, 이후 Tailwind와 이 패키지의 CSS를 어떤 순서로
+ * import하든 결과가 항상 고정된다.
+ */
+@layer theme, moyeorak-reset, base, moyeorak-base, moyeorak-tokens, moyeorak-recipes, moyeorak-utilities, components, utilities;

@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from "vite"
 import react from "@vitejs/plugin-react"
 import dts from "vite-plugin-dts"
 import { resolve } from "path"
-import { readdirSync, readFileSync, writeFileSync, existsSync } from "fs"
+import { readdirSync, readFileSync, writeFileSync, existsSync, copyFileSync } from "fs"
 
 function injectUseClientPlugin(): Plugin {
   return {
@@ -26,6 +26,17 @@ function injectUseClientPlugin(): Plugin {
   }
 }
 
+function copyLayersCssPlugin(): Plugin {
+  return {
+    name: "copy-layers-css",
+    closeBundle() {
+      const distDir = resolve(__dirname, "dist")
+      if (!existsSync(distDir)) return
+      copyFileSync(resolve(__dirname, "src/layers.css"), resolve(distDir, "layers.css"))
+    },
+  }
+}
+
 const isLibBuild = !process.env.npm_lifecycle_event?.includes("storybook")
 
 const plugins: Plugin[] = [
@@ -33,6 +44,7 @@ const plugins: Plugin[] = [
   ...(isLibBuild
     ? [
         injectUseClientPlugin(),
+        copyLayersCssPlugin(),
         dts({
           include: ["src"],
           exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
@@ -67,7 +79,7 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
         },
-        assetFileNames: "style.css",
+        assetFileNames: "styles.css",
       },
     },
     cssCodeSplit: false,

@@ -15,7 +15,8 @@
     "dist"
   ],
   "sideEffects": [
-    "./dist/style.css"
+    "./dist/styles.css",
+    "./dist/layers.css"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -41,7 +42,8 @@
         "default": "./dist/tailwind-plugin.js"
       }
     },
-    "./dist/style.css": "./dist/style.css"
+    "./styles.css": "./dist/styles.css",
+    "./layers.css": "./dist/layers.css"
   },
   "scripts": {
     "prepare": "panda codegen",
