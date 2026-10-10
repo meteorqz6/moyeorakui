@@ -22,6 +22,8 @@ const config: StorybookConfig = {
     "../src/components/FloatingButton/FloatingButton.stories.tsx",
     "../src/components/Toast/Toast.mdx",
     "../src/components/Toast/Toast.stories.tsx",
+    "../src/components/ActionArea/ActionArea.mdx",
+    "../src/components/ActionArea/ActionArea.stories.tsx",
   ],
   addons: [
     "@storybook/addon-essentials",

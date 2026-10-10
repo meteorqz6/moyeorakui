@@ -25,3 +25,6 @@ export type { ToastProps, ToastVariant, ToastViewportProps } from "./components/
 
 export { FloatingButton } from "./components/FloatingButton";
 export type { FloatingButtonProps, FloatingButtonType } from "./components/FloatingButton";
+
+export { ActionArea } from "./components/ActionArea";
+export type { ActionAreaProps, ActionAreaType } from "./components/ActionArea";
