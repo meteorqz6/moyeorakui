@@ -1,0 +1,10 @@
+// 타입 검사 전용 설정이에요. 빌드용 tsconfig.json은 타입 선언(d.ts) 생성 대상에서 스토리를 빼지만,
+// 스토리도 컴포넌트 API를 그대로 쓰니 검사에서는 src 전체를 포함해요.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
