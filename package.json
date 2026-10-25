@@ -4,6 +4,10 @@
   "description": "React design system built with Panda CSS and Radix UI",
   "license": "MIT",
   "author": "meteorqz6",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meteorqz6/moyeorakui.git"
+  },
   "keywords": [
     "react",
     "ui",
