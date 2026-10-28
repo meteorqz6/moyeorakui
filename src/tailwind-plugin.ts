@@ -75,7 +75,7 @@ export default plugin(({ addUtilities }) => {
     },
     ".textStyle_head4": {
       fontSize: "var(--font-sizes-lg)",
-      fontWeight: "var(--font-weights-medium)",
+      fontWeight: "var(--font-weights-bold)",
       letterSpacing: "var(--letter-spacings-tighter)",
       lineHeight: "1.4",
     },

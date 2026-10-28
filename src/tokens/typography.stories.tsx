@@ -30,7 +30,7 @@ const headEntries: TextStyleEntry[] = [
   { name: "head1",  fontSize: "28px", fontWeight: "600", lineHeight: "1.36", letterSpacing: "-0.005em", sizeToken: "2xl", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "38px" },
   { name: "head2",  fontSize: "24px", fontWeight: "700", lineHeight: "1.17", letterSpacing: "-0.005em", sizeToken: "xl",  weightToken: "bold",     spacingToken: "tighter", lineHeightPx: "28px" },
   { name: "head3",  fontSize: "24px", fontWeight: "600", lineHeight: "1.33", letterSpacing: "-0.005em", sizeToken: "xl",  weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "32px" },
-  { name: "head4",  fontSize: "20px", fontWeight: "500", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg",  weightToken: "medium",   spacingToken: "tighter", lineHeightPx: "28px" },
+  { name: "head4",  fontSize: "20px", fontWeight: "700", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg",  weightToken: "bold",     spacingToken: "tighter", lineHeightPx: "28px" },
 ];
 
 const titleEntries: TextStyleEntry[] = [

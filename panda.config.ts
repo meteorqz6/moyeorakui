@@ -217,7 +217,7 @@ export default defineConfig({
       head4: {
         value: {
           fontSize: "{fontSizes.lg}",
-          fontWeight: "{fontWeights.medium}",
+          fontWeight: "{fontWeights.bold}",
           letterSpacing: "{letterSpacings.tighter}",
           lineHeight: "1.4",
         },
