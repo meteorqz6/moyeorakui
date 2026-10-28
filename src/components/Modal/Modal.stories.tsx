@@ -149,7 +149,7 @@ export const WithLongBody: Story = {
   open={open}
   onOpenChange={setOpen}
   title="시간표 범위를 수정할까요?"
-  body={"기존에 등록된 일정 중 변경된 범위에\\n포함되지 않는 시간은 자동으로 삭제돼요."}
+  body={"기존에 등록된 일정 중 변경된 범위에\\n포함되지 않는 시간은 자동으로 삭제돼요"}
   mainLabel="수정하기"
   onMain={() => {
     updateTimetableRange();
@@ -164,7 +164,7 @@ export const WithLongBody: Story = {
   render: () => (
     <ModalPreview
       title="시간표 범위를 수정할까요?"
-      body={"기존에 등록된 일정 중 변경된 범위에\n포함되지 않는 시간은 자동으로 삭제돼요."}
+      body={"기존에 등록된 일정 중 변경된 범위에\n포함되지 않는 시간은 자동으로 삭제돼요"}
       mainLabel="수정하기"
       alternativeLabel="취소"
     />
