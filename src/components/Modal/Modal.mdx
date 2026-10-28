@@ -1,0 +1,79 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as ModalStories from "./Modal.stories";
+import anatomyImg from "./modal-anatomy.png";
+
+<Meta of={ModalStories} />
+
+# Modal
+
+화면 위에 표시되어 사용자의 주의를 특정 작업이나 메시지에 집중시키는 요소예요.
+Modal이 활성화되면 배경 화면과의 상호작용이 제한되며, 사용자는 Modal 안의 콘텐츠에 집중할 수 있어요.
+
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Modal anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Modal은 배경 콘텐츠와 시각적으로 구분하기 위한 **Dim** 영역과, **Title**, **Body**, **Action Area**를 포함하는 **Container**로 구성돼요.
+Body와 Alternative 버튼은 상황과 맥락에 따라 생략할 수 있어요.
+
+- **Dim** — Modal 뒤의 화면을 덮어 배경과 Modal을 시각적으로 구분해요.
+- **Container** — Title, Body, Action Area를 담는 영역이에요.
+- **Title** — Modal의 핵심 메시지예요. 항상 필수예요.
+- **Body** — Title을 보충하는 설명이에요. 선택적으로 사용할 수 있어요.
+- **Action Area** — [Action Area](?path=/docs/components-action-area--docs) 컴포넌트를 그대로 사용해요. Main 버튼은 필수이며, 필요하면 Alternative 버튼을 함께 배치해요.
+
+<br></br>
+
+## Action Area
+
+Alternative 버튼을 지정했는지에 따라 Action Area의 버튼 구성이 달라져요.
+
+<br></br>
+
+### Main Action
+
+`alternativeLabel`과 `onAlternative`를 생략하면 Main 버튼 하나만 배치돼요. 하나의 명확한 행동을 강조해야 하는 경우 사용해요.
+
+<Story of={ModalStories.MainAction} />
+
+<Source of={ModalStories.MainAction} />
+
+### Alternative Action
+
+`alternativeLabel`과 `onAlternative`를 함께 지정하면 Alternative 버튼과 Main 버튼이 1:1 비율로 배치돼요. 둘은 항상 함께 지정해야 해요. 확인/취소와 같이 동등한 중요도의 선택지를 제공해야 하는 상황에서 사용해요.
+
+<Story of={ModalStories.AlternativeAction} />
+
+<Source of={ModalStories.AlternativeAction} />
+
+<br></br>
+
+## Usage
+
+### Title Only
+
+메시지가 간단하거나 강조가 필요한 경우, 상황과 맥락에 따라 `body`를 생략하고 Title만 사용하여 핵심 메시지를 전달할 수 있어요.
+
+<Story of={ModalStories.TitleOnly} />
+
+<Source of={ModalStories.TitleOnly} />
+
+### Body
+
+Body는 최대 2줄까지 사용하며, 간결한 메시지 전달을 권장해요.
+
+줄은 띄어쓰기 단위로 자동으로 바뀌어요. 의미 단위가 갈라지지 않도록 원하는 위치에서 줄을 바꾸려면 문구에 `\n`을 넣어주세요. Title에도 똑같이 적용돼요.
+
+<Story of={ModalStories.WithLongBody} />
+
+<Source of={ModalStories.WithLongBody} />
+
+### 열고 닫기
+
+Modal은 열림 상태를 스스로 관리하지 않아요. 위 예시 코드처럼 사용하는 쪽에서 상태를 만들어 `open`으로 넘기고, 열 때는 `setOpen(true)`를 호출해요.
+
+사용자가 Dim 영역을 누르거나 ESC 키를 누르면 Modal은 `onOpenChange(false)`를 호출해요. `onOpenChange={setOpen}`으로 연결해두면 `open`이 바뀌면서 Modal이 닫혀요. 이때 Main 버튼과 Alternative 버튼의 동작은 실행되지 않아요.
+
+Main 버튼과 Alternative 버튼은 Modal을 자동으로 닫지 않아요. 위 예시처럼 `onMain`, `onAlternative` 안에서 `setOpen(false)`로 직접 닫아주세요. 덕분에 요청이 실패했을 때 Modal을 열어둔 채 안내하는 것처럼, 닫는 시점을 직접 정할 수 있어요.

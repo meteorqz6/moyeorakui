@@ -28,3 +28,6 @@ export type { FloatingButtonProps, FloatingButtonType } from "./components/Float
 
 export { ActionArea } from "./components/ActionArea";
 export type { ActionAreaProps, ActionAreaType } from "./components/ActionArea";
+
+export { Modal } from "./components/Modal";
+export type { ModalProps } from "./components/Modal";

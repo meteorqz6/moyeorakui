@@ -24,6 +24,8 @@ const config: StorybookConfig = {
     "../src/components/Toast/Toast.stories.tsx",
     "../src/components/ActionArea/ActionArea.mdx",
     "../src/components/ActionArea/ActionArea.stories.tsx",
+    "../src/components/Modal/Modal.mdx",
+    "../src/components/Modal/Modal.stories.tsx",
   ],
   addons: [
     "@storybook/addon-essentials",

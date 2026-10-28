@@ -1,29 +1,47 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { css } from "../../../styled-system/css";
+import { ActionArea } from "../ActionArea/ActionArea";
 import { Button } from "../Button/Button";
 
-export type ModalProps = {
+type ModalBaseProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
-  subtitle?: string;
-  confirmLabel: string;
-  onConfirm: () => void;
-  cancelLabel?: string;
-  onCancel?: () => void;
+  /** 최대 2줄 이내의 간결한 메시지를 권장해요. `\n`을 넣으면 그 위치에서 줄이 바뀌어요. */
+  body?: string;
+  mainLabel: string;
+  onMain: () => void;
 };
+
+// Alternative는 취소뿐 아니라 실제 동작이 있는 선택지일 수 있어서, 라벨과 핸들러를 항상 함께 받아요.
+type ModalAlternativeProps =
+  | {
+      /** 지정하면 Main과 1:1 비율의 Alternative 버튼이 함께 표시돼요. */
+      alternativeLabel: string;
+      onAlternative: () => void;
+    }
+  | {
+      alternativeLabel?: never;
+      onAlternative?: never;
+    };
+
+export type ModalProps = ModalBaseProps & ModalAlternativeProps;
 
 export function Modal({
   open,
   onOpenChange,
   title,
-  subtitle,
-  confirmLabel,
-  onConfirm,
-  cancelLabel,
-  onCancel,
+  body,
+  mainLabel,
+  onMain,
+  alternativeLabel,
+  onAlternative,
 }: ModalProps) {
-  const hasTwoButtons = cancelLabel !== undefined;
+  const mainButton = (
+    <Button variant="brand" size="lg" display="full" onClick={onMain}>
+      {mainLabel}
+    </Button>
+  );
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -37,6 +55,7 @@ export function Modal({
           })}
         />
         <Dialog.Content
+          {...(body ? {} : { "aria-describedby": undefined })}
           className={css({
             position: "fixed",
             top: "50%",
@@ -44,14 +63,13 @@ export function Modal({
             transform: "translate(-50%, -50%)",
             zIndex: 50,
             w: "303px",
-            bg: "fill.neutral.default",
+            bg: "bg.neutral.default",
             borderRadius: "lg",
+            overflow: "hidden",
             pt: "32px",
-            pb: "16px",
-            px: "16px",
             display: "flex",
             flexDirection: "column",
-            gap: "24px",
+            gap: "12px",
             outline: "none",
           })}
         >
@@ -61,58 +79,52 @@ export function Modal({
               flexDirection: "column",
               alignItems: "center",
               gap: "4px",
+              px: "16px",
             })}
           >
             <Dialog.Title
               className={css({
+                m: 0,
                 textStyle: "title1",
                 color: "fg.neutral.default",
                 textAlign: "center",
+                wordBreak: "keep-all",
+                whiteSpace: "pre-line",
+                overflowWrap: "break-word",
               })}
             >
               {title}
             </Dialog.Title>
-            {subtitle && (
+            {body && (
               <Dialog.Description
                 className={css({
+                  m: 0,
                   textStyle: "body4",
                   color: "fg.neutral.subtler",
                   textAlign: "center",
+                  wordBreak: "keep-all",
+                  whiteSpace: "pre-line",
+                  overflowWrap: "break-word",
                 })}
               >
-                {subtitle}
+                {body}
               </Dialog.Description>
             )}
           </div>
 
-          {hasTwoButtons ? (
-            <div className={css({ display: "flex", gap: "11px" })}>
-              <Button
-                variant="outline"
-                size="lg"
-                className={css({ flex: 1 })}
-                onClick={onCancel}
-              >
-                {cancelLabel}
-              </Button>
-              <Button
-                variant="brand"
-                size="lg"
-                className={css({ flex: 1 })}
-                onClick={onConfirm}
-              >
-                {confirmLabel}
-              </Button>
-            </div>
+          {alternativeLabel !== undefined ? (
+            <ActionArea
+              type="equal"
+              safeArea={false}
+              alternative={
+                <Button variant="outline" size="lg" display="full" onClick={onAlternative}>
+                  {alternativeLabel}
+                </Button>
+              }
+              main={mainButton}
+            />
           ) : (
-            <Button
-              variant="brand"
-              size="lg"
-              className={css({ w: "full" })}
-              onClick={onConfirm}
-            >
-              {confirmLabel}
-            </Button>
+            <ActionArea type="single" safeArea={false} main={mainButton} />
           )}
         </Dialog.Content>
       </Dialog.Portal>
