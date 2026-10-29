@@ -31,3 +31,6 @@ export type { ActionAreaProps, ActionAreaType } from "./components/ActionArea";
 
 export { Modal } from "./components/Modal";
 export type { ModalProps } from "./components/Modal";
+
+export { Header } from "./components/Header";
+export type { HeaderProps } from "./components/Header";

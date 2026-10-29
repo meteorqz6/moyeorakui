@@ -26,6 +26,8 @@ const config: StorybookConfig = {
     "../src/components/ActionArea/ActionArea.stories.tsx",
     "../src/components/Modal/Modal.mdx",
     "../src/components/Modal/Modal.stories.tsx",
+    "../src/components/Header/Header.mdx",
+    "../src/components/Header/Header.stories.tsx",
   ],
   addons: [
     "@storybook/addon-essentials",
