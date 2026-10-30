@@ -24,7 +24,7 @@ const badgeStyles = cva({
       outline: {
         bg: "fill.neutral.faintest",
         color: "fg.neutral.subtle",
-        boxShadow: "inset 0 0 0 1px {colors.stroke.neutral.subtle}",
+        boxShadow: "[inset 0 0 0 1px {colors.stroke.neutral.subtle}]",
       },
     },
     size: {

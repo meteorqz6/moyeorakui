@@ -165,7 +165,7 @@ export const WithSupportingText: Story = {
         code: `<ActionArea
   type="single"
   supportingItem={
-    <p className={css({ m: 0, textStyle: "body4", color: "fg.neutral.subtle", textAlign: "center" })}>
+    <p className={css({ m: "[0]", textStyle: "body4", color: "fg.neutral.subtle", textAlign: "center" })}>
       가능한 시간대를 1개 이상 선택해주세요
     </p>
   }
@@ -182,7 +182,7 @@ export const WithSupportingText: Story = {
     <ActionArea
       type="single"
       supportingItem={
-        <p className={css({ m: 0, textStyle: "body4", color: "fg.neutral.subtle", textAlign: "center" })}>
+        <p className={css({ m: "[0]", textStyle: "body4", color: "fg.neutral.subtle", textAlign: "center" })}>
           가능한 시간대를 1개 이상 선택해주세요
         </p>
       }
@@ -220,7 +220,7 @@ export const WithSupportingItem: Story = {
   render: () => {
     const legend = [
       { label: "가능", markerClassName: css({ bg: "fill.brand.default" }) },
-      { label: "불가", markerClassName: css({ bg: "bg.neutral.faintest" }) },
+      { label: "불가", markerClassName: css({ bg: "fill.neutral.faintest" }) },
     ];
 
     return (
@@ -235,7 +235,7 @@ export const WithSupportingItem: Story = {
               gap: "4px",
             })}
           >
-            <p className={css({ m: 0, textStyle: "body4", color: "fg.neutral.subtle" })}>
+            <p className={css({ m: "[0]", textStyle: "body4", color: "fg.neutral.subtle" })}>
               클릭하거나 쓸어내려 가능 시간대를 지정해보세요
             </p>
             <div className={css({ display: "flex", alignItems: "center", gap: "12px" })}>
@@ -253,10 +253,10 @@ export const WithSupportingItem: Story = {
                   <span
                     className={cx(
                       css({
-                        width: "14px",
-                        height: "14px",
+                        width: "[14px]",
+                        height: "[14px]",
                         borderRadius: "2xs",
-                        boxShadow: "inset 0 0 0 1px {colors.stroke.neutral.subtle}",
+                        boxShadow: "[inset 0 0 0 1px {colors.stroke.neutral.subtle}]",
                       }),
                       markerClassName,
                     )}

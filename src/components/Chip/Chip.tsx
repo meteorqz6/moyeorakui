@@ -13,7 +13,7 @@ const chipStyles = cva({
     py: "6px",
     border: "none",
     boxSizing: "border-box",
-    fontFamily: "inherit",
+    fontFamily: "[inherit]",
     _disabled: {
       cursor: "not-allowed",
     },
@@ -27,7 +27,7 @@ const chipStyles = cva({
       "outlined-brand": {
         bg: "fill.brand.subtle",
         color: "fg.brand.default",
-        boxShadow: "inset 0 0 0 1px {colors.stroke.brand.default}",
+        boxShadow: "[inset 0 0 0 1px {colors.stroke.brand.default}]",
       },
       neutral: {
         bg: "fill.neutral.default",

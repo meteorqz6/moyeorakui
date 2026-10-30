@@ -14,6 +14,8 @@ export default defineConfig({
   // 컴포넌트 prop(Button의 display 등)이 CSS 속성 이름과 겹쳐 스타일로 잘못 추출되지 않게 한다.
   // 이 패키지는 JSX 스타일 prop(<Box p="4"> 등)을 쓰지 않는다.
   jsxStyleProps: "none",
+  // 토큰이 정의된 속성에는 토큰만 쓰게 해서, 토큰 이름 오타를 타입 검사에서 잡는다.
+  strictTokens: true,
   // textStyle은 소스에서 실제로 쓰인 것만 추출되는데, Tailwind 플러그인은 15개 전부를
   // 하드코딩해서 노출하고 있어 raw CSS 변수 경로(Tailwind 미사용 소비자)와 커버리지가
   // 어긋남. 사용 여부와 무관하게 전부 생성해 두 경로의 textStyle_* 클래스를 동일하게 맞춤.
@@ -33,6 +35,8 @@ export default defineConfig({
   theme: {
     tokens: {
       colors: {
+        // theme을 extend 없이 정의해 Panda 기본 프리셋의 transparent가 없으므로 직접 둔다.
+        transparent: { value: "transparent" },
         gray: {
           0: { value: "#ffffff" },
           50: { value: "#f9fafd" },

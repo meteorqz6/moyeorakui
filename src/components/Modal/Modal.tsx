@@ -49,7 +49,7 @@ export function Modal({
         <Dialog.Overlay
           className={css({
             position: "fixed",
-            inset: 0,
+            inset: "[0]",
             bg: "overlay.neutral.default",
             zIndex: 50,
           })}
@@ -62,7 +62,7 @@ export function Modal({
             left: "50%",
             transform: "translate(-50%, -50%)",
             zIndex: 50,
-            w: "303px",
+            w: "[303px]",
             bg: "bg.neutral.default",
             borderRadius: "lg",
             overflow: "hidden",
@@ -84,7 +84,7 @@ export function Modal({
           >
             <Dialog.Title
               className={css({
-                m: 0,
+                m: "[0]",
                 textStyle: "title1",
                 color: "fg.neutral.strong",
                 textAlign: "center",
@@ -98,7 +98,7 @@ export function Modal({
             {body && (
               <Dialog.Description
                 className={css({
-                  m: 0,
+                  m: "[0]",
                   textStyle: "body4",
                   color: "fg.neutral.subtle",
                   textAlign: "center",

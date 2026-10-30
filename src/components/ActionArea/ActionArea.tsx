@@ -37,7 +37,7 @@ export type ActionAreaProps =
   | IconActionAreaProps;
 
 function ButtonArea(props: ActionAreaProps) {
-  const buttonAreaClassName = css({ display: "flex", alignItems: "center", gap: "8px", width: "100%" });
+  const buttonAreaClassName = css({ display: "flex", alignItems: "center", gap: "8px", width: "full" });
 
   switch (props.type) {
     case "single":
@@ -45,22 +45,22 @@ function ButtonArea(props: ActionAreaProps) {
     case "equal":
       return (
         <div className={buttonAreaClassName}>
-          <div className={css({ display: "flex", flex: "1 1 0%" })}>{props.alternative}</div>
-          <div className={css({ display: "flex", flex: "1 1 0%" })}>{props.main}</div>
+          <div className={css({ display: "flex", flex: "[1 1 0%]" })}>{props.alternative}</div>
+          <div className={css({ display: "flex", flex: "[1 1 0%]" })}>{props.main}</div>
         </div>
       );
     case "weighted":
       return (
         <div className={buttonAreaClassName}>
-          <div className={css({ display: "flex", flex: "3 1 0%" })}>{props.sub}</div>
-          <div className={css({ display: "flex", flex: "7 1 0%" })}>{props.main}</div>
+          <div className={css({ display: "flex", flex: "[3 1 0%]" })}>{props.sub}</div>
+          <div className={css({ display: "flex", flex: "[7 1 0%]" })}>{props.main}</div>
         </div>
       );
     case "icon":
       return (
         <div className={buttonAreaClassName}>
           {props.sub}
-          <div className={css({ display: "flex", flex: 1 })}>{props.main}</div>
+          <div className={css({ display: "flex", flex: "1" })}>{props.main}</div>
         </div>
       );
   }
@@ -77,7 +77,7 @@ export function ActionArea(props: ActionAreaProps) {
           flexDirection: "column",
           gap: "8px",
           boxSizing: "border-box",
-          width: "100%",
+          width: "full",
           px: "16px",
           py: "12px",
           pb: safeArea ? "max(12px, env(safe-area-inset-bottom))" : "12px",

@@ -10,7 +10,7 @@ const iconButtonStyles = cva({
     cursor: "pointer",
     border: "none",
     boxSizing: "border-box",
-    fontFamily: "inherit",
+    fontFamily: "[inherit]",
     _disabled: {
       cursor: "not-allowed",
     },
@@ -46,9 +46,9 @@ const iconButtonStyles = cva({
       },
     },
     size: {
-      sm: { width: "36px", height: "36px", borderRadius: "xs" },
-      md: { width: "48px", height: "48px", borderRadius: "sm" },
-      lg: { width: "54px", height: "54px", borderRadius: "sm" },
+      sm: { width: "[36px]", height: "[36px]", borderRadius: "xs" },
+      md: { width: "[48px]", height: "[48px]", borderRadius: "sm" },
+      lg: { width: "[54px]", height: "[54px]", borderRadius: "sm" },
     },
   },
   defaultVariants: {
