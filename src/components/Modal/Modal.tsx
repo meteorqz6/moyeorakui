@@ -86,7 +86,7 @@ export function Modal({
               className={css({
                 m: 0,
                 textStyle: "title1",
-                color: "fg.neutral.default",
+                color: "fg.neutral.strong",
                 textAlign: "center",
                 wordBreak: "keep-all",
                 whiteSpace: "pre-line",
@@ -100,7 +100,7 @@ export function Modal({
                 className={css({
                   m: 0,
                   textStyle: "body4",
-                  color: "fg.neutral.subtler",
+                  color: "fg.neutral.subtle",
                   textAlign: "center",
                   wordBreak: "keep-all",
                   whiteSpace: "pre-line",
