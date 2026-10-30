@@ -1,6 +1,6 @@
 {
   "name": "@moyeorak/design-system",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "React design system built with Panda CSS and Radix UI",
   "license": "MIT",
   "author": "meteorqz6",
