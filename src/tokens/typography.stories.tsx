@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { type TextStyleEntry, textStyleGroup } from "./theme-docs";
 
 const meta: Meta = {
   title: "Foundations/Typography",
@@ -6,52 +7,6 @@ const meta: Meta = {
 };
 export default meta;
 type Story = StoryObj;
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-type TextStyleEntry = {
-  name: string;
-  // actual CSS values — used only for rendering the preview
-  fontSize: string;
-  fontWeight: string;
-  lineHeight: string;
-  letterSpacing: string;
-  // token names — shown in the table
-  sizeToken: string;
-  weightToken: string;
-  spacingToken: string;
-  // designer px value for line height
-  lineHeightPx: string;
-};
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const headEntries: TextStyleEntry[] = [
-  { name: "head1",  fontSize: "28px", fontWeight: "600", lineHeight: "1.36", letterSpacing: "-0.005em", sizeToken: "2xl", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "38px" },
-  { name: "head2",  fontSize: "24px", fontWeight: "700", lineHeight: "1.17", letterSpacing: "-0.005em", sizeToken: "xl",  weightToken: "bold",     spacingToken: "tighter", lineHeightPx: "28px" },
-  { name: "head3",  fontSize: "24px", fontWeight: "600", lineHeight: "1.33", letterSpacing: "-0.005em", sizeToken: "xl",  weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "32px" },
-  { name: "head4",  fontSize: "20px", fontWeight: "700", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg",  weightToken: "bold",     spacingToken: "tighter", lineHeightPx: "28px" },
-];
-
-const titleEntries: TextStyleEntry[] = [
-  { name: "title1", fontSize: "20px", fontWeight: "600", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "28px" },
-  { name: "title2", fontSize: "20px", fontWeight: "400", lineHeight: "1.4",  letterSpacing: "-0.005em", sizeToken: "lg", weightToken: "regular",  spacingToken: "tighter", lineHeightPx: "28px" },
-  { name: "title3", fontSize: "16px", fontWeight: "600", lineHeight: "1.38", letterSpacing: "-0.005em", sizeToken: "md", weightToken: "semibold", spacingToken: "tighter", lineHeightPx: "22px" },
-];
-
-const bodyEntries: TextStyleEntry[] = [
-  { name: "body1",  fontSize: "16px", fontWeight: "500", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "md", weightToken: "medium",   spacingToken: "tight", lineHeightPx: "24px" },
-  { name: "body2",  fontSize: "16px", fontWeight: "400", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "md", weightToken: "regular",  spacingToken: "tight", lineHeightPx: "24px" },
-  { name: "body3",  fontSize: "14px", fontWeight: "600", lineHeight: "1.57", letterSpacing: "-0.01em", sizeToken: "sm", weightToken: "semibold", spacingToken: "tight", lineHeightPx: "22px" },
-  { name: "body4",  fontSize: "14px", fontWeight: "500", lineHeight: "1.57", letterSpacing: "-0.01em", sizeToken: "sm", weightToken: "medium",   spacingToken: "tight", lineHeightPx: "22px" },
-  { name: "body5",  fontSize: "14px", fontWeight: "400", lineHeight: "1.57", letterSpacing: "-0.01em", sizeToken: "sm", weightToken: "regular",  spacingToken: "tight", lineHeightPx: "22px" },
-];
-
-const captionEntries: TextStyleEntry[] = [
-  { name: "caption1", fontSize: "12px", fontWeight: "600", lineHeight: "1.67", letterSpacing: "-0.01em", sizeToken: "xs", weightToken: "semibold", spacingToken: "tight", lineHeightPx: "20px" },
-  { name: "caption2", fontSize: "12px", fontWeight: "500", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "xs", weightToken: "medium",   spacingToken: "tight", lineHeightPx: "18px" },
-  { name: "caption3", fontSize: "12px", fontWeight: "400", lineHeight: "1.5",  letterSpacing: "-0.01em", sizeToken: "xs", weightToken: "regular",  spacingToken: "tight", lineHeightPx: "18px" },
-];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -414,25 +369,25 @@ export const AllStyles: Story = {
       <TypeSection
         title="Head"
         description="가장 높은 시각적 위계를 가지는 텍스트 스타일로, 사용자의 주목이 필요한 대표 콘텐츠를 강조할 때 사용해요."
-        entries={headEntries}
+        entries={textStyleGroup("head")}
       />
 
       <TypeSection
         title="Title"
         description="상위 정보 위계를 표현하는 텍스트 스타일이에요. 화면, 섹션 또는 콘텐츠를 구분하고 강조하며 핵심 제목이나 주제를 표현하는 데 사용해요."
-        entries={titleEntries}
+        entries={textStyleGroup("title")}
       />
 
       <TypeSection
         title="Body"
         description="기본 정보 위계를 표현하며 서비스 전반에서 기본적으로 사용되는 텍스트 스타일이에요. 레이블, 일반 정보, 설명 등 다양한 UI 텍스트를 전달하는 데 사용하며, 상대적으로 중요도가 낮은 제목이나 소제목에도 활용돼요."
-        entries={bodyEntries}
+        entries={textStyleGroup("body")}
       />
 
       <TypeSection
         title="Caption"
         description="보조 정보 위계를 표현하는 텍스트 스타일로, 본문을 보완하거나 추가적인 맥락을 전달할 때 사용해요."
-        entries={captionEntries}
+        entries={textStyleGroup("caption")}
       />
     </div>
   ),

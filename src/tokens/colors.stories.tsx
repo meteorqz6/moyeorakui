@@ -1,4 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import {
+  type ColorEntry,
+  type SemanticGroupName,
+  paletteColor,
+  paletteScale,
+  semanticGroup,
+} from "./theme-docs";
 
 const meta: Meta = {
   title: "Foundations/Colors",
@@ -8,63 +15,16 @@ export default meta;
 
 type Story = StoryObj;
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-type ColorEntry = {
-  label: string;
-  value: string;
-  cssVar?: string;
-};
-
-// ─── Palette Data ────────────────────────────────────────────────────────────
-
-const grayScale: ColorEntry[] = [
-  { label: "0", value: "#ffffff", cssVar: "--colors-gray-0" },
-  { label: "50", value: "#f9fafd", cssVar: "--colors-gray-50" },
-  { label: "100", value: "#f2f4f9", cssVar: "--colors-gray-100" },
-  { label: "200", value: "#e1e4ec", cssVar: "--colors-gray-200" },
-  { label: "300", value: "#ccd0d9", cssVar: "--colors-gray-300" },
-  { label: "400", value: "#9fa5b3", cssVar: "--colors-gray-400" },
-  { label: "500", value: "#737a89", cssVar: "--colors-gray-500" },
-  { label: "600", value: "#5f6572", cssVar: "--colors-gray-600" },
-  { label: "700", value: "#464b53", cssVar: "--colors-gray-700" },
-  { label: "800", value: "#2c3038", cssVar: "--colors-gray-800" },
-  { label: "900", value: "#171a1f", cssVar: "--colors-gray-900" },
-];
-
-const grayOpacityScale: ColorEntry[] = [
-  { label: "100", value: "rgba(15, 17, 24, 0.02)", cssVar: "--colors-gray-opacity-100" },
-  { label: "200", value: "rgba(15, 17, 24, 0.04)", cssVar: "--colors-gray-opacity-200" },
-  { label: "300", value: "rgba(15, 17, 24, 0.08)", cssVar: "--colors-gray-opacity-300" },
-  { label: "400", value: "rgba(15, 17, 24, 0.20)", cssVar: "--colors-gray-opacity-400" },
-  { label: "500", value: "rgba(15, 17, 24, 0.28)", cssVar: "--colors-gray-opacity-500" },
-  { label: "600", value: "rgba(15, 17, 24, 0.56)", cssVar: "--colors-gray-opacity-600" },
-  { label: "700", value: "rgba(15, 17, 24, 0.70)", cssVar: "--colors-gray-opacity-700" },
-  { label: "800", value: "rgba(15, 17, 24, 0.80)", cssVar: "--colors-gray-opacity-800" },
-  { label: "900", value: "rgba(15, 17, 24, 0.90)", cssVar: "--colors-gray-opacity-900" },
-];
-
-const blueScale: ColorEntry[] = [
-  { label: "100", value: "#f7faff", cssVar: "--colors-blue-100" },
-  { label: "200", value: "#ebf2ff", cssVar: "--colors-blue-200" },
-  { label: "300", value: "#e5eeff", cssVar: "--colors-blue-300" },
-  { label: "400", value: "#cbddff", cssVar: "--colors-blue-400" },
-  { label: "500", value: "#b0ccff", cssVar: "--colors-blue-500" },
-  { label: "600", value: "#82acff", cssVar: "--colors-blue-600" },
-  { label: "700", value: "#4181ff", cssVar: "--colors-blue-700" },
-  { label: "800", value: "#3c76e9", cssVar: "--colors-blue-800" },
-  { label: "900", value: "#3265cb", cssVar: "--colors-blue-900" },
-];
-
 // ─── Palette Components ───────────────────────────────────────────────────────
 
 function formatColor(value: string): string {
-  const m = value.match(/rgba?\(\s*(\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\s*\)/);
+  const m = value.match(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)(?:[\s,/]+([\d.]+)(%?))?\s*\)/);
   if (!m) return value;
   const hex = [m[1], m[2], m[3]]
     .map((n) => parseInt(n).toString(16).padStart(2, "0"))
     .join("");
-  const alpha = m[4] !== undefined ? ` ${Math.round(parseFloat(m[4]) * 100)}%` : "";
+  const alpha =
+    m[4] !== undefined ? ` ${Math.round(m[5] ? parseFloat(m[4]) : parseFloat(m[4]) * 100)}%` : "";
   return `#${hex}${alpha}`;
 }
 
@@ -245,6 +205,16 @@ function SemanticRow({
   );
 }
 
+function SemanticRows({ group }: { group: SemanticGroupName }) {
+  return (
+    <>
+      {semanticGroup(group).map(({ token, alias, value }) => (
+        <SemanticRow key={token} token={token} alias={alias} cssValue={value} />
+      ))}
+    </>
+  );
+}
+
 function SemanticSection({
   title,
   accentColor = "#4181ff",
@@ -280,13 +250,13 @@ function SemanticSection({
 export const Palette: Story = {
   render: () => (
     <div style={{ padding: 32, fontFamily: "system-ui, sans-serif", maxWidth: 1040 }}>
-      <ColorScale name="Gray" colors={grayScale} mono />
-      <ColorScale name="Blue" colors={blueScale} />
-      <ColorScale name="Gray Opacity" colors={grayOpacityScale} mono />
+      <ColorScale name="Gray" colors={paletteScale("gray")} mono />
+      <ColorScale name="Blue" colors={paletteScale("blue")} />
+      <ColorScale name="Gray Opacity" colors={paletteScale("grayOpacity")} mono />
 
       <div style={{ display: "flex", gap: 16 }}>
-        <SingleColor name="Red" value="#f0405c" cssVar="--colors-red" />
-        <SingleColor name="Green" value="#00cf95" cssVar="--colors-green" />
+        <SingleColor name="Red" {...paletteColor("red")} />
+        <SingleColor name="Green" {...paletteColor("green")} />
       </div>
     </div>
   ),
@@ -296,241 +266,27 @@ export const Semantic: Story = {
   render: () => (
     <div style={{ padding: 32, fontFamily: "system-ui, sans-serif", maxWidth: 800 }}>
       <SemanticSection title="FG — 텍스트, 아이콘 요소에 사용돼요." accentColor="#171a1f">
-        <SemanticRow
-          token="--colors-fg-neutral-stronger"
-          alias="gray-900"
-          cssValue="#171a1f"
-        />
-        <SemanticRow
-          token="--colors-fg-neutral-strong"
-          alias="gray-800"
-          cssValue="#2c3038"
-        />
-        <SemanticRow
-          token="--colors-fg-neutral-default"
-          alias="gray-700"
-          cssValue="#464b53"
-        />
-        <SemanticRow
-          token="--colors-fg-neutral-subtle"
-          alias="gray-500"
-          cssValue="#737a89"
-        />
-        <SemanticRow
-          token="--colors-fg-neutral-subtler"
-          alias="gray-400"
-          cssValue="#9fa5b3"
-        />
-        <SemanticRow
-          token="--colors-fg-neutral-subtlest"
-          alias="gray-300"
-          cssValue="#ccd0d9"
-        />
-        <SemanticRow
-          token="--colors-fg-neutral-faintest"
-          alias="gray-0"
-          cssValue="#ffffff"
-        />
-        <SemanticRow
-          token="--colors-fg-brand-default"
-          alias="blue-700"
-          cssValue="#4181ff"
-        />
-        <SemanticRow
-          token="--colors-fg-brand-subtle"
-          alias="blue-400"
-          cssValue="#cbddff"
-        />
-        <SemanticRow
-          token="--colors-fg-brand-subtlest"
-          alias="blue-200"
-          cssValue="#ebf2ff"
-        />
-        <SemanticRow
-          token="--colors-fg-positive-default"
-          alias="green"
-          cssValue="#00cf95"
-        />
-        <SemanticRow
-          token="--colors-fg-negative-default"
-          alias="red"
-          cssValue="#f0405c"
-        />
+        <SemanticRows group="fg" />
       </SemanticSection>
 
       <SemanticSection title="Fill — 배지, 버튼 등 내부가 채워진 독립적 시각 요소의 면 영역에 사용돼요." accentColor="#00a676">
-        <SemanticRow
-          token="--colors-fill-neutral-default"
-          alias="gray-800"
-          cssValue="#2c3038"
-        />
-        <SemanticRow
-          token="--colors-fill-neutral-default-pressed"
-          alias="gray-600"
-          cssValue="#5f6572"
-        />
-        <SemanticRow
-          token="--colors-fill-neutral-default-disabled"
-          alias="gray-200"
-          cssValue="#e1e4ec"
-        />
-        <SemanticRow
-          token="--colors-fill-neutral-subtle"
-          alias="gray-300"
-          cssValue="#ccd0d9"
-        />
-        <SemanticRow
-          token="--colors-fill-neutral-subtler"
-          alias="gray-100"
-          cssValue="#f2f4f9"
-        />
-        <SemanticRow
-          token="--colors-fill-neutral-subtlest"
-          alias="gray-50"
-          cssValue="#f9fafd"
-        />
-        <SemanticRow
-          token="--colors-fill-neutral-faintest"
-          alias="gray-0"
-          cssValue="#ffffff"
-        />
-        <SemanticRow
-          token="--colors-fill-brand-default"
-          alias="blue-700"
-          cssValue="#4181ff"
-        />
-        <SemanticRow
-          token="--colors-fill-brand-default-pressed"
-          alias="blue-900"
-          cssValue="#3265cb"
-        />
-        <SemanticRow
-          token="--colors-fill-brand-subtle"
-          alias="blue-300"
-          cssValue="#e5eeff"
-        />
-        <SemanticRow
-          token="--colors-fill-brand-subtle-pressed"
-          alias="blue-500"
-          cssValue="#b0ccff"
-        />
-        <SemanticRow
-          token="--colors-fill-brand-subtler"
-          alias="blue-200"
-          cssValue="#ebf2ff"
-        />
-        <SemanticRow
-          token="--colors-fill-brand-subtlest"
-          alias="blue-100"
-          cssValue="#f7faff"
-        />
+        <SemanticRows group="fill" />
       </SemanticSection>
 
       <SemanticSection title="Stroke — 테두리, 구분선 등 요소의 경계를 표현하는 데 사용돼요." accentColor="#e05a00">
-        <SemanticRow
-          token="--colors-stroke-neutral-strong"
-          alias="gray-400"
-          cssValue="#9fa5b3"
-        />
-        <SemanticRow
-          token="--colors-stroke-neutral-default"
-          alias="gray-300"
-          cssValue="#ccd0d9"
-        />
-        <SemanticRow
-          token="--colors-stroke-neutral-subtle"
-          alias="gray-200"
-          cssValue="#e1e4ec"
-        />
-        <SemanticRow
-          token="--colors-stroke-neutral-subtler"
-          alias="gray-100"
-          cssValue="#f2f4f9"
-        />
-        <SemanticRow
-          token="--colors-stroke-brand-default"
-          alias="blue-700"
-          cssValue="#4181ff"
-        />
-        <SemanticRow
-          token="--colors-stroke-brand-subtle"
-          alias="blue-600"
-          cssValue="#82acff"
-        />
-        <SemanticRow
-          token="--colors-stroke-negative-default"
-          alias="red"
-          cssValue="#f0405c"
-        />
+        <SemanticRows group="stroke" />
       </SemanticSection>
 
       <SemanticSection title="BG — 페이지, 섹션, 모달 등 넓은 영역의 배경을 구성하는 데 사용돼요." accentColor="#8a4fff">
-        <SemanticRow
-          token="--colors-bg-neutral-strongest"
-          alias="gray-800"
-          cssValue="#2c3038"
-        />
-        <SemanticRow
-          token="--colors-bg-neutral-strong"
-          alias="gray-100"
-          cssValue="#f2f4f9"
-        />
-        <SemanticRow
-          token="--colors-bg-neutral-default"
-          alias="gray-0"
-          cssValue="#ffffff"
-        />
+        <SemanticRows group="bg" />
       </SemanticSection>
 
       <SemanticSection title="Overlay — 모달, 바텀시트 등이 활성화될 때 배경을 덮고 레이어를 시각적으로 구분하는 오버레이에 사용돼요." accentColor="#464b53">
-        <SemanticRow
-          token="--colors-overlay-neutral-stronger"
-          alias="gray-opacity-900"
-          cssValue="rgba(15,17,24,0.90)"
-        />
-        <SemanticRow
-          token="--colors-overlay-neutral-strong"
-          alias="gray-opacity-800"
-          cssValue="rgba(15,17,24,0.80)"
-        />
-        <SemanticRow
-          token="--colors-overlay-neutral-default"
-          alias="gray-opacity-700"
-          cssValue="rgba(15,17,24,0.70)"
-        />
-        <SemanticRow
-          token="--colors-overlay-neutral-subtle"
-          alias="gray-opacity-600"
-          cssValue="rgba(15,17,24,0.56)"
-        />
-        <SemanticRow
-          token="--colors-overlay-neutral-subtler"
-          alias="gray-opacity-500"
-          cssValue="rgba(15,17,24,0.28)"
-        />
+        <SemanticRows group="overlay" />
       </SemanticSection>
 
       <SemanticSection title="Shadow — 요소의 깊이감과 계층 구조를 표현하기 위한 그림자에 사용돼요." accentColor="#737a89">
-        <SemanticRow
-          token="--colors-shadow-neutral-stronger"
-          alias="gray-opacity-500"
-          cssValue="rgba(15,17,24,0.28)"
-        />
-        <SemanticRow
-          token="--colors-shadow-neutral-strong"
-          alias="gray-opacity-300"
-          cssValue="rgba(15,17,24,0.08)"
-        />
-        <SemanticRow
-          token="--colors-shadow-neutral-default"
-          alias="gray-opacity-200"
-          cssValue="rgba(15,17,24,0.04)"
-        />
-        <SemanticRow
-          token="--colors-shadow-neutral-subtle"
-          alias="gray-opacity-100"
-          cssValue="rgba(15,17,24,0.02)"
-        />
+        <SemanticRows group="shadow" />
       </SemanticSection>
     </div>
   ),
