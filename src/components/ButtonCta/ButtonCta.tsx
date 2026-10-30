@@ -5,7 +5,7 @@ import { cx } from "../../lib/utils";
 const buttonCtaStyles = cva({
   base: {
     display: "flex",
-    width: "100%",
+    width: "full",
     alignItems: "center",
     justifyContent: "center",
     whiteSpace: "nowrap",

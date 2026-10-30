@@ -11,7 +11,7 @@ const buttonStyles = cva({
     gap: "2px",
     border: "none",
     boxSizing: "border-box",
-    fontFamily: "inherit",
+    fontFamily: "[inherit]",
     _disabled: {
       cursor: "not-allowed",
       bg: "fill.neutral.default-disabled",
@@ -41,7 +41,7 @@ const buttonStyles = cva({
       outline: {
         bg: "fill.neutral.faintest",
         color: "fg.neutral.default",
-        boxShadow: "inset 0 0 0 1px {colors.stroke.neutral.subtle}",
+        boxShadow: "[inset 0 0 0 1px {colors.stroke.neutral.subtle}]",
         _active: { bg: "fill.neutral.subtler" },
       },
       ghost: {
@@ -57,7 +57,7 @@ const buttonStyles = cva({
     },
     display: {
       inline: { display: "inline-flex" },
-      full: { display: "flex", width: "100%" },
+      full: { display: "flex", width: "full" },
     },
     size: {
       sm: {
@@ -90,7 +90,7 @@ const buttonStyles = cva({
       variant: "outline",
       css: {
         _disabled: {
-          boxShadow: "none",
+          boxShadow: "[none]",
         },
       },
     },

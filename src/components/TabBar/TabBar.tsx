@@ -3,7 +3,7 @@ import { cx } from "../../lib/utils";
 
 const tabItemStyles = cva({
   base: {
-    flex: 1,
+    flex: "1",
     px: "20px",
     py: "10px",
     textAlign: "center",

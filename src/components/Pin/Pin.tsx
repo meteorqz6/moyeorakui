@@ -13,7 +13,7 @@ const pillStyles = cva({
     px: "10px",
     py: "4px",
     borderRadius: "full",
-    mb: "-5px",
+    mb: "[-5px]",
   },
   variants: {
     style: {
@@ -62,7 +62,7 @@ export function PinText({ style = "brand", text, className }: PinTextProps) {
         css({
           pt: "4px",
           px: "10px",
-          filter: "drop-shadow(0 0 4px rgba(15, 17, 24, 0.28))",
+          filter: "[drop-shadow(0 0 4px {colors.shadow.neutral.stronger})]",
         }),
         className,
       )}
@@ -149,7 +149,7 @@ export function PinLogoText({ size = "large", text, className }: PinLogoTextProp
   return (
     <div className={cx(css({ display: "inline-flex", alignItems: "center" }), className)}>
       <div className={css({ display: "flex", flexDir: "column", alignItems: "center" })}>
-        <PinText style="brand" text={text} className={css({ mb: "-2px" })} />
+        <PinText style="brand" text={text} className={css({ mb: "[-2px]" })} />
         <PinLogo size={size} />
       </div>
     </div>
@@ -220,7 +220,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
         css({
           position: "relative",
           flexShrink: 0,
-          filter: "drop-shadow(0 0 4px rgba(15, 17, 24, 0.28))",
+          filter: "[drop-shadow(0 0 4px {colors.shadow.neutral.stronger})]",
         }),
         className,
       )}
@@ -229,7 +229,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
       <div
         className={css({
           position: "absolute",
-          inset: "0",
+          inset: "[0]",
           bg: "fill.neutral.default",
           borderRadius: "xs",
         })}
@@ -238,7 +238,7 @@ export function PinFacility({ type, selected = false, className }: PinFacilityPr
         className={css({
           position: "absolute",
           bg: "fill.brand.default",
-          borderRadius: "4px",
+          borderRadius: "2xs",
         })}
         style={{ inset: "1.71px" }}
       />

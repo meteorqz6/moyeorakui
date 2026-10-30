@@ -56,7 +56,7 @@ export function Search({
           alignItems: "center",
           gap: "2px",
           px: "11px",
-          h: "48px",
+          h: "[48px]",
           w: "full",
           bg: "fill.neutral.default",
           borderWidth: "1px",
@@ -64,7 +64,7 @@ export function Search({
           borderColor: isFocused ? "stroke.brand.default" : "stroke.neutral.default",
           borderRadius: "sm",
           overflow: "hidden",
-          transition: "border-color 0.15s ease",
+          transition: "[border-color 0.15s ease]",
         }),
         className,
       )}
@@ -72,7 +72,7 @@ export function Search({
       <Icon type="search" size="md" variant="default" className={css({ flexShrink: 0 })} />
       <div
         className={css({
-          flex: 1,
+          flex: "1",
           display: "flex",
           alignItems: "center",
           px: "4px",
@@ -87,7 +87,7 @@ export function Search({
           onBlur={handleBlur}
           placeholder={placeholder}
           className={css({
-            flex: 1,
+            flex: "1",
             w: "full",
             bg: "transparent",
             border: "none",
@@ -108,7 +108,7 @@ export function Search({
             e.preventDefault();
             handleClear();
           }}
-          className={css({ mr: "-11px" })}
+          className={css({ mr: "[-11px]" })}
           aria-label="검색어 지우기"
         >
           <Icon type="x_circle" size="md" />

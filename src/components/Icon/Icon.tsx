@@ -16,10 +16,10 @@ const iconStyles = cva({
       inverted: { color: "fg.neutral.faintest" },
     },
     iconSize: {
-      xs: { width: "16px", height: "16px" },
-      sm: { width: "20px", height: "20px" },
-      md: { width: "24px", height: "24px" },
-      lg: { width: "32px", height: "32px" },
+      xs: { width: "[16px]", height: "[16px]" },
+      sm: { width: "[20px]", height: "[20px]" },
+      md: { width: "[24px]", height: "[24px]" },
+      lg: { width: "[32px]", height: "[32px]" },
     },
   },
 });

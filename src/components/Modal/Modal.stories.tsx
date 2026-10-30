@@ -32,7 +32,7 @@ function ModalPreview({ alternativeLabel, ...props }: ModalPreviewProps) {
   const close = () => setOpen(false);
   const shared = { ...props, open, onOpenChange: setOpen, onMain: close };
   return (
-    <div className={css({ display: "flex", alignItems: "center", justifyContent: "center", h: "100vh" })}>
+    <div className={css({ display: "flex", alignItems: "center", justifyContent: "center", h: "[100vh]" })}>
       {!open && (
         <Button variant="outline" size="md" onClick={() => setOpen(true)}>
           모달 열기

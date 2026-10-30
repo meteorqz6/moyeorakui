@@ -10,7 +10,7 @@ const wrapperStyles = cva({
     gap: "8px",
     px: "12px",
     py: "8px",
-    borderRadius: "12px",
+    borderRadius: "md",
     cursor: "pointer",
     bg: "transparent",
     border: "none",
@@ -27,8 +27,8 @@ const wrapperStyles = cva({
 
 const circleStyles = cva({
   base: {
-    w: "56px",
-    h: "56px",
+    w: "[56px]",
+    h: "[56px]",
     borderRadius: "full",
     overflow: "hidden",
     flexShrink: 0,

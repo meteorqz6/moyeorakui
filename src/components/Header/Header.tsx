@@ -27,7 +27,7 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
       className={cx(
         css({
           position: "relative",
-          h: "56px",
+          h: "[56px]",
           w: "full",
         }),
         className,
@@ -54,7 +54,7 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%)",
-          m: "0",
+          m: "[0]",
           textStyle: "title1",
           color: "fg.neutral.strong",
           textAlign: "center",
