@@ -13,7 +13,6 @@ export type IconType =
   | "chevron_up"
   | "clock"
   | "dash"
-  | "delete"
   | "error"
   | "invalid"
   | "location"
@@ -25,7 +24,8 @@ export type IconType =
   | "studyroom"
   | "success"
   | "traffic"
-  | "valid";
+  | "valid"
+  | "x_circle";
 
 export type IconStyle = "default" | "weak" | "weakest" | "brand" | "inverted";
 export type IconSize = "xs" | "sm" | "md" | "lg";
@@ -86,7 +86,7 @@ export const iconRegistry: Record<IconType, IconEntry> = {
     ),
   },
 
-  delete: {
+  x_circle: {
     viewBox: "0 0 24 24",
     paths: (
       <path
