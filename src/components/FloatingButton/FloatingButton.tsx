@@ -1,5 +1,6 @@
 import { css } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
+import { focusRing } from "../../lib/focus-ring";
 import { Icon } from "../Icon/Icon";
 import type { IconType } from "../Icon/registry";
 
@@ -18,6 +19,7 @@ const floatingButtonStyles = css({
   border: "none",
   boxSizing: "border-box",
   _active: { bg: "fill.neutral.subtler" },
+  ...focusRing,
 });
 
 const ICON_MAP: Record<FloatingButtonType, IconType> = {

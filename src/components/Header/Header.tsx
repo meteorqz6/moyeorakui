@@ -14,15 +14,6 @@ export type HeaderProps = {
   className?: string;
 };
 
-const focusRing = css({
-  _focusVisible: {
-    outlineWidth: "2px",
-    outlineStyle: "solid",
-    outlineColor: "stroke.brand.default",
-    outlineOffset: "2px",
-  },
-});
-
 export function Header({
   title,
   onBack,
@@ -51,7 +42,7 @@ export function Header({
             transform: "translateY(-50%)",
           })}
         >
-          <IconButton size="md" aria-label={backAriaLabel} onClick={onBack} className={focusRing}>
+          <IconButton size="md" aria-label={backAriaLabel} onClick={onBack}>
             <Icon type="chevron_left" size="md" />
           </IconButton>
         </div>
@@ -78,14 +69,11 @@ export function Header({
           variant="ghost-brand"
           size="lg"
           onClick={onAction}
-          className={cx(
-            css({
-              position: "absolute",
-              right: "12px",
-              top: "4px",
-            }),
-            focusRing,
-          )}
+          className={css({
+            position: "absolute",
+            right: "12px",
+            top: "4px",
+          })}
         >
           {actionLabel}
         </Button>

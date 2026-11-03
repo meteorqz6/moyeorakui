@@ -1,6 +1,7 @@
 import * as Toggle from "@radix-ui/react-toggle";
 import { cva, type RecipeVariantProps } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
+import { focusRing } from "../../lib/focus-ring";
 
 const chipStyles = cva({
   base: {
@@ -14,6 +15,7 @@ const chipStyles = cva({
     border: "none",
     boxSizing: "border-box",
     fontFamily: "[inherit]",
+    ...focusRing,
     _disabled: {
       cursor: "not-allowed",
     },
