@@ -58,5 +58,6 @@ bun run build
 ## Git
 
 - 커밋: `type(scope): 한국어 요약 (#이슈)`. type은 feat, fix, refactor, docs, chore, test, ci를 쓴다.
+- 버전을 올리는 릴리스 커밋은 예외로 `chore(release): vX.Y.Z`만 쓴다.
 - PR 리뷰는 CodeRabbit이 맡는다(`.coderabbit.yaml`). 지적마다 반영하거나 반려한 이유를 답글로 남긴다.
 - push, PR 생성, 머지는 사람이 요청할 때만 한다.
