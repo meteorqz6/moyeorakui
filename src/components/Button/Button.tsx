@@ -1,6 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type RecipeVariantProps } from "../../../styled-system/css";
 import { cx } from "../../lib/utils";
+import { focusRing } from "../../lib/focus-ring";
 
 const buttonStyles = cva({
   base: {
@@ -12,6 +13,7 @@ const buttonStyles = cva({
     border: "none",
     boxSizing: "border-box",
     fontFamily: "[inherit]",
+    ...focusRing,
     _disabled: {
       cursor: "not-allowed",
       bg: "fill.neutral.default-disabled",

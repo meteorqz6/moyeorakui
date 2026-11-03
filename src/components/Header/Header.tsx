@@ -7,21 +7,21 @@ import { Icon } from "../Icon/Icon";
 export type HeaderProps = {
   title: string;
   onBack?: () => void;
+  /** 뒤로 가기 버튼의 접근 가능한 이름이에요. 화면에는 보이지 않고 스크린 리더가 읽어요. */
+  backAriaLabel?: string;
   actionLabel?: string;
   onAction?: () => void;
   className?: string;
 };
 
-const focusRing = css({
-  _focusVisible: {
-    outlineWidth: "2px",
-    outlineStyle: "solid",
-    outlineColor: "stroke.brand.default",
-    outlineOffset: "2px",
-  },
-});
-
-export function Header({ title, onBack, actionLabel, onAction, className }: HeaderProps) {
+export function Header({
+  title,
+  onBack,
+  backAriaLabel = "뒤로 가기",
+  actionLabel,
+  onAction,
+  className,
+}: HeaderProps) {
   return (
     <header
       className={cx(
@@ -42,7 +42,7 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
             transform: "translateY(-50%)",
           })}
         >
-          <IconButton size="md" aria-label="뒤로가기" onClick={onBack} className={focusRing}>
+          <IconButton size="md" aria-label={backAriaLabel} onClick={onBack}>
             <Icon type="chevron_left" size="md" />
           </IconButton>
         </div>
@@ -69,14 +69,11 @@ export function Header({ title, onBack, actionLabel, onAction, className }: Head
           variant="ghost-brand"
           size="lg"
           onClick={onAction}
-          className={cx(
-            css({
-              position: "absolute",
-              right: "12px",
-              top: "4px",
-            }),
-            focusRing,
-          )}
+          className={css({
+            position: "absolute",
+            right: "12px",
+            top: "4px",
+          })}
         >
           {actionLabel}
         </Button>
