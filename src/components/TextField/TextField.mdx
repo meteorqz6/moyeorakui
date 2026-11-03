@@ -1,0 +1,102 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as TextFieldStories from "./TextField.stories";
+import anatomyImg from "./text-field-anatomy.png";
+
+<Meta of={TextFieldStories} />
+
+# Text Field
+
+한 줄 값을 직접 입력하는 요소에요. 이름처럼 짧은 값을 입력하고 검증할 때 사용해요.
+
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Text Field anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Text Field는 **Label**, **Input**, **Clear Button**, **Helper Text**, **Character Count**로 구성돼요. 각 부분은 같은 이름의 prop으로 전달해요.
+
+- **Label** — 입력칸의 제목이에요. `label`로 전달하며 필수예요. 입력칸의 접근 가능한 이름이 돼요.
+- **Input** — 값을 입력하는 칸이에요.
+- **Clear Button** — 입력한 값을 지우는 버튼이에요. `onClear`를 전달하면 입력하는 중이고 값이 있을 때 오른쪽에 보여요.
+- **Helper Text** — 입력칸 아래의 안내문이에요. `helperText`로 전달하고, 에러는 `errorMessage`로 따로 전달해요.
+- **Character Count** — 입력한 글자 수예요. `maxCharacterCount`를 전달하면 보여요.
+
+<br></br>
+
+## 사용 예제
+
+### 상태
+
+Text Field는 **기본**, **값 있음**, **에러**, **글자 수 넘음** 상태로 구분돼요.
+
+- **에러** — `errorMessage`를 전달하면 테두리와 안내문 자리가 에러 색으로 바뀌어요. 평소 안내문은 화면에서 숨고 스크린 리더용으로 남아요.
+- **글자 수 넘음** — `maxCharacterCount`는 글자 수를 보여 주기만 하고 입력을 막지 않아요. 넘으면 숫자만 에러 색으로 바뀌어요. 테두리와 에러 문장까지 에러로 보이게 하려면, 화면의 폼 검증에서 에러 문장을 정해 `errorMessage`로 넘겨요. 아래 예시의 "글자 수 넘음"은 `errorMessage`까지 넘긴 모습이에요.
+
+<Story of={TextFieldStories.States} />
+
+<Source of={TextFieldStories.States} />
+
+### 폼 검증과 함께 쓰기
+
+에러인지 아닌지와 에러 문장은 Text Field가 아니라 화면의 폼 검증이 정해요. 글자 수를 넘었을 때도, 비어 있을 때도 같은 `errorMessage` 자리로 넘겨요.
+
+- **Text Field가 스스로** — 글자 수를 넘으면 숫자만 에러 색으로 바뀌어요. 테두리와 에러 문장은 그대로예요.
+- **`errorMessage`를 넘기면** — 테두리가 에러 색이 되고, 안내문 자리에 에러 문장이 보여요.
+
+```tsx
+// 1. 폼 검증 규칙에 글자 수와 에러 문장을 적어요
+const schema = z.object({
+  participantName: z
+    .string()
+    .trim()
+    .min(1, "이름을 입력해주세요")
+    .max(4, "최대 4자까지 입력할 수 있어요"),
+});
+
+// 2. 검증 결과의 문장을 errorMessage로 넘겨요
+<Controller
+  control={control}
+  name="participantName"
+  render={({ field, fieldState }) => (
+    <TextField
+      {...field}
+      label="모임장 이름"
+      helperText="최대 4자까지 입력할 수 있어요"
+      errorMessage={fieldState.error?.message}
+      maxCharacterCount={4}
+      onClear={() => field.onChange("")}
+    />
+  )}
+/>;
+```
+
+### 포커스
+
+입력하는 중에는 테두리가 브랜드 색으로 바뀌어요. 안내문은 그대로 보이고, 글자 수 색은 바뀌지 않아요.
+
+<Story of={TextFieldStories.Focused} />
+
+### 지우기 버튼
+
+`onClear`를 전달하면 입력하는 중이고 값이 있을 때 지우기 버튼이 보여요. 누르면 `onClear`가 불리고 입력칸에 포커스가 돌아와요. 키보드로 입력칸에서 Tab을 누르면 지우기 버튼으로 이동해요.
+
+```tsx
+<TextField
+  label="모임장 이름"
+  value={value}
+  onChange={(event) => setValue(event.target.value)}
+  onClear={() => setValue("")}
+/>
+```
+
+<br></br>
+
+## 접근성
+
+- `label`은 필수예요. `<label>`로 그려져 입력칸과 연결돼요.
+- 안내문과 에러는 화면에 그려진 것만 `aria-describedby`로 입력칸에 연결돼요.
+- 에러가 있으면 입력칸에 `aria-invalid`가 붙고, 에러 문구는 나타날 때 스크린 리더가 읽어 줘요(`aria-live="polite"`).
+- 지우기 버튼의 접근 가능한 이름은 "입력 지우기"예요.
+- 글자 수는 스크린 리더용 문구("4자 중 2자 입력")로 입력칸에 연결돼, 칸에 들어갈 때 함께 읽혀요. 화면에 보이는 "2/4"는 스크린 리더가 건너뛰어요. 안내문에 제한을 적지 않아도 제한이 전달돼요.
+- 비활성 상태(`disabled`)는 아직 제공하지 않아요. 쓰는 곳이 생기면 모양과 함께 추가해요.

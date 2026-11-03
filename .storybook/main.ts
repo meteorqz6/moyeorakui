@@ -28,6 +28,10 @@ const config: StorybookConfig = {
     "../src/components/Modal/Modal.stories.tsx",
     "../src/components/Header/Header.mdx",
     "../src/components/Header/Header.stories.tsx",
+    "../src/components/TextField/TextField.mdx",
+    "../src/components/TextField/TextField.stories.tsx",
+    "../src/components/Fieldset/Fieldset.mdx",
+    "../src/components/Fieldset/Fieldset.stories.tsx",
   ],
   addons: [
     "@storybook/addon-essentials",
