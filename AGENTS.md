@@ -12,10 +12,11 @@
 ```sh
 bun run typecheck
 bun run test
-bun run lint
 bun run build
+bunx prettier --check <바꾼 파일>
 ```
 
+- prettier는 바꾼 파일만 확인한다. 저장소 전체에는 예전 형식 경고가 남아 있다.
 - `panda.config.ts`나 `src/tokens/theme.ts`를 바꾸면 `bun run prepare`로 codegen을 다시 실행한다.
 
 ## 컴포넌트를 만들기 전에
@@ -46,8 +47,10 @@ bun run build
 ## 문서
 
 - 스토리는 모든 variant, size, 상태를 보여 준다.
+- 새 컴포넌트의 스토리와 MDX는 `.storybook/main.ts`의 `stories` 목록에 등록한다. 목록에 없으면 Storybook에 나오지 않는다.
 - MDX는 `IconButton.mdx` 형식을 따른다: 소개, Anatomy(이미지), 사용 예제(크기, 스타일, 상태), 접근성.
-- 문서와 예시 문구는 해요체로 쓰고, 끝에 마침표를 찍지 않고, 가운데 점(·)을 쓰지 않는다.
+- MDX에 마크다운 표를 쓰지 않는다. 표로 렌더링되지 않는다.
+- 문서와 예시 문구는 해요체로 쓰고, 가운데 점(·)을 쓰지 않는다. 끝에 마침표를 찍지 않는 것은 화면에 보이는 예시 문구에만 적용한다.
 
 ## 배포
 
@@ -55,7 +58,7 @@ bun run build
 - `v*` 태그를 push하면 `publish.yml`이 staged publish를 하고, npmjs.com에서 2FA로 승인해야 공개된다.
 - staged publish가 성공하면 `publish.yml`이 GitHub 자동 노트(병합된 PR 제목 목록과 변경 비교 링크)로 릴리스를 만든다. 깨지는 변경이 있으면 릴리스 노트에 옮기는 방법을 직접 덧붙인다.
 - npm 승인을 거부하면 `gh release delete vX.Y.Z --cleanup-tag`로 릴리스와 태그를 지운다.
-- 태그 생성과 push, npm 승인은 사람이 한다.
+- 사람이 릴리스를 요청하면 AI가 태그를 만들어 push한다. npm 승인은 사람이 한다.
 
 ## Git
 
