@@ -58,7 +58,7 @@ bunx prettier --check <바꾼 파일>
 - `v*` 태그를 push하면 `publish.yml`이 staged publish를 하고, npmjs.com에서 2FA로 승인해야 공개된다.
 - staged publish가 성공하면 `publish.yml`이 GitHub 자동 노트(병합된 PR 제목 목록과 변경 비교 링크)로 릴리스를 만든다. 깨지는 변경이 있으면 릴리스 노트에 옮기는 방법을 직접 덧붙인다.
 - npm 승인을 거부하면 `gh release delete vX.Y.Z --cleanup-tag`로 릴리스와 태그를 지운다.
-- 릴리스 태그 생성과 push는 AI가 하고, npm 승인은 사람이 한다.
+- 사람이 릴리스를 요청하면 AI가 태그를 만들어 push한다. npm 승인은 사람이 한다.
 
 ## Git
 
