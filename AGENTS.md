@@ -54,6 +54,7 @@ bun run build
 - 버전을 올리는 커밋은 `chore(release): vX.Y.Z`로 쓴다. 새 컴포넌트와 기존 API를 깨는 변경은 minor, 버그 수정은 patch를 올린다.
 - `v*` 태그를 push하면 `publish.yml`이 staged publish를 하고, npmjs.com에서 2FA로 승인해야 공개된다.
 - staged publish가 성공하면 `publish.yml`이 PR 제목으로 노트를 채운 GitHub 릴리스를 만든다. 깨지는 변경이 있으면 릴리스 노트에 옮기는 방법을 직접 덧붙인다.
+- npm 승인을 거부하면 `gh release delete vX.Y.Z --cleanup-tag`로 릴리스와 태그를 지운다.
 - 태그 생성과 push, npm 승인은 사람이 한다.
 
 ## Git
