@@ -34,3 +34,9 @@ export type { ModalProps } from "./components/Modal";
 
 export { Header } from "./components/Header";
 export type { HeaderProps } from "./components/Header";
+
+export { TextField } from "./components/TextField";
+export type { TextFieldProps } from "./components/TextField";
+
+export { Fieldset } from "./components/Fieldset";
+export type { FieldsetProps } from "./components/Fieldset";

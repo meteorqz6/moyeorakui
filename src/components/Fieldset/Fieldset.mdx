@@ -1,0 +1,38 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as FieldsetStories from "./Fieldset.stories";
+import anatomyImg from "./fieldset-anatomy.png";
+
+<Meta of={FieldsetStories} />
+
+# Fieldset
+
+여러 개의 선택 요소를 하나로 묶고 제목을 붙이는 요소에요. Chip 묶음처럼 입력칸 하나가 아닌 선택지 여러 개에 제목이 필요할 때 사용해요.
+
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Fieldset anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Fieldset은 **Label**, **Content**, **Helper Text**로 구성돼요. Label과 Helper Text는 Text Field와 같은 모양이에요.
+
+- **Label** — 묶음의 제목이에요. `label`로 전달하며 필수예요. `<legend>`로 그려져 묶음의 이름이 돼요.
+- **Content** — 묶을 요소예요. Chip 같은 선택 요소를 `children`으로 전달해요.
+- **Helper Text** — 묶음 아래의 안내문이에요. `helperText`로 전달해요. 고를 수 있는 범위처럼 선택지를 보기 전에 알아야 할 것을 적어요.
+
+에러는 아직 제공하지 않아요. 쓰는 곳이 생기면 Text Field와 같은 모양으로 추가해요.
+
+<br></br>
+
+## 사용 예제
+
+<Story of={FieldsetStories.Default} />
+
+<Source of={FieldsetStories.Default} />
+
+<br></br>
+
+## 접근성
+
+- `<fieldset>`과 `<legend>`로 그려져, 스크린 리더가 묶음 안의 요소를 읽을 때 제목을 함께 알려 줘요.
+- 안내문은 `aria-describedby`로 묶음에 연결돼, 묶음에 들어갈 때 함께 읽혀요.
