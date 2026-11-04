@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
@@ -90,6 +90,16 @@ describe("TextField", () => {
 
     expect(onClear).toHaveBeenCalledTimes(1);
     expect(document.activeElement).toBe(input);
+  });
+
+  it("지우기 버튼을 누르는 순간 입력칸 포커스를 빼앗지 않는다", async () => {
+    const user = userEvent.setup();
+    render(<ControlledTextField initialValue="락이" />);
+    await user.click(screen.getByLabelText("모임장 이름"));
+
+    // mousedown을 막아야 Safari(WebKit)에서 버튼이 사라지지 않고 눌린다.
+    const notPrevented = fireEvent.mouseDown(screen.getByRole("button", { name: "입력 지우기" }));
+    expect(notPrevented).toBe(false);
   });
 
   it("글자 수를 보여 주고, 최대를 넘으면 넘었다는 상태가 된다", async () => {

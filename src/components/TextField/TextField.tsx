@@ -150,7 +150,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
                 size="md"
                 variant="clear"
                 // 누르는 순간 입력칸 포커스가 빠지면 버튼이 사라져 눌리지 않는다.
-                onPointerDown={(event) => event.preventDefault()}
+                // 포커스 이동은 mousedown에서 일어난다. WebKit 터치에서는 pointerdown을 막아도 이동한다.
+                onMouseDown={(event) => event.preventDefault()}
                 onClick={handleClear}
               >
                 <Icon type="x_circle" size="md" />
