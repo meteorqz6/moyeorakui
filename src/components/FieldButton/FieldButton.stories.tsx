@@ -24,6 +24,7 @@ type Story = StoryObj<typeof FieldButton>;
 
 const frame = { width: 335 };
 
+const LONG_PLACE_NAME = "모여락 커뮤니티센터 서대문역점 별관 3층 대회의실";
 const LONG_VALUE = "경기도 성남시 분당구 판교역로 235 에이치스퀘어 엔동 7층";
 
 export const Default: Story = {
@@ -47,13 +48,16 @@ export const States: Story = {
         code: `// 값 없음
 <FieldButton label="출발지" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
 
-// 값 있음
-<FieldButton label="출발지" value="서울 강남구 강남대로 396" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
-
 // 값과 설명
 <FieldButton label="출발지" value="서대문역 5호선" description="서울 종로구 통일로 지하 126" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
 
-// 긴 값
+// 값만
+<FieldButton label="출발지" value="서울 강남구 강남대로 396" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
+
+// 긴 값과 설명
+<FieldButton label="출발지" value="${LONG_PLACE_NAME}" description="서울 종로구 통일로 126" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
+
+// 긴 값만
 <FieldButton label="출발지" value="${LONG_VALUE}" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />`,
       },
     },
@@ -63,13 +67,19 @@ export const States: Story = {
       <FieldButton label="출발지" placeholder="주소를 검색해주세요" />
       <FieldButton
         label="출발지"
+        value="서대문역 5호선"
+        description="서울 종로구 통일로 지하 126"
+        placeholder="주소를 검색해주세요"
+      />
+      <FieldButton
+        label="출발지"
         value="서울 강남구 강남대로 396"
         placeholder="주소를 검색해주세요"
       />
       <FieldButton
         label="출발지"
-        value="서대문역 5호선"
-        description="서울 종로구 통일로 지하 126"
+        value={LONG_PLACE_NAME}
+        description="서울 종로구 통일로 126"
         placeholder="주소를 검색해주세요"
       />
       <FieldButton label="출발지" value={LONG_VALUE} placeholder="주소를 검색해주세요" />
