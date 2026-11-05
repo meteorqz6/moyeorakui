@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useEffect, useRef, useState, type Ref } from "react";
+import { useState } from "react";
 import { TextField, type TextFieldProps } from "./TextField";
 
 const meta: Meta<typeof TextField> = {
@@ -24,16 +24,11 @@ const meta: Meta<typeof TextField> = {
 export default meta;
 type Story = StoryObj<typeof TextField>;
 
-function Controlled({
-  initialValue = "",
-  inputRef,
-  ...props
-}: TextFieldProps & { initialValue?: string; inputRef?: Ref<HTMLInputElement> }) {
+function Controlled({ initialValue = "", ...props }: TextFieldProps & { initialValue?: string }) {
   const [value, setValue] = useState(initialValue);
   return (
     <TextField
       {...props}
-      ref={inputRef}
       value={value}
       onChange={(event) => setValue(event.target.value)}
       onClear={() => setValue("")}
@@ -109,23 +104,6 @@ export const States: Story = {
   ),
 };
 
-function FocusedExample() {
-  const ref = useRef<HTMLInputElement>(null);
-  // autoFocus를 쓰면 문서를 열 때 이 스토리까지 스크롤이 내려간다.
-  useEffect(() => ref.current?.focus({ preventScroll: true }), []);
-  return (
-    <div style={frame}>
-      <Controlled
-        inputRef={ref}
-        label="모임장 이름"
-        initialValue="락이"
-        helperText="최대 4자까지 입력할 수 있어요"
-        maxCharacterCount={4}
-      />
-    </div>
-  );
-}
-
 export const Focused: Story = {
   name: "포커스",
   parameters: {
@@ -135,5 +113,16 @@ export const Focused: Story = {
       },
     },
   },
-  render: () => <FocusedExample />,
+  // 문서에서 포커스를 옮기면 페이지가 이 스토리까지 내려가고, Tab이 앞쪽 예시를 건너뛴다.
+  render: (_, { viewMode }) => (
+    <div style={frame}>
+      <Controlled
+        label="모임장 이름"
+        initialValue="락이"
+        helperText="최대 4자까지 입력할 수 있어요"
+        maxCharacterCount={4}
+        autoFocus={viewMode === "story"}
+      />
+    </div>
+  ),
 };
