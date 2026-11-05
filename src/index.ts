@@ -38,5 +38,8 @@ export type { HeaderProps } from "./components/Header";
 export { TextField } from "./components/TextField";
 export type { TextFieldProps } from "./components/TextField";
 
+export { FieldButton } from "./components/FieldButton";
+export type { FieldButtonProps } from "./components/FieldButton";
+
 export { Fieldset } from "./components/Fieldset";
 export type { FieldsetProps } from "./components/Fieldset";

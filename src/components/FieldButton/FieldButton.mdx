@@ -1,0 +1,66 @@
+import { Meta, Story, Source } from "@storybook/blocks";
+import * as FieldButtonStories from "./FieldButton.stories";
+import anatomyImg from "./field-button-anatomy.png";
+
+<Meta of={FieldButtonStories} />
+
+# Field Button
+
+입력칸 모양의 버튼이에요. 값을 직접 입력하지 않고, 누르면 열리는 다른 화면에서 값을 고를 때 사용해요. 값을 바로 입력한다면 Text Field를 사용해요.
+
+<br></br>
+
+## Anatomy
+
+<img src={anatomyImg} alt="Field Button anatomy" style={{ width: "100%", maxWidth: 800 }} />
+
+Field Button은 **Label**, **Icon**, **Placeholder**, **Value**로 구성돼요.
+
+- **Label** — 칸의 제목이에요. `label`로 전달하며 필수예요.
+- **Icon** — 왼쪽의 검색 아이콘이에요. 고정이라 따로 전달하지 않아요.
+- **Placeholder** — 값이 없을 때 보이는 글자예요. `placeholder`로 전달하며 필수예요.
+- **Value** — 고른 값이에요. `value`로 전달하고, 길면 한 줄로 말줄임돼요.
+
+<br></br>
+
+## 사용 예제
+
+### 상태
+
+Field Button은 **값 없음**, **값 있음**, **긴 값** 상태로 구분돼요.
+
+<Story of={FieldButtonStories.States} />
+
+<Source of={FieldButtonStories.States} />
+
+### 누르는 중
+
+누르는 동안 바탕색이 `fill.neutral.subtler`로 바뀌어요. hover 모양은 없어요.
+
+### 포커스
+
+키보드로 칸에 들어오면 포커스 링이 보여요.
+
+<Story of={FieldButtonStories.Focused} />
+
+### 폼과 함께 쓰기
+
+Field Button은 `type="button"`으로 고정이라 폼 안에서 눌러도 제출되지 않아요. 고른 값은 화면의 폼 상태에 저장하고 `value`로 넘겨요.
+
+```tsx
+<FieldButton
+  label="출발지"
+  value={address}
+  placeholder="주소를 검색해주세요"
+  onClick={openAddressSearch}
+/>
+```
+
+<br></br>
+
+## 접근성
+
+- `label`과 `placeholder`는 필수예요. 접근 가능한 이름은 제목과 고른 값으로 자동으로 만들어져요(`aria-labelledby`). 값이 없으면 제목과 placeholder로 만들어져요.
+- `aria-label`과 `aria-labelledby`는 받지 않아요. 직접 쓴 이름이 고른 값과 어긋나지 않게 하기 위해서예요.
+- `<button>`으로 그려져 Enter와 Space로 누를 수 있어요. 제목을 눌러도 버튼이 눌려요.
+- 비활성 상태(`disabled`), 안내문, 에러는 아직 제공하지 않아요. 쓰는 곳이 생기면 추가해요.

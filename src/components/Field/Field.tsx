@@ -2,7 +2,7 @@ import { useId, type ReactNode } from "react";
 import { css, cx } from "../../../styled-system/css";
 
 // 입력칸 하나의 제목, 안내문, 에러, 글자 수를 그리고 접근성 연결을 붙이는 내부 부품이에요.
-// TextField(다음 단계에서 FieldButton, Select)가 안에서 쓰고, 패키지에서 export하지 않아요.
+// TextField, FieldButton(다음 단계에서 Select)이 안에서 쓰고, 패키지에서 export하지 않아요.
 // 화면에서 Field와 입력칸을 직접 조합하면 id 연결을 빠뜨릴 수 있어, 조립된 컴포넌트만 공개해요.
 
 export const fieldLabelStyles = css({
@@ -94,6 +94,11 @@ export type FieldControlProps = {
   "aria-invalid"?: true;
 };
 
+export type FieldLabelProps = {
+  /** 제목의 id예요. 이름을 제목과 다른 글자로 함께 만드는 입력칸이 `aria-labelledby`에 써요. */
+  labelId: string;
+};
+
 export type FieldProps = {
   label: string;
   helperText?: string;
@@ -104,7 +109,7 @@ export type FieldProps = {
   controlId?: string;
   className?: string;
   /** 입력칸을 그린다. 받은 속성을 입력칸에 그대로 넘겨야 제목, 안내문, 에러가 연결돼요. */
-  children: (control: FieldControlProps) => ReactNode;
+  children: (control: FieldControlProps, label: FieldLabelProps) => ReactNode;
 };
 
 export function Field({
@@ -118,6 +123,7 @@ export function Field({
 }: FieldProps) {
   const id = useId();
   const controlId = controlIdProp ?? `${id}-control`;
+  const labelId = `${id}-label`;
   const helperTextId = `${id}-helper`;
   const errorMessageId = `${id}-error`;
   const characterCountId = `${id}-count`;
@@ -133,14 +139,17 @@ export function Field({
 
   return (
     <div className={cx(rootStyles, className)}>
-      <label htmlFor={controlId} className={cx(fieldLabelStyles, labelSpacingStyles)}>
+      <label id={labelId} htmlFor={controlId} className={cx(fieldLabelStyles, labelSpacingStyles)}>
         {label}
       </label>
-      {children({
-        id: controlId,
-        "aria-describedby": ariaDescribedBy || undefined,
-        "aria-invalid": invalid || undefined,
-      })}
+      {children(
+        {
+          id: controlId,
+          "aria-describedby": ariaDescribedBy || undefined,
+          "aria-invalid": invalid || undefined,
+        },
+        { labelId },
+      )}
       <FieldMessages
         helperText={helperText}
         errorMessage={errorMessage}
