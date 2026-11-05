@@ -113,14 +113,15 @@ export const Focused: Story = {
       },
     },
   },
-  render: () => (
+  // 문서에서 포커스를 옮기면 페이지가 이 스토리까지 내려가고, Tab이 앞쪽 예시를 건너뛴다.
+  render: (_, { viewMode }) => (
     <div style={frame}>
       <Controlled
         label="모임장 이름"
         initialValue="락이"
         helperText="최대 4자까지 입력할 수 있어요"
         maxCharacterCount={4}
-        autoFocus
+        autoFocus={viewMode === "story"}
       />
     </div>
   ),
