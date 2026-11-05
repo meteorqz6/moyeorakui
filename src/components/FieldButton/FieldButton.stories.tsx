@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useEffect, useRef } from "react";
 import { FieldButton } from "./FieldButton";
 
 const meta: Meta<typeof FieldButton> = {
@@ -12,6 +11,10 @@ const meta: Meta<typeof FieldButton> = {
       description: "제목이에요. 고른 값과 함께 버튼의 접근 가능한 이름이 돼요.",
     },
     value: { control: "text", description: "고른 값이에요. 비어 있으면 placeholder를 보여 줘요." },
+    description: {
+      control: "text",
+      description: "고른 값 아래에 보이는 설명이에요. 값이 없으면 보이지 않아요.",
+    },
     placeholder: { control: "text", description: "값이 없을 때 보이는 글자예요." },
   },
 };
@@ -47,6 +50,9 @@ export const States: Story = {
 // 값 있음
 <FieldButton label="출발지" value="서울 강남구 강남대로 396" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
 
+// 값과 설명
+<FieldButton label="출발지" value="서대문역 5호선" description="서울 종로구 통일로 지하 126" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
+
 // 긴 값
 <FieldButton label="출발지" value="${LONG_VALUE}" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />`,
       },
@@ -60,26 +66,16 @@ export const States: Story = {
         value="서울 강남구 강남대로 396"
         placeholder="주소를 검색해주세요"
       />
+      <FieldButton
+        label="출발지"
+        value="서대문역 5호선"
+        description="서울 종로구 통일로 지하 126"
+        placeholder="주소를 검색해주세요"
+      />
       <FieldButton label="출발지" value={LONG_VALUE} placeholder="주소를 검색해주세요" />
     </div>
   ),
 };
-
-function FocusedExample() {
-  const ref = useRef<HTMLButtonElement>(null);
-  // autoFocus를 쓰면 문서를 열 때 이 스토리까지 스크롤이 내려간다.
-  useEffect(() => ref.current?.focus({ preventScroll: true }), []);
-  return (
-    <div style={{ ...frame, padding: 4 }}>
-      <FieldButton
-        ref={ref}
-        label="출발지"
-        value="서울 강남구 강남대로 396"
-        placeholder="주소를 검색해주세요"
-      />
-    </div>
-  );
-}
 
 export const Focused: Story = {
   name: "포커스",
@@ -93,5 +89,15 @@ export const Focused: Story = {
       },
     },
   },
-  render: () => <FocusedExample />,
+  // 문서에서 포커스를 옮기면 페이지가 이 스토리까지 내려가고, Tab이 앞쪽 예시를 건너뛴다.
+  render: (_, { viewMode }) => (
+    <div style={{ ...frame, padding: 4 }}>
+      <FieldButton
+        label="출발지"
+        value="서울 강남구 강남대로 396"
+        placeholder="주소를 검색해주세요"
+        autoFocus={viewMode === "story"}
+      />
+    </div>
+  ),
 };

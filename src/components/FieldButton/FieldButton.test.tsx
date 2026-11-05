@@ -29,6 +29,27 @@ describe("FieldButton", () => {
     expect(screen.getByRole("button", { name: `출발지 ${PLACEHOLDER}` })).toBeTruthy();
   });
 
+  it("설명이 있으면 이름이 제목, 값, 설명이고, 위반이 없다", async () => {
+    const { container } = render(
+      <FieldButton
+        label="출발지"
+        value="서대문역 5호선"
+        description="서울 종로구 통일로 지하 126"
+        placeholder={PLACEHOLDER}
+      />,
+    );
+    expect(
+      screen.getByRole("button", { name: "출발지 서대문역 5호선 서울 종로구 통일로 지하 126" }),
+    ).toBeTruthy();
+    expect((await axe(container)).violations).toEqual([]);
+  });
+
+  it("값이 없으면 설명은 보이지 않고 이름에도 들어가지 않는다", () => {
+    render(<FieldButton label="출발지" description="설명" placeholder={PLACEHOLDER} />);
+    expect(screen.queryByText("설명")).toBeNull();
+    expect(screen.getByRole("button", { name: `출발지 ${PLACEHOLDER}` })).toBeTruthy();
+  });
+
   it("버튼을 눌러도, 제목을 눌러도 onClick이 불린다", async () => {
     const user = userEvent.setup();
     const onClick = vi.fn();

@@ -6,11 +6,12 @@ import { Icon } from "../Icon/Icon";
 
 const buttonStyles = css({
   display: "flex",
-  alignItems: "center",
+  alignItems: "flex-start",
   gap: "8px",
   w: "full",
-  h: "[58px]",
+  minH: "[58px]",
   m: "[0]",
+  py: "16px",
   pl: "12px",
   pr: "16px",
   boxSizing: "border-box",
@@ -26,18 +27,20 @@ const buttonStyles = css({
   ...focusRing,
 });
 
-const textStyles = css({
+const contentStyles = css({
+  display: "flex",
+  flexDirection: "column",
   flex: "1",
   minW: "[0]",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  textStyle: "body2",
+  wordBreak: "keep-all",
+  overflowWrap: "break-word",
 });
 
-const valueStyles = css({ color: "fg.neutral.stronger" });
+const valueStyles = css({ textStyle: "body2", color: "fg.neutral.stronger" });
 
-const placeholderStyles = css({ color: "fg.neutral.subtler" });
+const placeholderStyles = css({ textStyle: "body2", color: "fg.neutral.subtler" });
+
+const descriptionStyles = css({ textStyle: "body5", color: "fg.neutral.default" });
 
 export type FieldButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -54,16 +57,21 @@ export type FieldButtonProps = Omit<
   label: string;
   /** 고른 값이에요. 비어 있으면 placeholder를 보여 줘요. */
   value?: string;
+  /** 고른 값 아래에 보이는 설명이에요. 값이 없으면 보이지 않아요. */
+  description?: string;
   /** 값이 없을 때 보이는 글자예요. */
   placeholder: string;
   className?: string;
 };
 
 export const FieldButton = forwardRef<HTMLButtonElement, FieldButtonProps>(function FieldButton(
-  { label, value, placeholder, id, className, ...props },
+  { label, value, description, placeholder, id, className, ...props },
   ref,
 ) {
-  const textId = useId();
+  const baseId = useId();
+  const textId = `${baseId}-text`;
+  const descriptionId = `${baseId}-description`;
+  const visibleDescription = value ? description : undefined;
 
   return (
     <Field label={label} controlId={id} className={className}>
@@ -73,12 +81,21 @@ export const FieldButton = forwardRef<HTMLButtonElement, FieldButtonProps>(funct
           {...control}
           ref={ref}
           type="button"
-          aria-labelledby={`${labelId} ${textId}`}
+          aria-labelledby={[labelId, textId, visibleDescription && descriptionId]
+            .filter(Boolean)
+            .join(" ")}
           className={buttonStyles}
         >
           <Icon type="search" size="md" variant="default" />
-          <span id={textId} className={cx(textStyles, value ? valueStyles : placeholderStyles)}>
-            {value || placeholder}
+          <span className={contentStyles}>
+            <span id={textId} className={value ? valueStyles : placeholderStyles}>
+              {value || placeholder}
+            </span>
+            {visibleDescription && (
+              <span id={descriptionId} className={descriptionStyles}>
+                {visibleDescription}
+              </span>
+            )}
           </span>
         </button>
       )}
