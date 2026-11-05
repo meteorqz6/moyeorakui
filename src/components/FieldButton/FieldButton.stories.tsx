@@ -52,7 +52,7 @@ export const States: Story = {
 <FieldButton label="출발지" value="${PLACE_NAME}" description="${ADDRESS}" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />
 
 // 값만
-<FieldButton label="출발지" value="${ADDRESS}" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />`,
+<FieldButton label="출발지" value="${PLACE_NAME}" placeholder="주소를 검색해주세요" onClick={openAddressSearch} />`,
       },
     },
   },
@@ -65,7 +65,7 @@ export const States: Story = {
         description={ADDRESS}
         placeholder="주소를 검색해주세요"
       />
-      <FieldButton label="출발지" value={ADDRESS} placeholder="주소를 검색해주세요" />
+      <FieldButton label="출발지" value={PLACE_NAME} placeholder="주소를 검색해주세요" />
     </div>
   ),
 };
